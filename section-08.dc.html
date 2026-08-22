@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EAE6DC; }
+  a { color: #541F2B; text-decoration: none; }
+  .faq-btn { width: 100%; background: none; border: none; padding: 0; margin: 0; cursor: pointer; font-family: 'Archivo', sans-serif; text-align: left; color: inherit; }
+  .faq-btn:focus-visible { outline: 1px solid #541F2B; outline-offset: 4px; }
+</style>
+</helmet>
+
+<div id="faq" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:64px 60px 28px 60px;box-sizing:border-box;">
+
+  <!-- HEADER -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:60px;margin-bottom:48px;">
+    <div>
+      <h2 style="margin:0;font-size:36px;line-height:1.15;font-weight:700;letter-spacing:-0.6px;text-transform:uppercase;max-width:620px;">ВОПРОСЫ, КОТОРЫЕ<br/>ЛУЧШЕ ЗАДАТЬ ДО ПАРТИИ.</h2>
+    </div>
+    <div style="text-align:right;font-size:10px;font-weight:600;letter-spacing:1.5px;line-height:1.7;text-transform:uppercase;opacity:0.5;padding-top:32px;">НЕ «ЧАСТО<br/>ЗАДАВАЕМЫЕ».<br/>ВАЖНЫЕ.</div>
+  </div>
+
+  <!-- ACCORDION -->
+  <div style="border-top:1px solid rgba(24,23,21,0.15);">
+    <sc-for list="{{ items }}" as="item" hint-placeholder-count="7">
+      <div style="border-bottom:1px solid rgba(24,23,21,0.12);">
+        <button class="faq-btn" type="button" onClick="{{ item.onToggle }}" aria-expanded="{{ item.expanded }}" aria-controls="{{ item.panelId }}" style="display:flex;align-items:center;gap:32px;padding:26px 0;">
+          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;opacity:0.4;width:24px;flex-shrink:0;">{{ item.num }}</span>
+          <span style="flex:1;font-size:20px;font-weight:700;line-height:1.25;text-transform:uppercase;color:{{ item.qColor }};">{{ item.q }}</span>
+          <span style="font-size:18px;font-weight:400;opacity:0.45;width:20px;text-align:right;flex-shrink:0;color:{{ item.signColor }};">{{ item.sign }}</span>
+        </button>
+        <div id="{{ item.panelId }}" role="region" style="display:{{ item.panelDisplay }};padding:0 0 28px 56px;max-width:760px;">
+          <sc-for list="{{ item.paras }}" as="p" hint-placeholder-count="2">
+            <p style="margin:0 0 12px 0;font-size:14px;line-height:1.65;opacity:0.72;">{{ p.text }}</p>
+          </sc-for>
+          <sc-if value="{{ item.hasStrong }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:6px 0 0 0;font-size:14px;font-weight:700;line-height:1.5;text-transform:uppercase;color:{{ accent }};">{{ item.strong }}</p>
+          </sc-if>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- TRANSITION -->
+  <div style="margin-top:36px;display:flex;justify-content:flex-end;">
+    <a href="#consultation" style="font-size:22px;font-weight:700;letter-spacing:-0.2px;text-transform:uppercase;color:{{ ink }};line-height:1.25;text-align:right;border-bottom:1px solid rgba(24,23,21,0.25);padding-bottom:8px;" style-hover="color:{{ accent }};border-color:{{ accent }};">ВАШЕГО ВОПРОСА<br/>НЕТ В СПИСКЕ? ↓</a>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 1000},
+  &quot;ivory&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#F2EFE8&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#F2EFE8&quot;, &quot;#EDEAE1&quot;, &quot;#F6F3EC&quot;]},
+  &quot;ink&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#181715&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#181715&quot;, &quot;#111111&quot;]},
+  &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#541F2B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#541F2B&quot;, &quot;#6B2A38&quot;, &quot;#3F1620&quot;], &quot;section&quot;: &quot;Brand&quot;}
+}">
+const FAQ = [
+  {
+    num: '01',
+    q: 'А ВЫ ТОЧНО ПОНЯЛИ, ЧТО Я ХОЧУ?',
+    paras: [
+      'Дело не только в переводе.',
+      'Лиана говорит на китайском, понимает контекст переговоров и помогает перевести задачу бизнеса на язык производства: что именно нужно сделать, из чего, в каком качестве и с каким результатом.',
+    ],
+  },
+  {
+    num: '02',
+    q: 'ОБРАЗЕЦ ХОРОШИЙ. А ПАРТИЯ БУДЕТ ТАКОЙ ЖЕ?',
+    paras: [
+      'Эталонный образец — только начало.',
+      'Качество контролируется и во время производства: материал, посадка, обработка, размеры и фурнитура должны соответствовать согласованному образцу.',
+    ],
+  },
+  {
+    num: '03',
+    q: 'В КИТАЕ ВООБЩЕ РАБОТАЮТ С НЕБОЛЬШИМИ ПАРТИЯМИ?',
+    paras: [
+      'Да — но MOQ зависит от продукта и конкретного производства.',
+      'Для малых и средних партий ориентир может начинаться примерно от 100–300 единиц. Для некоторых готовых решений возможен старт от 50 единиц.',
+    ],
+  },
+  {
+    num: '04',
+    q: 'КАК Я ПОЙМУ, КТО НА САМОМ ДЕЛЕ ШЬЁТ МОЙ ЗАКАЗ?',
+    paras: [
+      'Одна из задач команды в Китае — подобрать производство под конкретный продукт, технологию и объём.',
+      'Мы работаем на месте и понимаем, с кем ведутся переговоры и кому передаётся производство.',
+    ],
+  },
+  {
+    num: '05',
+    q: 'А МОЮ МОДЕЛЬ ПОТОМ НЕ УВИЖУ У КОНКУРЕНТА?',
+    paras: [
+      'Для собственных разработок предусмотрена работа по NDA.',
+      'Это особенно важно при разработке новых моделей, эксклюзивных тканей и других решений, которые принадлежат бренду клиента.',
+    ],
+  },
+  {
+    num: '06',
+    q: 'СКОЛЬКО ВРЕМЕНИ ЗАНИМАЕТ ПЕРВАЯ КОЛЛЕКЦИЯ?',
+    paras: [
+      'При разработке коллекции с нуля ориентир — в среднем 3–6 месяцев.',
+      'Производство одежды — это цикл: разработка, образцы, материалы, согласования, производство и контроль.',
+    ],
+    strong: 'Это не услуга «за один час».',
+  },
+  {
+    num: '07',
+    q: 'А ЕСЛИ Я ЕЩЁ САМА НЕ ПОНИМАЮ, ЧТО МНЕ ПРОИЗВОДИТЬ?',
+    accentQ: true,
+    strongFirst: 'МЫ НЕ ВЫБИРАЕМ ЗА ВАС, ЧТО БУДЕТ ПРОДАВАТЬСЯ.',
+    paras: [
+      'Вы знаете свой рынок, покупателя и задачу бизнеса.',
+      'Наша зона ответственности — помочь превратить эту задачу в производимый продукт и провести его через производство в Китае.',
+    ],
+  },
+];
+
+class Component extends DCLogic {
+  state = { open: null };
+
+  toggle = (i) => () => this.setState(s => ({ open: s.open === i ? null : i }));
+
+  renderVals() {
+    const ink = this.props.ink ?? '#181715';
+    const accent = this.props.accent ?? '#541F2B';
+    const open = this.state.open;
+
+    const items = FAQ.map((f, i) => {
+      const isOpen = open === i;
+      const paras = f.strongFirst
+        ? [{ text: f.strongFirst }, ...f.paras.map(t => ({ text: t }))]
+        : f.paras.map(t => ({ text: t }));
+      return {
+        num: f.num,
+        q: f.q,
+        qColor: f.accentQ ? accent : ink,
+        signColor: isOpen ? accent : ink,
+        sign: isOpen ? '–' : '+',
+        expanded: isOpen ? 'true' : 'false',
+        panelId: 'faq-panel-' + f.num,
+        panelDisplay: isOpen ? 'block' : 'none',
+        onToggle: this.toggle(i),
+        paras,
+        hasStrong: !!f.strong,
+        strong: f.strong || '',
+      };
+    });
+
+    return {
+      ivory: this.props.ivory ?? '#F2EFE8',
+      ink, accent, items,
+    };
+  }
+}
+</script>
+</body>
+</html>

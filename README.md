@@ -7,16 +7,18 @@
 ```
 dist/
   index.html                  главная страница
-  LIANA Hero v2.dc.html       блоки страницы (подгружаются index.html)
-  LIANA Section 02..10.dc.html
+  hero.dc.html                первый экран
+  section-02.dc.html ... section-10.dc.html   блоки страницы
   assets/js/
     support.js                рантайм компонентов (обязателен)
-    image-slot.js             слоты изображений
     payments.js               реестр товаров и точки подключения оплаты
     enquiry.js                отправка формы заявки
-  uploads/                    видео и фотографии
+  assets/media/               видео и фотографии
+  assets/media/slots/         фотографии, вставленные в слоты
   .nojekyll                   отключает обработку Jekyll на GitHub Pages
 ```
+
+Все имена файлов без пробелов и скобок — обязательное условие для GitHub Pages.
 
 ## Публикация на GitHub Pages
 
