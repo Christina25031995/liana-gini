@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="assets/js/image-slot.js"></script>
+<style>
+  body { margin: 0; background: #EAE6DC; }
+  a { color: #541F2B; text-decoration: none; }
+  a:hover { color: #181715; }
+</style>
+</helmet>
+
+<div ref="{{ scrollRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;">
+  <div style="position:relative;">
+
+    <!-- INTRO -->
+    <div ref="{{ introRef }}" style="height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;">
+      <div style="width:{{ introLineWidth }};height:1px;background:{{ accent }};transition:width 0.4s ease;"></div>
+      <h2 style="margin:0;font-size:52px;line-height:1.25;font-weight:600;letter-spacing:-0.5px;text-transform:uppercase;max-width:900px;">
+        <div>ПРОИЗВОДСТВО В КИТАЕ</div>
+        <div>НЕ ДОЛЖНО СТАНОВИТЬСЯ</div>
+        <div style="color:{{ accent }};">ВАШЕЙ ВТОРОЙ РАБОТОЙ</div>
+      </h2>
+    </div>
+
+    <!-- STICKY PROBLEMS ZONE -->
+    <div style="height:4300px;position:relative;">
+      <div style="position:sticky;top:0;height:900px;display:flex;border-top:1px solid rgba(24,23,21,0.12);background:{{ ivory }};">
+
+        <!-- LEFT: persistent nav -->
+        <div style="width:38%;flex-shrink:0;padding:64px 56px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(24,23,21,0.12);box-sizing:border-box;">
+          <div>
+            <h3 style="margin:0;font-size:34px;line-height:1.15;font-weight:600;letter-spacing:-0.5px;text-transform:uppercase;">ПРОИЗВОДСТВО<br/>В КИТАЕ</h3>
+          </div>
+          <div style="display:flex;gap:28px;align-items:flex-end;">
+            <div style="width:1px;height:220px;background:rgba(24,23,21,0.12);position:relative;flex-shrink:0;">
+              <div style="position:absolute;bottom:0;left:0;width:100%;background:{{ accent }};height:{{ lineProgressPct }}%;transition:height 0.15s linear;"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <span style="font-size:{{ num1Size }};font-weight:{{ num1Weight }};letter-spacing:1px;color:{{ num1Color }};transition:all 0.3s ease;">01</span>
+              <span style="font-size:{{ num2Size }};font-weight:{{ num2Weight }};letter-spacing:1px;color:{{ num2Color }};transition:all 0.3s ease;">02</span>
+              <span style="font-size:{{ num3Size }};font-weight:{{ num3Weight }};letter-spacing:1px;color:{{ num3Color }};transition:all 0.3s ease;">03</span>
+              <span style="font-size:{{ num4Size }};font-weight:{{ num4Weight }};letter-spacing:1px;color:{{ num4Color }};transition:all 0.3s ease;">04</span>
+              <span style="font-size:{{ num5Size }};font-weight:{{ num5Weight }};letter-spacing:1px;color:{{ num5Color }};transition:all 0.3s ease;">05</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: active problem -->
+        <div style="flex:1;padding:64px 72px;position:relative;overflow:hidden;box-sizing:border-box;">
+
+          <sc-if value="{{ isP1 }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">CONTROL</div>
+            <h4 style="margin:0 0 24px 0;font-size:48px;line-height:1.1;font-weight:600;text-transform:uppercase;max-width:640px;">НЕ МОГУ КОНТРОЛИРОВАТЬ<br/>ПРОИЗВОДСТВО<br/>ИЗ ДРУГОЙ СТРАНЫ</h4>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;opacity:{{ bodyOpacity }};transform:translateY({{ bodyY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 20px 0;">Чтобы понимать, что происходит с партией, приходится постоянно писать, звонить, запрашивать фото и надеяться, что проблема не обнаружится слишком поздно.</p>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;font-weight:600;opacity:{{ solutionOpacity }};transform:translateY({{ solutionY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 32px 0;">→ Команда находится в Китае и контролирует производство на месте.</p>
+            <div style="width:490px;opacity:{{ imageOpacity }};transform:translateY({{ imageY }}px);transition:opacity 0.6s ease, transform 0.6s ease;">
+              <image-slot id="p1-image" shape="rect" style="width:490px;height:320px;" placeholder="Документальное фото производства"></image-slot>
+              <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;margin-top:10px;">CN / PRODUCTION CONTROL / 01</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isP2 }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">QUALITY CONTROL</div>
+            <h4 style="margin:0 0 24px 0;font-size:48px;line-height:1.1;font-weight:600;text-transform:uppercase;max-width:640px;">БОЮСЬ ПОЛУЧИТЬ<br/>НЕ ТО, ЧТО<br/>СОГЛАСОВАЛИ</h4>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;opacity:{{ bodyOpacity }};transform:translateY({{ bodyY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 20px 0;">Эталонный образец устроил, но во время серийного производства могут поменяться материал, посадка, фурнитура или обработка.</p>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;font-weight:600;opacity:{{ solutionOpacity }};transform:translateY({{ solutionY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 28px 0;">→ Контроль идёт в процессе производства, а не только после того, как партия уже готова.</p>
+            <div style="display:flex;align-items:flex-end;gap:36px;">
+              <div style="opacity:{{ imageOpacity }};transition:opacity 0.5s ease;">
+                <image-slot id="p2-sample" shape="rect" style="width:320px;height:400px;" placeholder="Эталонный образец"></image-slot>
+              </div>
+              <div style="width:70px;height:1px;background:{{ accent }};margin-bottom:150px;position:relative;">
+                <span style="position:absolute;top:-56px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9px;letter-spacing:1px;opacity:{{ matOpacity }};transition:opacity 0.4s ease;">MATERIAL</span>
+                <span style="position:absolute;top:-34px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9px;letter-spacing:1px;opacity:{{ fitOpacity }};transition:opacity 0.4s ease;">FIT</span>
+                <span style="position:absolute;top:14px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9px;letter-spacing:1px;opacity:{{ hwOpacity }};transition:opacity 0.4s ease;">HARDWARE</span>
+                <span style="position:absolute;top:36px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9px;letter-spacing:1px;opacity:{{ finOpacity }};transition:opacity 0.4s ease;">FINISH</span>
+              </div>
+              <div style="opacity:{{ productionOpacity }};transition:opacity 0.5s ease;">
+                <image-slot id="p2-production" shape="rect" style="width:350px;height:260px;" placeholder="Серийное производство"></image-slot>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isP3 }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">PRODUCT DEVELOPMENT</div>
+            <h4 style="margin:0 0 24px 0;font-size:43px;line-height:1.12;font-weight:600;text-transform:uppercase;max-width:680px;">ЕСТЬ ИДЕЯ ПРОДУКТА,<br/>НО МЕЖДУ РЕФЕРЕНСОМ<br/>И ГОТОВОЙ ПАРТИЕЙ<br/>СЛИШКОМ МНОГО НЕИЗВЕСТНЫХ</h4>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;opacity:{{ bodyOpacity }};transform:translateY({{ bodyY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 20px 0;">Лекала, материалы, образцы, корректировки, производство — и на каждом этапе можно ошибиться.</p>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;font-weight:600;opacity:{{ solutionOpacity }};transform:translateY({{ solutionY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 24px 0;">→ Команда ведёт продукт через весь производственный цикл: от идеи до партии.</p>
+            <div style="position:relative;height:340px;">
+              <div style="position:absolute;left:0;top:145px;width:{{ routeWidthPct }};height:1px;background:{{ accent }};transition:width 0.3s ease;"></div>
+              <div style="position:absolute;left:0;top:0;opacity:{{ refOpacity }};transition:opacity 0.5s ease;">
+                <image-slot id="p3-reference" shape="rect" style="width:215px;height:290px;" placeholder="Референс"></image-slot>
+                <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;margin-top:8px;">REFERENCE</div>
+              </div>
+              <div style="position:absolute;left:265px;top:105px;opacity:{{ sampleOpacity }};transition:opacity 0.5s ease;">
+                <image-slot id="p3-sample" shape="rect" style="width:165px;height:220px;" placeholder="Образец"></image-slot>
+                <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;margin-top:8px;">SAMPLE</div>
+              </div>
+              <div style="position:absolute;left:470px;top:20px;opacity:{{ productOpacity }};transition:opacity 0.5s ease;">
+                <image-slot id="p3-product" shape="rect" style="width:220px;height:280px;" placeholder="Готовый продукт"></image-slot>
+                <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;margin-top:8px;">PRODUCT</div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isP4 }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">ECONOMICS</div>
+            <h4 style="margin:0 0 32px 0;font-size:43px;line-height:1.12;font-weight:600;text-transform:uppercase;max-width:660px;">НУЖНО ПОПАСТЬ<br/>НЕ ТОЛЬКО В КАЧЕСТВО,<br/>НО И В ДЕНЬГИ</h4>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;margin:0 0 40px 0;">Можно произвести прекрасную вещь, которая окажется бессмысленной для бизнеса из-за себестоимости.</p>
+            <div style="opacity:{{ statement1Opacity }};transition:opacity 0.6s ease;font-size:44px;font-weight:700;text-transform:uppercase;line-height:1.1;margin-bottom:12px;">КРАСИВО — <span style="color:{{ accent }};">МАЛО.</span></div>
+            <div style="opacity:{{ statement2Opacity }};transition:opacity 0.6s ease;font-size:44px;font-weight:700;text-transform:uppercase;line-height:1.1;margin-bottom:32px;">ПРОДУКТ ДОЛЖЕН ЗАРАБАТЫВАТЬ.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:20px 28px;opacity:{{ paramsOpacity }};transition:opacity 0.6s ease;border-top:1px solid rgba(24,23,21,0.12);padding-top:20px;max-width:460px;">
+              <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">TARGET COST</span>
+              <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">MATERIAL</span>
+              <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">COMPOSITION</span>
+              <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">DENSITY</span>
+              <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">HARDWARE</span>
+              <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">VOLUME</span>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isP5 }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">ONE TEAM</div>
+            <h4 style="margin:0 0 24px 0;font-size:43px;line-height:1.12;font-weight:600;text-transform:uppercase;max-width:660px;">НЕ ХОЧУ САМ<br/>УПРАВЛЯТЬ ПЯТЬЮ<br/>РАЗНЫМИ ИСПОЛНИТЕЛЯМИ<br/>В КИТАЕ</h4>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;margin:0 0 40px 0;">Фабрика, технолог, закупщик, контроль, переговоры — всё это ещё нужно связать между собой и заставить работать на один результат.</p>
+
+            <div style="position:relative;height:200px;opacity:{{ linesOpacity }};transition:opacity 0.5s ease;">
+              <div style="position:absolute;left:0;top:0;display:flex;align-items:center;gap:12px;"><div style="width:60px;height:1px;background:rgba(24,23,21,0.3);"></div><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">FACTORY</span></div>
+              <div style="position:absolute;left:0;top:44px;display:flex;align-items:center;gap:12px;"><div style="width:60px;height:1px;background:rgba(24,23,21,0.3);"></div><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">TECHNOLOGIST</span></div>
+              <div style="position:absolute;left:0;top:88px;display:flex;align-items:center;gap:12px;"><div style="width:60px;height:1px;background:rgba(24,23,21,0.3);"></div><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">SOURCING</span></div>
+              <div style="position:absolute;left:0;top:132px;display:flex;align-items:center;gap:12px;"><div style="width:60px;height:1px;background:rgba(24,23,21,0.3);"></div><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">QUALITY CONTROL</span></div>
+              <div style="position:absolute;left:0;top:176px;display:flex;align-items:center;gap:12px;"><div style="width:60px;height:1px;background:rgba(24,23,21,0.3);"></div><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">NEGOTIATIONS</span></div>
+            </div>
+
+            <div style="opacity:{{ convergedOpacity }};transition:opacity 0.6s ease;display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:-40px;">
+              <div style="width:160px;height:2px;background:{{ accent }};"></div>
+              <div>
+                <div style="font-size:20px;font-weight:700;letter-spacing:1px;">LIANA GINI</div>
+                <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.6;">CHINA / PRODUCTION</div>
+              </div>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTRO CTA -->
+    <div style="padding:70px 0 90px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
+      <div style="width:2px;height:36px;background:{{ accent }};"></div>
+      <a href="#services" style="font-size:30px;font-weight:600;line-height:1.25;text-transform:uppercase;text-align:center;color:{{ ink }};" style-hover="color:{{ accent }};">ПЕРЕДАТЬ ЗАДАЧУ КОМАНДЕ В КИТАЕ →</a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  scrollRef = React.createRef();
+  introRef = React.createRef();
+  state = { scrollTop: 0, introInView: false };
+  ticking = false;
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+    this.io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.setState({ introInView: true });
+        this.io.disconnect();
+      }
+    }, { threshold: 0.2 });
+    if (this.introRef.current) this.io.observe(this.introRef.current);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.io) this.io.disconnect();
+  }
+
+  onScroll = () => {
+    if (!this.scrollRef.current) return;
+    const rect = this.scrollRef.current.getBoundingClientRect();
+    const scrollTop = Math.max(0, -rect.top);
+    if (scrollTop !== this.state.scrollTop) this.setState({ scrollTop });
+  };
+
+  renderVals() {
+    const ivory = this.props.ivory ?? '#F2EFE8';
+    const ink = this.props.ink ?? '#181715';
+    const accent = this.props.accent ?? '#541F2B';
+    const inactive = 'rgba(24,23,21,0.3)';
+
+    const introH = 680, problemH = 680, numProblems = 5, problemsH = problemH * numProblems;
+    const scrollTop = this.state.scrollTop || 0;
+    const rel = scrollTop - introH;
+    const activeIndex = Math.max(0, Math.min(numProblems - 1, Math.floor(rel / problemH)));
+    const localProgress = Math.max(0, Math.min(1, (rel - activeIndex * problemH) / problemH));
+    const lineProgressPct = Math.max(0, Math.min(100, (rel / problemsH) * 100));
+    const bodyOpacity = 1, bodyY = 0, solutionOpacity = 1, solutionY = 0, imageOpacity = 1, imageY = 0;
+
+    return {
+      ivory, ink, accent,
+      scrollRef: this.scrollRef,
+      introRef: this.introRef,
+
+      introLineWidth: '32px',
+      introLine1Opacity: 1,
+      introLine1Y: 0,
+      introLine2Opacity: 1,
+      introLine2Y: 0,
+      introLine3Opacity: 1,
+      introLine3Y: 0,
+
+      lineProgressPct: lineProgressPct,
+      num1Color: activeIndex === 0 && rel >= 0 ? accent : (activeIndex > 0 || rel >= problemH ? ink : inactive),
+      num2Color: activeIndex === 1 ? accent : (activeIndex > 1 ? ink : inactive),
+      num3Color: activeIndex === 2 ? accent : (activeIndex > 2 ? ink : inactive),
+      num4Color: activeIndex === 3 ? accent : (activeIndex > 3 ? ink : inactive),
+      num5Color: activeIndex === 4 ? accent : inactive,
+      num1Size: activeIndex === 0 ? '22px' : '15px',
+      num2Size: activeIndex === 1 ? '22px' : '15px',
+      num3Size: activeIndex === 2 ? '22px' : '15px',
+      num4Size: activeIndex === 3 ? '22px' : '15px',
+      num5Size: activeIndex === 4 ? '22px' : '15px',
+      num1Weight: activeIndex === 0 ? 700 : 600,
+      num2Weight: activeIndex === 1 ? 700 : 600,
+      num3Weight: activeIndex === 2 ? 700 : 600,
+      num4Weight: activeIndex === 3 ? 700 : 600,
+      num5Weight: activeIndex === 4 ? 700 : 600,
+
+      isP1: rel >= 0 && activeIndex === 0,
+      isP2: activeIndex === 1,
+      isP3: activeIndex === 2,
+      isP4: activeIndex === 3,
+      isP5: activeIndex === 4,
+
+      bodyOpacity, bodyY, solutionOpacity, solutionY, imageOpacity, imageY,
+
+      // P2 specific
+      matOpacity: 1, fitOpacity: 1, hwOpacity: 1, finOpacity: 1, productionOpacity: 1,
+
+      // P3 specific
+      routeWidthPct: '100%',
+      refOpacity: 1, sampleOpacity: 1, productOpacity: 1,
+
+      // P4 specific
+      statement1Opacity: 1, statement2Opacity: 1, paramsOpacity: 1,
+
+      // P5 specific
+      linesOpacity: 0, convergedOpacity: 1,
+    };
+  }
+}
+</script>
+</body>
+</html>

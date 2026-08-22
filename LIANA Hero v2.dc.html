@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #111; }
+  a { color: #F2EFE8; text-decoration: none; }
+  a:hover { color: #E8B4B8; }
+  @keyframes revealUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<div style="width:100%;max-width:1440px;height:940px;margin:40px auto;position:relative;overflow:hidden;font-family:'Archivo',sans-serif;color:{{ ivory }};box-shadow:0 40px 80px rgba(0,0,0,0.12);background:#0e0b0a;">
+
+  <video ref="{{ videoRef }}" src="uploads/Create_cinematic_hero_video_202608201053-764dd3d3.mp4" autoplay="true" muted="true" loop="true" playsinline="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"></video>
+
+  <!-- header -->
+  <div style="position:absolute;top:0;left:0;right:0;height:96px;display:flex;align-items:center;justify-content:space-between;padding:0 64px;z-index:3;">
+    <div style="font-size:20px;font-weight:700;letter-spacing:2px;white-space:nowrap;">LIANA GINI</div>
+    <nav style="display:flex;gap:40px;">
+      <a href="#" style="font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};" style-hover="color:{{ accent }};">Услуги</a>
+      <a href="#" style="font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};" style-hover="color:{{ accent }};">Как работаем</a>
+      <a href="#" style="font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};" style-hover="color:{{ accent }};">Кейсы</a>
+      <a href="#" style="font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};" style-hover="color:{{ accent }};">О Лиане</a>
+      <a href="#" style="font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};" style-hover="color:{{ accent }};">Контакты</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="https://t.me/" style="display:flex;align-items:center;gap:8px;background:{{ accent }};padding:9px 16px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};" style-hover="background:{{ ivory }};color:{{ ink }};">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21.5 4.5L2.5 12.1c-1.1.44-1.1 1.06-.2 1.34l4.9 1.53 1.9 5.83c.23.63.4.88.82.88.4 0 .57-.18.79-.4l2.24-2.16 4.66 3.44c.86.47 1.48.23 1.7-.8l3.06-14.4c.33-1.28-.48-1.85-1.37-1.44z" fill="currentColor"/></svg>
+ Задать вопрос
+ </a>
+    </div>
+  </div>
+
+  <!-- oversized outlined word bleeding off the right edge -->
+  <div style="position:absolute;right:0;bottom:120px;z-index:2;font-size:340px;line-height:0.8;font-weight:700;letter-spacing:-4px;color:transparent;-webkit-text-stroke:1.5px rgba(242,239,232,0.5);text-transform:uppercase;pointer-events:none;animation:revealUp 1s ease 0.05s both;">
+    中国
+  </div>
+
+  <!-- headline: frosted glass panel -->
+  <div style="position:absolute;left:64px;bottom:56px;z-index:3;background:rgba(14,11,10,0.35);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:{{ ivory }};max-width:640px;padding:44px 52px 44px 44px;animation:revealUp 0.7s ease 0.15s both;">
+    <h1 style="font-size:38px;line-height:1.2;font-weight:600;letter-spacing:-0.5px;margin:0 0 20px 0;text-transform:uppercase;">
+ Ваш<br/>производственный<br/>отдел в&nbsp;Китае
+ </h1>
+    <p style="font-size:15px;line-height:1.55;font-weight:400;color:{{ ivory }};opacity:0.82;margin:0 0 28px 0;text-wrap:pretty;">
+ Разработка и&nbsp;производство одежды, обуви и&nbsp;аксессуаров<br/>одной командой на&nbsp;месте — от&nbsp;идеи до&nbsp;готовой партии.
+ </p>
+    <div style="display:flex;align-items:center;gap:28px;margin-bottom:28px;">
+      <a href="#contact" style="background:{{ accent }};color:{{ ivory }};font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:15px 28px;border:1px solid {{ accent }};" style-hover="background:{{ ivory }};color:{{ ink }};border-color:{{ ivory }};">Обсудить производство</a>
+      <a href="#products" style="font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};opacity:0.65;border-bottom:1px solid transparent;padding-bottom:4px;" style-hover="opacity:1;border-color:{{ ivory }};">Смотреть готовые модели</a>
+    </div>
+    <div style="display:flex;gap:24px;border-top:1px solid rgba(242,239,232,0.2);padding-top:18px;">
+      <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:{{ ivory }};opacity:0.6;">14 лет в Китае</span>
+      <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:{{ ivory }};opacity:0.6;">Команда на месте</span>
+      <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:{{ ivory }};opacity:0.6;">Свои технологи</span>
+      <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:{{ ivory }};opacity:0.6;">NDA</span>
+    </div>
+  </div>
+
+  <div style="position:absolute;right:64px;bottom:56px;z-index:3;display:flex;flex-direction:column;align-items:flex-end;gap:6px;animation:revealUp 0.8s ease 0.3s both;">
+    <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:{{ ivory }};text-shadow:0 1px 8px rgba(0,0,0,0.5);">Guangzhou</span>
+    <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:{{ ivory }};opacity:0.7;text-shadow:0 1px 8px rgba(0,0,0,0.5);">Control / Sample / Production</span>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 940},
+  &quot;ivory&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#F2EFE8&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#F2EFE8&quot;, &quot;#EDEAE1&quot;, &quot;#F6F3EC&quot;]},
+  &quot;ink&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#181715&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#181715&quot;, &quot;#111111&quot;]},
+  &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#541F2B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#541F2B&quot;, &quot;#6B2A38&quot;, &quot;#3F1620&quot;], &quot;section&quot;: &quot;Brand&quot;}
+}">
+class Component extends DCLogic {
+  videoRef = React.createRef();
+  componentDidMount() {
+    if (this.videoRef.current) this.videoRef.current.muted = true;
+  }
+  renderVals() {
+    return {
+      ivory: this.props.ivory ?? '#F2EFE8',
+      ink: this.props.ink ?? '#181715',
+      accent: this.props.accent ?? '#541F2B',
+      videoRef: this.videoRef,
+    };
+  }
+}
+</script>
+</body>
+</html>

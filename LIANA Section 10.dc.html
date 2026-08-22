@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EAE6DC; }
+  .brief-input { font-family: 'Archivo', sans-serif; background: transparent; border: none; border-bottom: 1px solid rgba(242,239,232,0.22); outline: none; color: #F2EFE8; font-size: 15px; font-weight: 500; width: 100%; height: 34px; padding: 0; display: block; }
+  .brief-input::placeholder { color: rgba(242,239,232,0.28); }
+  .brief-input:focus { border-bottom-color: #8C4457; }
+</style>
+</helmet>
+
+<div id="contact" style="width:100%;background:{{ charcoal }};color:{{ ivory }};font-family:'Archivo',sans-serif;">
+  <div style="width:1440px;max-width:100%;margin:0 auto;padding:76px 60px 40px 60px;box-sizing:border-box;">
+
+    <!-- PRODUCTION ENQUIRY -->
+    <div style="display:flex;gap:80px;align-items:flex-start;margin-bottom:60px;">
+      <div style="width:400px;flex-shrink:0;">
+        <h2 style="margin:0 0 18px 0;font-size:40px;line-height:1.1;font-weight:700;letter-spacing:-1px;text-transform:uppercase;">РАССКАЖИТЕ,<br/>ЧТО ХОТИТЕ<br/>ПРОИЗВЕСТИ.</h2>
+        <p style="margin:0;font-size:13px;line-height:1.6;max-width:320px;opacity:0.55;">Несколько вопросов помогут понять задачу до первого разговора с командой.</p>
+      </div>
+
+      <form onSubmit="{{ onSubmit }}" data-form="production-enquiry" data-submit-state="{{ formState }}" data-success-target="#enquiry-sent" style="flex:1;min-width:0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;column-gap:48px;row-gap:0;">
+
+          <div style="grid-column:1 / -1;border-top:1px solid rgba(242,239,232,0.18);padding:16px 0 18px 0;display:flex;gap:20px;align-items:baseline;">
+            <span style="font-size:9px;letter-spacing:1.5px;opacity:0.4;width:18px;flex-shrink:0;">01</span>
+            <div style="flex:1;min-width:0;">
+              <label for="q-product" style="display:block;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">ЧТО ХОТИТЕ ПРОИЗВОДИТЬ?</label>
+              <input class="brief-input" id="q-product" name="product" type="text" required="true" placeholder="категория, изделие"/>
+            </div>
+          </div>
+
+          <div style="grid-column:1 / -1;border-top:1px solid rgba(242,239,232,0.18);padding:16px 0 18px 0;display:flex;gap:20px;align-items:baseline;">
+            <span style="font-size:9px;letter-spacing:1.5px;opacity:0.4;width:18px;flex-shrink:0;">02</span>
+            <div style="flex:1;min-width:0;">
+              <label for="q-design" style="display:block;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">ЕСТЬ ЛИ ГОТОВЫЙ ДИЗАЙН ИЛИ РЕФЕРЕНС?</label>
+              <input class="brief-input" id="q-design" name="design" type="text" placeholder="да / нет / ссылка"/>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid rgba(242,239,232,0.18);padding:16px 0 18px 0;display:flex;gap:20px;align-items:baseline;">
+            <span style="font-size:9px;letter-spacing:1.5px;opacity:0.4;width:18px;flex-shrink:0;">03</span>
+            <div style="flex:1;min-width:0;">
+              <label for="q-volume" style="display:block;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">КАКОЙ ПЛАНИРУЕТСЯ ОБЪЁМ?</label>
+              <input class="brief-input" id="q-volume" name="volume" type="text" placeholder="шт."/>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid rgba(242,239,232,0.18);padding:16px 0 18px 0;display:flex;gap:20px;align-items:baseline;">
+            <span style="font-size:9px;letter-spacing:1.5px;opacity:0.4;width:18px;flex-shrink:0;">04</span>
+            <div style="flex:1;min-width:0;">
+              <label for="q-cost" style="display:block;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">ЕСТЬ ЛИ ЦЕЛЕВАЯ СЕБЕСТОИМОСТЬ?</label>
+              <input class="brief-input" id="q-cost" name="targetCost" type="text" placeholder="₽ / ¥ за единицу"/>
+            </div>
+          </div>
+
+          <div style="grid-column:1 / -1;border-top:1px solid rgba(242,239,232,0.18);padding:16px 0 18px 0;display:flex;gap:20px;align-items:baseline;">
+            <span style="font-size:9px;letter-spacing:1.5px;opacity:0.4;width:18px;flex-shrink:0;">05</span>
+            <div style="flex:1;min-width:0;">
+              <label for="q-contact" style="display:block;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">КАК С ВАМИ СВЯЗАТЬСЯ?</label>
+              <input class="brief-input" id="q-contact" name="contact" type="text" required="true" placeholder="Telegram / телефон / email"/>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top:2px solid {{ accentLight }};padding-top:22px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:28px;">
+            <button type="submit" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ivory }};color:{{ charcoal }};">ОБСУДИТЬ ПРОЕКТ С КОМАНДОЙ →</button>
+            <a href="https://t.me/lianagini" style="display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};opacity:0.5;white-space:nowrap;" style-hover="opacity:1;color:{{ accentLight }};">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21.5 4.5L2.5 12.1c-1.1.44-1.1 1.06-.2 1.34l4.9 1.53 1.9 5.83c.23.63.4.88.82.88.4 0 .57-.18.79-.4l2.24-2.16 4.66 3.44c.86.47 1.48.23 1.7-.8l3.06-14.4c.33-1.28-.48-1.85-1.37-1.44z" fill="currentColor"/></svg>
+ НАПИСАТЬ СРАЗУ В TELEGRAM →
+ </a>
+          </div>
+          <span style="font-size:11px;line-height:1.5;opacity:0.4;max-width:260px;">{{ formNote }}</span>
+        </div>
+        <div id="enquiry-sent" style="display:none;"></div>
+      </form>
+    </div>
+
+    <!-- FOOTER -->
+    <div style="border-top:1px solid rgba(242,239,232,0.18);padding-top:34px;display:flex;gap:80px;align-items:flex-start;">
+      <div style="width:400px;flex-shrink:0;">
+        <div style="font-size:18px;font-weight:700;letter-spacing:2px;margin-bottom:12px;">LIANA GINI</div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;line-height:1.7;text-transform:uppercase;opacity:0.45;">ПРОИЗВОДСТВО В КИТАЕ<br/>ДЛЯ FASHION-БРЕНДОВ</div>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;">
+        <a href="#services" style="font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.7;" style-hover="opacity:1;color:{{ accentLight }};">УСЛУГИ</a>
+        <a href="#team" style="font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.7;" style-hover="opacity:1;color:{{ accentLight }};">КОМАНДА В КИТАЕ</a>
+        <a href="#cases" style="font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.7;" style-hover="opacity:1;color:{{ accentLight }};">КЕЙСЫ</a>
+        <a href="#products" style="font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.7;" style-hover="opacity:1;color:{{ accentLight }};">ГОТОВЫЕ РЕШЕНИЯ</a>
+        <a href="#faq" style="font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.7;" style-hover="opacity:1;color:{{ accentLight }};">ВОПРОСЫ</a>
+        <a href="#consultation" style="font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.7;" style-hover="opacity:1;color:{{ accentLight }};">КОНСУЛЬТАЦИЯ</a>
+      </div>
+      <div style="width:280px;flex-shrink:0;display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.4;margin-bottom:4px;">TELEGRAM</div>
+          <a href="https://t.me/lianagini" style="font-size:15px;font-weight:700;color:{{ ivory }};" style-hover="color:{{ accentLight }};">@lianagini</a>
+        </div>
+        <div>
+          <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.4;margin-bottom:4px;">INSTAGRAM</div>
+          <a href="#instagram" style="font-size:15px;font-weight:700;color:{{ ivory }};" style-hover="color:{{ accentLight }};">@lianagini</a>
+        </div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+          <a href="#vk" style="font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">VK</a>
+          <a href="#dzen" style="font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">ЯНДЕКС ДЗЕН</a>
+          <a href="#youtube" style="font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">YOUTUBE</a>
+          <a href="#tiktok" style="font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">TIKTOK</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGAL -->
+    <div style="border-top:1px solid rgba(242,239,232,0.1);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:40px;flex-wrap:wrap;">
+      <div style="font-size:10px;letter-spacing:1.2px;opacity:0.35;">© 2026 LIANA GINI</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <a href="#privacy" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Политика конфиденциальности</a>
+        <a href="#offer" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Публичная оферта</a>
+        <a href="#details" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Реквизиты</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 880},
+  &quot;charcoal&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#1A1817&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#1A1817&quot;, &quot;#131211&quot;, &quot;#221F1E&quot;]},
+  &quot;ivory&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#F2EFE8&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#F2EFE8&quot;, &quot;#EDEAE1&quot;]},
+  &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#541F2B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#541F2B&quot;, &quot;#6B2A38&quot;, &quot;#3F1620&quot;], &quot;section&quot;: &quot;Brand&quot;},
+  &quot;accentLight&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#8C4457&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#8C4457&quot;, &quot;#A85566&quot;], &quot;section&quot;: &quot;Brand&quot;}
+}">
+class Component extends DCLogic {
+  state = { formState: 'idle' };
+
+  // Destination (Liana's Telegram relay vs shared team email) is not confirmed yet,
+  // so submitEnquiry never fabricates a success state — see enquiry.js (WIRED=false).
+  onSubmit = async (e) => {
+ e.preventDefault();
+ const form = e.currentTarget;
+ const payload = {
+ product: form.product?.value || '',
+ design: form.design?.value || '',
+ volume: form.volume?.value || '',
+ targetCost: form.targetCost?.value || '',
+ contact: form.contact?.value || '',
+ };
+ this.setState({ formState: 'pending' });
+ try {
+ const mod = await import('./assets/js/enquiry.js');
+ const res = await mod.submitEnquiry(payload);
+ this.setState({ formState: res.state });
+ } catch (err) {
+ this.setState({ formState: 'error' });
+ }
+ };
+
+ renderVals() {
+ const s = this.state.formState;
+ const notes = {
+ idle: 'Ответим в Telegram или по указанному контакту.',
+ pending: 'Отправляем…',
+ success: 'Заявка отправлена. Свяжемся с вами.',
+ error: 'Канал отправки пока не подключён — напишите в Telegram.',
+ };
+ return {
+ charcoal: this.props.charcoal ?? '#1A1817',
+ ivory: this.props.ivory ?? '#F2EFE8',
+ accent: this.props.accent ?? '#541F2B',
+ accentLight: this.props.accentLight ?? '#8C4457',
+ onSubmit: this.onSubmit,
+ formState: s,
+ formNote: notes[s] || notes.idle,
+ };
+ }
+}
+</script>
+</body>
+</html>

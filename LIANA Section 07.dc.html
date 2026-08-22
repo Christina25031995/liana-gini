@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EAE6DC; }
+  a { color: #541F2B; text-decoration: none; }
+</style>
+</helmet>
+
+<div id="products" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:56px 60px 44px 60px;box-sizing:border-box;">
+
+  <!-- HEADER -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:32px;">
+    <div>
+      <h2 style="margin:0 0 16px 0;font-size:38px;line-height:1.1;font-weight:700;letter-spacing:-0.8px;text-transform:uppercase;">НЕ ГОТОВЫ<br/>К ПРОИЗВОДСТВУ?</h2>
+      <div style="display:flex;align-items:baseline;gap:10px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">
+        <span>ИЗУЧИТЬ</span><span style="opacity:0.3;">→</span>
+        <span>ПРОВЕРИТЬ</span><span style="opacity:0.3;">→</span>
+        <span>НАЙТИ</span><span style="opacity:0.3;">→</span>
+        <span style="color:{{ accent }};">ПРОИЗВЕСТИ</span>
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:22px;font-weight:700;line-height:1.15;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;">НАЧНИТЕ<br/>С ГОТОВОГО.</div>
+      <p style="margin:0;font-size:12px;line-height:1.55;max-width:360px;opacity:0.6;text-align:right;">Подборки, гайды и база рынков Китая — готовые инструменты, которые можно получить сразу после оплаты.</p>
+    </div>
+  </div>
+
+  <!-- MAIN PRODUCT -->
+  <div style="display:flex;gap:44px;border-top:1px solid rgba(24,23,21,0.15);padding-top:28px;align-items:stretch;margin-bottom:32px;">
+    <div style="width:400px;flex-shrink:0;">
+      <img loading="lazy" decoding="async" src="uploads/liana/s7-factory.jpg" alt="" style="width:400px;height:390px;object-fit:cover;object-position:center 62%;display:block;"/>
+      <div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.45;margin-top:8px;">GUANGZHOU / CLOSED SHOWROOMS</div>
+    </div>
+
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <h3 style="margin:0 0 16px 0;font-size:34px;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-0.5px;">PDF-ПОДБОРКИ<br/>КОЛЛЕКЦИЙ</h3>
+        <div style="display:flex;gap:18px;border-top:1px solid rgba(24,23,21,0.12);border-bottom:1px solid rgba(24,23,21,0.12);padding:10px 0;margin-bottom:18px;max-width:520px;">
+          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">ОДЕЖДА</span>
+          <span style="font-size:10px;opacity:0.3;">/</span>
+          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">СУМКИ</span>
+          <span style="font-size:10px;opacity:0.3;">/</span>
+          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">ОБУВЬ</span>
+          <span style="font-size:10px;opacity:0.3;">/</span>
+          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">АКСЕССУАРЫ</span>
+        </div>
+        <p style="margin:0 0 8px 0;font-size:13px;line-height:1.55;max-width:460px;opacity:0.7;">Подборки из закрытых шоурумов Гуанчжоу.</p>
+        <p style="margin:0 0 14px 0;font-size:13px;line-height:1.55;max-width:460px;opacity:0.7;">Понравившуюся модель можно адаптировать под свой бренд и запустить в производство.</p>
+        <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ accent }};">ПАРТИЯ — ОТ 50 ШТ.</div>
+      </div>
+
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-top:1px solid rgba(24,23,21,0.12);padding-top:18px;margin-top:20px;">
+        <div style="font-size:44px;font-weight:700;line-height:0.9;letter-spacing:-2px;">999 ₽</div>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="pdf-collections" data-product-name="PDF-подборки коллекций" data-price="999" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};border-bottom:2px solid {{ accent }};padding-bottom:4px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ ПОДБОРКУ →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- THREE TOOLS -->
+  <div style="display:flex;gap:40px;border-top:1px solid rgba(24,23,21,0.15);padding-top:22px;align-items:stretch;margin-bottom:30px;">
+    <div style="flex:1;">
+      <div style="font-size:17px;font-weight:700;line-height:1.2;text-transform:uppercase;margin-bottom:16px;">9 ШАГОВ<br/>ПРОВЕРКИ ФАБРИКИ</div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;">
+        <span style="font-size:22px;font-weight:700;letter-spacing:-0.5px;">490 ₽</span>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="factory-check-guide" data-product-name="9 шагов проверки фабрики" data-price="490" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ ГАЙД →</a>
+      </div>
+    </div>
+    <div style="width:1px;align-self:stretch;background:rgba(24,23,21,0.1);"></div>
+    <div style="flex:1;">
+      <div style="font-size:17px;font-weight:700;line-height:1.2;text-transform:uppercase;margin-bottom:16px;">САМОСТОЯТЕЛЬНЫЙ<br/>ПОИСК ФАБРИКИ</div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;">
+        <span style="font-size:22px;font-weight:700;letter-spacing:-0.5px;">490 ₽</span>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="factory-search-guide" data-product-name="Самостоятельный поиск фабрики" data-price="490" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ ГАЙД →</a>
+      </div>
+    </div>
+    <div style="width:1px;align-self:stretch;background:rgba(24,23,21,0.1);"></div>
+    <div style="flex:1;">
+      <div style="font-size:17px;font-weight:700;line-height:1.2;text-transform:uppercase;margin-bottom:16px;">РЫНКИ ГУАНЧЖОУ<br/>С АДРЕСАМИ</div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;">
+        <span style="font-size:22px;font-weight:700;letter-spacing:-0.5px;">5 500 ₽</span>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="guangzhou-markets" data-product-name="Рынки Гуанчжоу с адресами" data-price="5500" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ БАЗУ →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS / DELIVERY MOUNT: filled by backend after confirmed payment -->
+  <div id="order-success" data-order-state="{{ orderState }}" style="display:none;"></div>
+
+  <!-- BRIDGE TO MAIN SERVICE -->
+  <div style="border-top:2px solid {{ accent }};padding-top:22px;display:flex;justify-content:space-between;align-items:center;gap:40px;">
+    <div style="font-size:20px;font-weight:700;line-height:1.25;text-transform:uppercase;max-width:560px;">НАШЛИ ТО, ЧТО ХОТИТЕ<br/>ВЫПУСТИТЬ ПОД СВОИМ БРЕНДОМ?</div>
+    <div style="flex:1;height:1px;background:rgba(84,31,43,0.35);"></div>
+    <a href="#contact" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 24px;white-space:nowrap;" style-hover="background:{{ ink }};">ПЕРЕДАТЬ ПРОИЗВОДСТВО КОМАНДЕ →</a>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 970},
+  &quot;ivory&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#F2EFE8&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#F2EFE8&quot;, &quot;#EDEAE1&quot;, &quot;#F6F3EC&quot;]},
+  &quot;ink&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#181715&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#181715&quot;, &quot;#111111&quot;]},
+  &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#541F2B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#541F2B&quot;, &quot;#6B2A38&quot;, &quot;#3F1620&quot;], &quot;section&quot;: &quot;Brand&quot;}
+}">
+class Component extends DCLogic {
+  state = { orderState: 'idle' };
+
+  // Single payment trigger for every product. Reads the product contract off the
+  // clicked CTA's data-* attributes and hands it to the payment layer, which will
+  // call our own backend once a provider is chosen. No keys, no download URLs here.
+  onBuy = async (e) => {
+    e.preventDefault();
+    const el = e.currentTarget;
+    const order = {
+      productId: el.dataset.productId,
+      name: el.dataset.productName,
+      price: Number(el.dataset.price),
+      currency: el.dataset.currency,
+    };
+    try {
+      const mod = await import('./assets/js/payments.js');
+      const res = await mod.startCheckout(order.productId);
+      this.setState({ orderState: res.state });
+      if (res.checkoutUrl) window.location.href = res.checkoutUrl;
+    } catch (err) {
+      this.setState({ orderState: 'idle' });
+    }
+  };
+
+  renderVals() {
+    return {
+      onBuy: this.onBuy,
+      orderState: this.state.orderState,
+      ivory: this.props.ivory ?? '#F2EFE8',
+      ink: this.props.ink ?? '#181715',
+      accent: this.props.accent ?? '#541F2B',
+    };
+  }
+}
+</script>
+</body>
+</html>
