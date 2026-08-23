@@ -1,0 +1,215 @@
+/* Mobile adaptation for LIANA GINI.
+   Desktop above 1024px is untouched: every rule lives inside a max-width query.
+   The design is built with inline styles, so overrides need !important. */
+
+@media (max-width: 1024px) {
+  html, body { background: #F2EFE8 !important; overflow-x: hidden; }
+  div[style*="min-width: 1560px"] { min-width: 0 !important; padding: 0 !important; background: #F2EFE8 !important; }
+  div[style*="width: 1440px"] { width: 100% !important; max-width: 100% !important; box-shadow: none !important; }
+}
+
+@media (max-width: 767px) {
+
+  /* ---- containers ---- */
+[style*="width: 200px"],
+[style*="width: 215px"],
+[style*="width: 220px"],
+[style*="width: 280px"],
+[style*="width: 320px"],
+[style*="width: 340px"],
+[style*="width: 350px"],
+[style*="width: 360px"],
+[style*="width: 380px"],
+[style*="width: 390px"],
+[style*="width: 400px"],
+[style*="width: 420px"],
+[style*="width: 480px"],
+[style*="width: 490px"],
+[style*="width: 520px"],
+[style*="width: 560px"],
+[style*="width: 1440px"] { width: 100% !important; max-width: 100% !important; }
+[style*="max-width: 260px"],
+[style*="max-width: 320px"],
+[style*="max-width: 340px"],
+[style*="max-width: 360px"],
+[style*="max-width: 400px"],
+[style*="max-width: 420px"],
+[style*="max-width: 440px"],
+[style*="max-width: 460px"],
+[style*="max-width: 480px"],
+[style*="max-width: 520px"],
+[style*="max-width: 560px"],
+[style*="max-width: 600px"],
+[style*="max-width: 620px"],
+[style*="max-width: 640px"],
+[style*="max-width: 660px"],
+[style*="max-width: 680px"],
+[style*="max-width: 760px"],
+[style*="max-width: 900px"],
+[style*="max-width: 1440px"] { max-width: 100% !important; }
+
+  [style*="font-family: Archivo"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ---- heights follow content ---- */
+[style*="height: 200px"],
+[style*="height: 220px"],
+[style*="height: 260px"],
+[style*="height: 270px"],
+[style*="height: 280px"],
+[style*="height: 290px"],
+[style*="height: 300px"],
+[style*="height: 320px"],
+[style*="height: 340px"],
+[style*="height: 360px"],
+[style*="height: 380px"],
+[style*="height: 390px"],
+[style*="height: 400px"],
+[style*="height: 420px"],
+[style*="height: 640px"],
+[style*="height: 680px"],
+[style*="height: 940px"],
+[style*="height: 2960px"] { height: auto !important; min-height: 0 !important; }
+
+  /* ---- media ---- */
+  img, video, svg, picture { max-width: 100% !important; }
+  img[style*="object-fit: cover"] { width: 100% !important; height: auto !important; aspect-ratio: 4 / 3; }
+  img[style*="height: 640px"], img[style*="height: 420px"], img[style*="height: 440px"] { aspect-ratio: 3 / 4; }
+  video { width: 100% !important; height: auto !important; aspect-ratio: 16 / 9; object-position: center !important; }
+
+  /* ---- rows stack ---- */
+  div[style*="display: flex"][style*="gap: 36px"],
+  div[style*="display: flex"][style*="gap: 40px"],
+  div[style*="display: flex"][style*="gap: 44px"],
+  div[style*="display: flex"][style*="gap: 48px"],
+  div[style*="display: flex"][style*="gap: 50px"],
+  div[style*="display: flex"][style*="gap: 56px"],
+  div[style*="display: flex"][style*="gap: 60px"],
+  div[style*="display: flex"][style*="gap: 80px"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 28px !important;
+  }
+  div[style*="display: flex"][style*="gap: 24px"],
+  div[style*="display: flex"][style*="gap: 28px"],
+  div[style*="display: flex"][style*="gap: 32px"] {
+    flex-wrap: wrap !important;
+  }
+  div[style*="display: flex"][style*="justify-content: space-between"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+  }
+  div[style*="display: grid"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+  div[style*="text-align: right"] { text-align: left !important; }
+  div[style*="width: 1px"] { display: none !important; }
+
+  /* ---- type scale ---- */
+  [style*="font-size: 20px"] { font-size: 17px !important; }
+  [style*="font-size: 22px"] { font-size: 18px !important; }
+  [style*="font-size: 24px"] { font-size: 19px !important; }
+  [style*="font-size: 26px"] { font-size: 20px !important; }
+  [style*="font-size: 30px"] { font-size: 22px !important; }
+  [style*="font-size: 34px"] { font-size: 24px !important; }
+  [style*="font-size: 36px"] { font-size: 26px !important; }
+  [style*="font-size: 38px"] { font-size: 27px !important; }
+  [style*="font-size: 40px"] { font-size: 28px !important; }
+  [style*="font-size: 42px"] { font-size: 30px !important; }
+  [style*="font-size: 43px"] { font-size: 30px !important; }
+  [style*="font-size: 44px"] { font-size: 30px !important; }
+  [style*="font-size: 46px"] { font-size: 32px !important; }
+  [style*="font-size: 48px"] { font-size: 32px !important; }
+  [style*="font-size: 52px"] { font-size: 34px !important; }
+  [style*="font-size: 56px"] { font-size: 34px !important; }
+  [style*="font-size: 340px"] { font-size: 120px !important; }
+  h1, h2, h3, h4 { letter-spacing: -0.3px !important; }
+
+  /* ---- touch targets ---- */
+  a[style*="padding: 1"], button { min-height: 44px; display: inline-flex !important; align-items: center; }
+  input, textarea, select { font-size: 16px !important; }
+
+  /* ---- Section 02: scroll mechanic kept, frame rebuilt ---- */
+  #problems-zone { height: 5200px !important; }
+  #problems-zone > div[style*="position: sticky"] {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+  }
+  #problems-zone > div[style*="position: sticky"] > div:first-child { display: none !important; }
+  #problems-zone > div[style*="position: sticky"] > div:last-child { padding: 28px 20px !important; flex: 1 1 auto !important; }
+  #problems-zone div[style*="position: relative"] > div[style*="position: absolute"] {
+    position: static !important;
+    margin-bottom: 18px !important;
+  }
+  #problems-zone div[style*="position: relative"][style*="height:"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 14px !important;
+    align-items: flex-start !important;
+  }
+  #problems-zone img { width: 130px !important; height: auto !important; aspect-ratio: 3 / 4; }
+  #problems-zone div[style*="height: 1px"] { display: none !important; }
+
+  /* ---- Section 03: absolute production map becomes a vertical sequence ---- */
+  #services { height: auto !important; padding-bottom: 40px !important; }
+  #services > svg { display: none !important; }
+  #services > div,
+  #services > img {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 28px 0 !important;
+  }
+  #services > img { height: auto !important; aspect-ratio: 4 / 3; }
+  #services h2[style*="position: absolute"],
+  #services div[style*="position: absolute"] {
+    position: static !important;
+    white-space: normal !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* ---- Section 10 ---- */
+  #contact { padding-left: 20px !important; padding-right: 20px !important; }
+  #contact input, #contact textarea { width: 100% !important; box-sizing: border-box !important; }
+}
+
+@media (max-width: 767px) {
+  /* nav is a <nav>, not a div — stack it and let it wrap */
+  nav[style*="display: flex"] { flex-wrap: wrap !important; gap: 14px 18px !important; }
+  nav a { font-size: 11px !important; }
+
+  /* Section 04 economics diagram is drawn on a fixed 960px canvas */
+  svg[viewBox="0 0 960 190"] { display: none !important; }
+  svg { max-width: 100% !important; height: auto !important; }
+
+  /* hero frosted panel sits on absolute coordinates */
+  div[style*="position: absolute"][style*="backdrop-filter"] {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 24px 20px !important;
+    margin-top: auto !important;
+  }
+  /* hero canvas: let the panel flow under the video */
+  div[style*="height: 940px"] {
+    height: auto !important;
+    min-height: 560px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+  }
+  div[style*="height: 940px"] > video { position: absolute !important; height: 100% !important; aspect-ratio: auto !important; }
+}
+
+@media (max-width: 767px) {
+  /* Section 03 intro headlines shrank when they left absolute positioning */
+  #services h2 { width: 100% !important; max-width: 100% !important; }
+  /* hero headline stays the loudest element on the page */
+  h1 { font-size: 32px !important; }
+}
