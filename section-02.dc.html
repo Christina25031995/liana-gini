@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="assets/js/support.js"></script>
+<script src="assets/js/dc-runtime.js"></script>
 </head>
 <body>
 <x-dc>
@@ -15,6 +15,10 @@
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
   a:hover { color: #181715; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-anim="line"] { width: 32px !important; transition: none !important; }
+    [data-anim="statement"] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 </style>
 </helmet>
 
@@ -23,11 +27,11 @@
 
     <!-- INTRO -->
     <div ref="{{ introRef }}" style="height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;">
-      <div style="width:{{ introLineWidth }};height:1px;background:{{ accent }};transition:width 0.4s ease;"></div>
+      <div data-anim="line" style="width:{{ introLineWidth }};height:1px;background:{{ accent }};transition:width 0.5s cubic-bezier(.16,1,.3,1);"></div>
       <h2 style="margin:0;font-size:52px;line-height:1.25;font-weight:600;letter-spacing:-0.5px;text-transform:uppercase;max-width:900px;">
-        <div>ПРОИЗВОДСТВО В КИТАЕ</div>
-        <div>НЕ ДОЛЖНО СТАНОВИТЬСЯ</div>
-        <div style="color:{{ accent }};">ВАШЕЙ ВТОРОЙ РАБОТОЙ</div>
+        <div style="opacity:{{ introOn }};transform:translateY({{ introY }}px);transition:opacity 0.6s cubic-bezier(.16,1,.3,1) 0s, transform 0.6s cubic-bezier(.16,1,.3,1) 0s;" data-anim="statement">ПРОИЗВОДСТВО В КИТАЕ</div>
+        <div style="opacity:{{ introOn }};transform:translateY({{ introY }}px);transition:opacity 0.6s cubic-bezier(.16,1,.3,1) 0.1s, transform 0.6s cubic-bezier(.16,1,.3,1) 0.1s;" data-anim="statement">НЕ ДОЛЖНО СТАНОВИТЬСЯ</div>
+        <div style="color:{{ accent }};opacity:{{ introOn }};transform:translateY({{ introY }}px);transition:opacity 0.6s cubic-bezier(.16,1,.3,1) 0.24s, transform 0.6s cubic-bezier(.16,1,.3,1) 0.24s;" data-anim="statement">ВАШЕЙ ВТОРОЙ РАБОТОЙ</div>
       </h2>
     </div>
 
@@ -74,8 +78,15 @@
             <p style="max-width:440px;font-size:16px;line-height:1.6;opacity:{{ bodyOpacity }};transform:translateY({{ bodyY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 20px 0;">Эталонный образец устроил, но во время серийного производства могут поменяться материал, посадка, фурнитура или обработка.</p>
             <p style="max-width:440px;font-size:16px;line-height:1.6;font-weight:600;opacity:{{ solutionOpacity }};transform:translateY({{ solutionY }}px);transition:opacity 0.5s ease, transform 0.5s ease;margin:0 0 28px 0;">→ Контроль идёт в процессе производства, а не только после того, как партия уже готова.</p>
             <div style="display:flex;align-items:flex-end;gap:36px;">
-              <div style="opacity:{{ imageOpacity }};transition:opacity 0.5s ease;">
+              <div style="position:relative;opacity:{{ imageOpacity }};transition:opacity 0.5s ease;">
                 <img loading="lazy" decoding="async" src="assets/media/slots/p2-sample.webp" alt="" style="width:320px;height:400px;object-fit:cover;object-position:center;display:block;"/>
+                <div style="position:absolute;inset:0;pointer-events:none;opacity:{{ qcOpacity }};transition:opacity 0.5s ease;">
+                  <div style="position:absolute;top:10px;left:10px;width:16px;height:16px;border-top:1.5px solid {{ ivory }};border-left:1.5px solid {{ ivory }};"></div>
+                  <div style="position:absolute;top:10px;right:10px;width:16px;height:16px;border-top:1.5px solid {{ ivory }};border-right:1.5px solid {{ ivory }};"></div>
+                  <div style="position:absolute;bottom:10px;left:10px;width:16px;height:16px;border-bottom:1.5px solid {{ ivory }};border-left:1.5px solid {{ ivory }};"></div>
+                  <div style="position:absolute;bottom:10px;right:10px;width:16px;height:16px;border-bottom:1.5px solid {{ ivory }};border-right:1.5px solid {{ ivory }};"></div>
+                  <div style="position:absolute;top:34px;left:10px;font-size:9px;letter-spacing:1.5px;font-weight:600;color:{{ ivory }};background:rgba(84,31,43,0.85);padding:3px 7px;">QC</div>
+                </div>
               </div>
               <div style="width:70px;height:1px;background:{{ accent }};margin-bottom:150px;position:relative;">
                 <span style="position:absolute;top:-56px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9px;letter-spacing:1px;opacity:{{ matOpacity }};transition:opacity 0.4s ease;">MATERIAL</span>
@@ -114,7 +125,7 @@
           <sc-if value="{{ isP4 }}" hint-placeholder-val="{{ false }}">
             <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">ECONOMICS</div>
             <h4 style="margin:0 0 32px 0;font-size:43px;line-height:1.12;font-weight:600;text-transform:uppercase;max-width:660px;">НУЖНО ПОПАСТЬ<br/>НЕ ТОЛЬКО В КАЧЕСТВО,<br/>НО И В ДЕНЬГИ</h4>
-            <p style="max-width:440px;font-size:16px;line-height:1.6;margin:0 0 40px 0;">Можно произвести прекрасную вещь, которая окажется бессмысленной для бизнеса из-за себестоимости.</p>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;margin:0 0 40px 0;opacity:{{ bodyOpacity }};transform:translateY({{ bodyY }}px);transition:opacity 0.5s ease, transform 0.5s ease;">Можно произвести прекрасную вещь, которая окажется бессмысленной для бизнеса из-за себестоимости.</p>
             <div style="opacity:{{ statement1Opacity }};transition:opacity 0.6s ease;font-size:44px;font-weight:700;text-transform:uppercase;line-height:1.1;margin-bottom:12px;">КРАСИВО — <span style="color:{{ accent }};">МАЛО.</span></div>
             <div style="opacity:{{ statement2Opacity }};transition:opacity 0.6s ease;font-size:44px;font-weight:700;text-transform:uppercase;line-height:1.1;margin-bottom:32px;">ПРОДУКТ ДОЛЖЕН ЗАРАБАТЫВАТЬ.</div>
             <div style="display:flex;flex-wrap:wrap;gap:20px 28px;opacity:{{ paramsOpacity }};transition:opacity 0.6s ease;border-top:1px solid rgba(24,23,21,0.12);padding-top:20px;max-width:460px;">
@@ -130,7 +141,7 @@
           <sc-if value="{{ isP5 }}" hint-placeholder-val="{{ false }}">
             <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">ONE TEAM</div>
             <h4 style="margin:0 0 24px 0;font-size:43px;line-height:1.12;font-weight:600;text-transform:uppercase;max-width:660px;">НЕ ХОЧУ САМ<br/>УПРАВЛЯТЬ ПЯТЬЮ<br/>РАЗНЫМИ ИСПОЛНИТЕЛЯМИ<br/>В КИТАЕ</h4>
-            <p style="max-width:440px;font-size:16px;line-height:1.6;margin:0 0 40px 0;">Фабрика, технолог, закупщик, контроль, переговоры — всё это ещё нужно связать между собой и заставить работать на один результат.</p>
+            <p style="max-width:440px;font-size:16px;line-height:1.6;margin:0 0 40px 0;opacity:{{ bodyOpacity }};transform:translateY({{ bodyY }}px);transition:opacity 0.5s ease, transform 0.5s ease;">Фабрика, технолог, закупщик, контроль, переговоры — всё это ещё нужно связать между собой и заставить работать на один результат.</p>
 
             <div style="position:relative;height:200px;opacity:{{ linesOpacity }};transition:opacity 0.5s ease;">
               <div style="position:absolute;left:0;top:0;display:flex;align-items:center;gap:12px;"><div style="width:60px;height:1px;background:rgba(24,23,21,0.3);"></div><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">FACTORY</span></div>
@@ -140,7 +151,7 @@
               <div style="position:absolute;left:0;top:176px;display:flex;align-items:center;gap:12px;"><div style="width:60px;height:1px;background:rgba(24,23,21,0.3);"></div><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.55;">NEGOTIATIONS</span></div>
             </div>
 
-            <div style="opacity:{{ convergedOpacity }};transition:opacity 0.6s ease;display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:-40px;">
+            <div style="opacity:{{ convergedOpacity }};transition:opacity 0.6s ease;display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;">
               <div style="width:160px;height:2px;background:{{ accent }};"></div>
               <div>
                 <div style="font-size:20px;font-weight:700;letter-spacing:1px;">LIANA GINI</div>
@@ -206,20 +217,19 @@ class Component extends DCLogic {
     const activeIndex = Math.max(0, Math.min(numProblems - 1, Math.floor(rel / problemH)));
     const localProgress = Math.max(0, Math.min(1, (rel - activeIndex * problemH) / problemH));
     const lineProgressPct = Math.max(0, Math.min(100, (rel / problemsH) * 100));
-    const bodyOpacity = 1, bodyY = 0, solutionOpacity = 1, solutionY = 0, imageOpacity = 1, imageY = 0;
+    const lp = localProgress;
+    const bodyOpacity = lp > 0.05 ? 1 : 0, bodyY = lp > 0.05 ? 0 : 16;
+    const solutionOpacity = lp > 0.3 ? 1 : 0, solutionY = lp > 0.3 ? 0 : 16;
+    const imageOpacity = lp > 0.55 ? 1 : 0, imageY = lp > 0.55 ? 0 : 16;
 
     return {
       ivory, ink, accent,
       scrollRef: this.scrollRef,
       introRef: this.introRef,
 
-      introLineWidth: '32px',
-      introLine1Opacity: 1,
-      introLine1Y: 0,
-      introLine2Opacity: 1,
-      introLine2Y: 0,
-      introLine3Opacity: 1,
-      introLine3Y: 0,
+      introLineWidth: this.state.introInView ? '32px' : '0px',
+      introOn: this.state.introInView ? 1 : 0,
+      introY: this.state.introInView ? 0 : 14,
 
       lineProgressPct: lineProgressPct,
       num1Color: activeIndex === 0 && rel >= 0 ? accent : (activeIndex > 0 || rel >= problemH ? ink : inactive),
@@ -246,18 +256,30 @@ class Component extends DCLogic {
 
       bodyOpacity, bodyY, solutionOpacity, solutionY, imageOpacity, imageY,
 
-      // P2 specific
-      matOpacity: 1, fitOpacity: 1, hwOpacity: 1, finOpacity: 1, productionOpacity: 1,
+      // P2 specific — material/fit/hardware/finish labels + production shot stagger in
+      matOpacity: lp > 0.15 ? 1 : 0,
+      fitOpacity: lp > 0.28 ? 1 : 0,
+      hwOpacity: lp > 0.41 ? 1 : 0,
+      finOpacity: lp > 0.54 ? 1 : 0,
+      productionOpacity: lp > 0.67 ? 1 : 0,
+      // QC micro-overlay on the sample shot: appears briefly right as the image
+      // reveals, then settles quiet — a restrained inspection-marker moment.
+      qcOpacity: lp < 0.55 ? 0 : (lp < 0.65 ? 1 : 0.35),
 
-      // P3 specific
-      routeWidthPct: '100%',
-      refOpacity: 1, sampleOpacity: 1, productOpacity: 1,
+      // P3 specific — route line draws in, then reference → sample → product appear along it
+      routeWidthPct: Math.round(Math.min(100, lp * 140)) + '%',
+      refOpacity: lp > 0.1 ? 1 : 0,
+      sampleOpacity: lp > 0.35 ? 1 : 0,
+      productOpacity: lp > 0.6 ? 1 : 0,
 
       // P4 specific
-      statement1Opacity: 1, statement2Opacity: 1, paramsOpacity: 1,
+      statement1Opacity: lp > 0.15 ? 1 : 0,
+      statement2Opacity: lp > 0.4 ? 1 : 0,
+      paramsOpacity: lp > 0.65 ? 1 : 0,
 
-      // P5 specific
-      linesOpacity: 0, convergedOpacity: 1,
+      // P5 specific — role list draws in first, then converges into the LIANA GINI mark
+      linesOpacity: lp > 0.15 ? 1 : 0,
+      convergedOpacity: lp > 0.55 ? 1 : 0,
     };
   }
 }

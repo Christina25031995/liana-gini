@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="assets/js/support.js"></script>
+<script src="assets/js/dc-runtime.js"></script>
 </head>
 <body>
 <x-dc>
@@ -14,13 +14,16 @@
 <style>
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-anim] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 </style>
 </helmet>
 
-<div id="cases" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:56px 60px 44px 60px;box-sizing:border-box;">
+<div id="cases" ref="{{ rootRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:56px 60px 44px 60px;box-sizing:border-box;">
 
   <!-- HEADER -->
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:60px;margin-bottom:36px;">
+  <div data-anim style="display:flex;justify-content:space-between;align-items:flex-start;gap:60px;margin-bottom:36px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);">
     <div>
       <h2 style="margin:0 0 12px 0;font-size:40px;line-height:1.08;font-weight:700;letter-spacing:-1px;text-transform:uppercase;">РАБОТАЕМ С ТЕМИ,<br/>КОГО ВЫ НОСИТЕ.</h2>
       <p style="margin:0;font-size:12px;line-height:1.55;max-width:440px;opacity:0.6;">Производим для крупных игроков fashion-индустрии — и для брендов, которые только начинают расти.</p>
@@ -33,11 +36,11 @@
 
     <!-- CASE 01 -->
     <div style="flex:1;min-width:0;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;">01 — НИЖНЕЕ БЕЛЬЁ</div>
-      <h3 style="margin:0 0 14px 0;font-size:24px;line-height:1.15;font-weight:700;text-transform:uppercase;">ИЗ 3 МОДЕЛЕЙ —<br/>В 38 ПОЗИЦИЙ.</h3>
-      <p style="margin:0 0 22px 0;font-size:12px;line-height:1.55;opacity:0.6;">Пришли с тремя моделями. Переработали ассортимент, размерную сетку по ГОСТу, добавили авторские принты.</p>
+      <div data-anim style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0s, transform .6s cubic-bezier(.16,1,.3,1) 0s;">01 — НИЖНЕЕ БЕЛЬЁ</div>
+      <h3 data-anim style="margin:0 0 14px 0;font-size:24px;line-height:1.15;font-weight:700;text-transform:uppercase;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0s, transform .6s cubic-bezier(.16,1,.3,1) 0s;">ИЗ 3 МОДЕЛЕЙ —<br/>В 38 ПОЗИЦИЙ.</h3>
+      <p data-anim style="margin:0 0 22px 0;font-size:12px;line-height:1.55;opacity:{{ rO6 }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0s, transform .6s cubic-bezier(.16,1,.3,1) 0s;">Пришли с тремя моделями. Переработали ассортимент, размерную сетку по ГОСТу, добавили авторские принты.</p>
 
-      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:22px;">
+      <div data-anim style="display:flex;align-items:baseline;gap:12px;margin-bottom:22px;opacity:{{ c1ChainO }};transform:translateY({{ c1ChainY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.16s, transform .6s cubic-bezier(.16,1,.3,1) 0.16s;">
         <span style="font-size:44px;font-weight:700;line-height:0.9;letter-spacing:-2px;">3</span>
         <span style="font-size:16px;opacity:0.35;">→</span>
         <span style="font-size:44px;font-weight:700;line-height:0.9;letter-spacing:-2px;">38</span>
@@ -45,7 +48,7 @@
         <span style="font-size:44px;font-weight:700;line-height:0.9;letter-spacing:-2px;color:{{ accent }};">60</span>
       </div>
 
-      <div style="border-top:1px solid rgba(24,23,21,0.12);padding-top:12px;">
+      <div data-anim style="border-top:1px solid rgba(24,23,21,0.12);padding-top:12px;opacity:{{ c1ResultO }};transform:translateY({{ c1ResultY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.34s, transform .6s cubic-bezier(.16,1,.3,1) 0.34s;">
         <div style="font-size:17px;font-weight:700;line-height:1.25;text-transform:uppercase;">60 ПРОДАЖ В ДЕНЬ<br/>НА ПИКОВЫХ МОДЕЛЯХ.</div>
       </div>
     </div>
@@ -54,44 +57,44 @@
 
     <!-- CASE 02 -->
     <div style="flex:1;min-width:0;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;">02 — ПИЖАМЫ</div>
-      <h3 style="margin:0 0 14px 0;font-size:24px;line-height:1.15;font-weight:700;text-transform:uppercase;">ДОРОГОЕ ОЩУЩЕНИЕ.<br/>НУЖНАЯ ЭКОНОМИКА.</h3>
-      <p style="margin:0 0 16px 0;font-size:12px;line-height:1.55;opacity:0.6;">Задача — сохранить ощущение зарубежного продукта, но уложиться в экономику бренда. Разобрали оригинал, подобрали состав и производство.</p>
+      <div data-anim style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.05s, transform .6s cubic-bezier(.16,1,.3,1) 0.05s;">02 — ПИЖАМЫ</div>
+      <h3 data-anim style="margin:0 0 14px 0;font-size:24px;line-height:1.15;font-weight:700;text-transform:uppercase;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.05s, transform .6s cubic-bezier(.16,1,.3,1) 0.05s;">ДОРОГОЕ ОЩУЩЕНИЕ.<br/>НУЖНАЯ ЭКОНОМИКА.</h3>
+      <p data-anim style="margin:0 0 16px 0;font-size:12px;line-height:1.55;opacity:{{ rO6 }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.05s, transform .6s cubic-bezier(.16,1,.3,1) 0.05s;">Задача — сохранить ощущение зарубежного продукта, но уложиться в экономику бренда. Разобрали оригинал, подобрали состав и производство.</p>
 
-      <div style="font-size:11px;font-weight:600;line-height:1.55;text-transform:uppercase;margin-bottom:18px;opacity:0.7;">НАШЛИ ПОСТАВЩИКА.<br/>ПОДОБРАЛИ ТКАНЬ.<br/>РАЗРАБОТАЛИ РАЗМЕРНУЮ СЕТКУ.<br/>ОБЕСПЕЧИЛИ КОНТРОЛЬ КАЧЕСТВА.</div>
+      <div data-anim style="font-size:11px;font-weight:600;line-height:1.55;text-transform:uppercase;margin-bottom:18px;opacity:{{ rO7 }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.05s, transform .6s cubic-bezier(.16,1,.3,1) 0.05s;">НАШЛИ ПОСТАВЩИКА.<br/>ПОДОБРАЛИ ТКАНЬ.<br/>РАЗРАБОТАЛИ РАЗМЕРНУЮ СЕТКУ.<br/>ОБЕСПЕЧИЛИ КОНТРОЛЬ КАЧЕСТВА.</div>
 
-      <div style="border-top:1px solid rgba(24,23,21,0.12);padding-top:12px;margin-bottom:18px;">
+      <div data-anim style="border-top:1px solid rgba(24,23,21,0.12);padding-top:12px;margin-bottom:18px;opacity:{{ c2ResultO }};transform:translateY({{ c2ResultY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.3s, transform .6s cubic-bezier(.16,1,.3,1) 0.3s;">
         <div style="font-size:17px;font-weight:700;line-height:1.25;text-transform:uppercase;">ЛИНЕЙКА СТАБИЛЬНО<br/>ДЕРЖИТСЯ В ЦЕЛЕВОЙ МАРЖЕ.</div>
       </div>
 
-      <div style="width:100%;height:120px;background-image:url('assets/media/review-fabric.jpg');background-size:368px auto;background-position:center 12%;background-repeat:no-repeat;"></div>
-      <div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.45;margin-top:8px;">ФРАГМЕНТ ПЕРЕПИСКИ С КЛИЕНТОМ</div>
+      <div data-anim style="width:100%;height:120px;background-image:url('assets/media/review-fabric.jpg');background-size:368px auto;background-position:center 12%;background-repeat:no-repeat;opacity:{{ c2ResultO }};transform:translateY({{ c2ResultY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.3s, transform .6s cubic-bezier(.16,1,.3,1) 0.3s;"></div>
+      <div data-anim style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;margin-top:8px;opacity:{{ c2Result45 }};transform:translateY({{ c2ResultY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.3s, transform .6s cubic-bezier(.16,1,.3,1) 0.3s;">ФРАГМЕНТ ПЕРЕПИСКИ С КЛИЕНТОМ</div>
     </div>
 
     <div style="width:1px;align-self:stretch;background:rgba(24,23,21,0.1);"></div>
 
     <!-- CASE 03 -->
     <div style="flex:1.15;min-width:0;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;">03 — ДЕТСКАЯ ОДЕЖДА</div>
-      <h3 style="margin:0 0 14px 0;font-size:24px;line-height:1.15;font-weight:700;text-transform:uppercase;">РАЗМЕР, КОТОРЫЙ<br/>ФАБРИКА НЕ ШИЛА.</h3>
-      <p style="margin:0 0 16px 0;font-size:12px;line-height:1.55;opacity:0.6;">Фабрика отказывалась делать малышковый размер. Разработали сетку от 66 размера и добились запуска производства.</p>
+      <div data-anim style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.1s, transform .6s cubic-bezier(.16,1,.3,1) 0.1s;">03 — ДЕТСКАЯ ОДЕЖДА</div>
+      <h3 data-anim style="margin:0 0 14px 0;font-size:24px;line-height:1.15;font-weight:700;text-transform:uppercase;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.1s, transform .6s cubic-bezier(.16,1,.3,1) 0.1s;">РАЗМЕР, КОТОРЫЙ<br/>ФАБРИКА НЕ ШИЛА.</h3>
+      <p data-anim style="margin:0 0 16px 0;font-size:12px;line-height:1.55;opacity:{{ rO6 }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.1s, transform .6s cubic-bezier(.16,1,.3,1) 0.1s;">Фабрика отказывалась делать малышковый размер. Разработали сетку от 66 размера и добились запуска производства.</p>
 
       <div style="border-top:1px solid rgba(24,23,21,0.12);padding-top:12px;margin-bottom:16px;">
         <div style="font-size:17px;font-weight:700;line-height:1.25;text-transform:uppercase;">СЕГОДНЯ АКТИВНЫЙ АССОРТИМЕНТ<br/>КЛИЕНТА ПРОИЗВОДИТСЯ С НАМИ.</div>
       </div>
 
       <!-- proof sequence: produced → worn -->
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+      <div data-anim style="display:flex;gap:8px;align-items:center;margin-bottom:16px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.1s, transform .6s cubic-bezier(.16,1,.3,1) 0.1s;">
         <img loading="lazy" decoding="async" src="assets/media/produced.jpg" alt="" style="width:112px;height:92px;object-fit:cover;display:block;"/>
         <span style="font-size:13px;opacity:0.3;">→</span>
         <div style="width:78px;height:92px;background-image:url('assets/media/worn.jpg');background-size:180px auto;background-position:-34px -48px;background-repeat:no-repeat;"></div>
         <div style="font-size:8px;letter-spacing:1.2px;text-transform:uppercase;opacity:0.45;margin-left:6px;line-height:1.5;">ПРОИЗВЕЛИ<br/>→ НОСЯТ</div>
       </div>
 
-      <div style="font-size:14px;font-weight:700;line-height:1.25;text-transform:uppercase;color:{{ accent }};margin-bottom:14px;">«НИ ОДНО БОДИ<br/>НЕ ПРИШЛО С БРАКОМ.»</div>
+      <div data-anim style="font-size:14px;font-weight:700;line-height:1.25;text-transform:uppercase;color:{{ accent }};margin-bottom:14px;opacity:{{ c3ResultO }};transform:translateY({{ c3ResultY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.32s, transform .6s cubic-bezier(.16,1,.3,1) 0.32s;">«НИ ОДНО БОДИ<br/>НЕ ПРИШЛО С БРАКОМ.»</div>
 
-      <div style="width:100%;height:104px;background-image:url('assets/media/review-shipment.jpg');background-size:423px auto;background-position:center 26%;background-repeat:no-repeat;"></div>
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;gap:16px;">
+      <div data-anim style="width:100%;height:104px;background-image:url('assets/media/review-shipment.jpg');background-size:423px auto;background-position:center 26%;background-repeat:no-repeat;opacity:{{ c3ResultO }};transform:translateY({{ c3ResultY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.32s, transform .6s cubic-bezier(.16,1,.3,1) 0.32s;"></div>
+      <div data-anim style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;gap:16px;opacity:{{ c3ResultO }};transform:translateY({{ c3ResultY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) 0.32s, transform .6s cubic-bezier(.16,1,.3,1) 0.32s;">
         <div style="font-size:12px;font-weight:700;text-transform:uppercase;line-height:1.3;">ПОСЛЕ ПЕРВОЙ ОТГРУЗКИ —<br/>СНОВА ОБРАТИЛИСЬ К НАМ.</div>
       </div>
     </div>
@@ -113,11 +116,47 @@
   &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#541F2B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#541F2B&quot;, &quot;#6B2A38&quot;, &quot;#3F1620&quot;], &quot;section&quot;: &quot;Brand&quot;}
 }">
 class Component extends DCLogic {
+  rootRef = React.createRef();
+  state = { revealed: false };
+
+  componentDidMount() {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      this.setState({ revealed: true });
+      return;
+    }
+    this.io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.setState({ revealed: true });
+        this.io.disconnect();
+      }
+    }, { threshold: 0.15 });
+    if (this.rootRef.current) this.io.observe(this.rootRef.current);
+  }
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+  }
+
   renderVals() {
+    const on = this.state.revealed;
     return {
       ivory: this.props.ivory ?? '#F2EFE8',
       ink: this.props.ink ?? '#181715',
       accent: this.props.accent ?? '#541F2B',
+      rootRef: this.rootRef,
+      rO: on ? 1 : 0,
+      rY: on ? 0 : 24,
+      rO6: on ? 0.6 : 0,
+      rO7: on ? 0.7 : 0,
+      c1ChainO: on ? 1 : 0,
+      c1ChainY: on ? 0 : 16,
+      c1ResultO: on ? 1 : 0,
+      c1ResultY: on ? 0 : 16,
+      c2ResultO: on ? 1 : 0,
+      c2ResultY: on ? 0 : 16,
+      c2Result45: on ? 0.45 : 0,
+      c3ResultO: on ? 1 : 0,
+      c3ResultY: on ? 0 : 16,
     };
   }
 }

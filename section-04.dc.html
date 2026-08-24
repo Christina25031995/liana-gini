@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="assets/js/support.js"></script>
+<script src="assets/js/dc-runtime.js"></script>
 </head>
 <body>
 <x-dc>
@@ -14,6 +14,9 @@
 <style>
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-anim="step"] * { opacity: 1 !important; transition: none !important; }
+  }
 </style>
 </helmet>
 
@@ -76,8 +79,12 @@
   <p style="font-size:12px;line-height:1.5;max-width:600px;margin:0 0 30px 0;opacity:0.55;text-transform:uppercase;letter-spacing:0.3px;">Состав ткани, фурнитура, технология и объём — это не только вопрос производства. Это экономика продукта.</p>
 
   <!-- BOTTOM -->
-  <div style="border-top:1px solid rgba(24,23,21,0.15);padding-top:22px;">
-    <h3 style="margin:0;font-size:30px;font-weight:700;text-transform:uppercase;line-height:1.15;">СНАЧАЛА — ЦИФРЫ. ПОТОМ — ПАРТИЯ.</h3>
+  <div data-anim="step" ref="{{ bottomRef }}" style="border-top:1px solid rgba(24,23,21,0.15);padding-top:22px;">
+    <h3 style="margin:0;font-size:30px;font-weight:700;text-transform:uppercase;line-height:1.15;display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+      <span style="opacity:{{ b1O }};transition:opacity 0.35s ease;">СНАЧАЛА — ЦИФРЫ.</span>
+      <span style="display:inline-block;width:{{ bLineW }};height:2px;background:{{ accent }};flex-shrink:0;transition:width 0.35s cubic-bezier(.4,0,.2,1) 0.2s;"></span>
+      <span style="opacity:{{ b2O }};transition:opacity 0.35s ease 0.45s;">ПОТОМ — ПАРТИЯ.</span>
+    </h3>
   </div>
 
 </div>
@@ -91,9 +98,15 @@
 }">
 class Component extends DCLogic {
   rootRef = React.createRef();
-  state = { animated: false };
+  bottomRef = React.createRef();
+  state = { animated: false, bottomAnimated: false };
 
   componentDidMount() {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      this.setState({ animated: true, bottomAnimated: true });
+      return;
+    }
     this.io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         this.setState({ animated: true });
@@ -101,22 +114,38 @@ class Component extends DCLogic {
       }
     }, { threshold: 0.25 });
     if (this.rootRef.current) this.io.observe(this.rootRef.current);
+
+    // Separate trigger for the closing statement — it sits far below the
+    // top-of-section observer above and needs its own reveal moment.
+    this.ioBottom = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.setState({ bottomAnimated: true });
+        this.ioBottom.disconnect();
+      }
+    }, { threshold: 0.4 });
+    if (this.bottomRef.current) this.ioBottom.observe(this.bottomRef.current);
   }
   componentWillUnmount() {
     if (this.io) this.io.disconnect();
+    if (this.ioBottom) this.ioBottom.disconnect();
   }
 
   renderVals() {
     const on = this.state.animated;
+    const bOn = this.state.bottomAnimated;
     return {
       ivory: this.props.ivory ?? '#F2EFE8',
       ink: this.props.ink ?? '#181715',
       accent: this.props.accent ?? '#541F2B',
       rootRef: this.rootRef,
+      bottomRef: this.bottomRef,
       revealA: on ? 1 : 0,
       lineOffset: on ? 0 : 1000,
       revealB: on ? 1 : 0, revealC: on ? 1 : 0, revealD: on ? 1 : 0,
       revealE: on ? 1 : 0, revealF: on ? 1 : 0, revealG: on ? 1 : 0,
+      b1O: bOn ? 1 : 0,
+      bLineW: bOn ? '40px' : '0px',
+      b2O: bOn ? 1 : 0,
     };
   }
 }

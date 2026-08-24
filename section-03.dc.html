@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="assets/js/support.js"></script>
+<script src="assets/js/dc-runtime.js"></script>
 </head>
 <body>
 <x-dc>
@@ -15,6 +15,9 @@
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
   a:hover { color: #181715; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-anim="step"] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 </style>
 </helmet>
 
@@ -40,7 +43,7 @@
   </div>
 
   <!-- 01 / BRIEF (typographic only) -->
-  <div style="position:absolute;top:260px;left:100px;width:400px;">
+  <div data-anim="step" style="position:absolute;top:260px;left:100px;width:400px;opacity:{{ s1O }};transform:translateY({{ s1Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
     <h3 style="margin:0 0 14px 0;font-size:24px;line-height:1.2;font-weight:700;text-transform:uppercase;">РАЗБИРАЕМ ЗАДАЧУ И ЭКОНОМИКУ</h3>
     <p style="font-size:13px;line-height:1.55;max-width:340px;margin:0 0 16px 0;opacity:0.75;">Что производим, для кого, какой объём, целевая себестоимость, требования к продукту.</p>
     <div style="display:flex;flex-wrap:wrap;gap:8px 16px;border-top:1px solid rgba(24,23,21,0.15);padding-top:12px;max-width:360px;">
@@ -53,7 +56,7 @@
   </div>
 
   <!-- 02 / DEVELOPMENT — image right -->
-  <div style="position:absolute;top:560px;left:100px;width:400px;">
+  <div data-anim="step" style="position:absolute;top:560px;left:100px;width:400px;opacity:{{ s2O }};transform:translateY({{ s2Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
     <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:{{ accent }};margin-bottom:10px;">02</div>
     <h3 style="margin:0 0 14px 0;font-size:26px;line-height:1.2;font-weight:700;text-transform:uppercase;">РАЗРАБАТЫВАЕМ ПРОДУКТ</h3>
     <p style="font-size:13px;line-height:1.55;max-width:360px;margin:0 0 16px 0;opacity:0.75;">ТЗ, лекала, материалы, состав, плотность, фурнитура, технологии.</p>
@@ -64,11 +67,18 @@
       <span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;">HARDWARE</span>
     </div>
   </div>
-  <img loading="lazy" decoding="async" src="assets/media/slots/s3-development.webp" alt="" style="position:absolute;top:550px;left:700px;width:480px;height:340px;object-fit:cover;object-position:center;display:block;"/>
+  <img data-anim="step" loading="lazy" decoding="async" src="assets/media/slots/s3-development.webp" alt="" style="position:absolute;top:550px;left:700px;width:480px;height:340px;object-fit:cover;object-position:center;display:block;opacity:{{ s2O }};transform:translateY({{ s2Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);"/>
 
   <!-- 03 / FACTORY — image left -->
-  <img loading="lazy" decoding="async" src="assets/media/slots/s3-factory.webp" alt="" style="position:absolute;top:990px;left:100px;width:520px;height:360px;object-fit:cover;object-position:center;display:block;"/>
-  <div style="position:absolute;top:990px;left:700px;width:380px;">
+  <img data-anim="step" loading="lazy" decoding="async" src="assets/media/slots/s3-factory.webp" alt="" style="position:absolute;top:990px;left:100px;width:520px;height:360px;object-fit:cover;object-position:center;display:block;opacity:{{ s3O }};transform:translateY({{ s3Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);"/>
+  <div style="position:absolute;top:990px;left:100px;width:520px;height:360px;pointer-events:none;opacity:{{ qcOpacity3 }};transition:opacity 0.5s ease;">
+    <div style="position:absolute;top:10px;left:10px;width:16px;height:16px;border-top:1.5px solid {{ ivory }};border-left:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;top:10px;right:10px;width:16px;height:16px;border-top:1.5px solid {{ ivory }};border-right:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;bottom:10px;left:10px;width:16px;height:16px;border-bottom:1.5px solid {{ ivory }};border-left:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;bottom:10px;right:10px;width:16px;height:16px;border-bottom:1.5px solid {{ ivory }};border-right:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;top:34px;left:10px;font-size:9px;letter-spacing:1.5px;font-weight:600;color:{{ ivory }};background:rgba(84,31,43,0.85);padding:3px 7px;">PRODUCTION</div>
+  </div>
+  <div data-anim="step" style="position:absolute;top:990px;left:700px;width:380px;opacity:{{ s3O }};transform:translateY({{ s3Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
     <h3 style="margin:0 0 14px 0;font-size:26px;line-height:1.2;font-weight:700;text-transform:uppercase;">ПОДБИРАЕМ ПРОИЗВОДСТВО И ДОГОВАРИВАЕМСЯ</h3>
     <p style="font-size:13px;line-height:1.55;max-width:340px;margin:0 0 16px 0;opacity:0.75;">Ищем подходящее под задачу производство, согласовываем условия, MOQ, сроки.</p>
     <div style="display:flex;flex-wrap:wrap;gap:8px 16px;">
@@ -80,7 +90,7 @@
   </div>
 
   <!-- 04 / SAMPLE — image right, portrait -->
-  <div style="position:absolute;top:1430px;left:100px;width:380px;">
+  <div data-anim="step" style="position:absolute;top:1430px;left:100px;width:380px;opacity:{{ s4O }};transform:translateY({{ s4Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
     <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:{{ accent }};margin-bottom:10px;">04</div>
     <h3 style="margin:0 0 14px 0;font-size:26px;line-height:1.2;font-weight:700;text-transform:uppercase;">ДЕЛАЕМ ЭТАЛОННЫЙ ОБРАЗЕЦ</h3>
     <p style="font-size:13px;line-height:1.55;max-width:340px;margin:0 0 16px 0;opacity:0.75;">Проверяем посадку, размеры, материалы, обработку. Корректируем до согласования.</p>
@@ -91,11 +101,18 @@
       <span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;">FINISH</span>
     </div>
   </div>
-  <img loading="lazy" decoding="async" src="assets/media/slots/s3-sample.webp" alt="" style="position:absolute;top:1410px;left:660px;width:340px;height:420px;object-fit:cover;object-position:center;display:block;"/>
+  <img data-anim="step" loading="lazy" decoding="async" src="assets/media/slots/s3-sample.webp" alt="" style="position:absolute;top:1410px;left:660px;width:340px;height:420px;object-fit:cover;object-position:center;display:block;opacity:{{ s4O }};transform:translateY({{ s4Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);"/>
 
   <!-- 05 / CONTROL — image left, largest documentary -->
-  <img loading="lazy" decoding="async" src="assets/media/slots/s3-control.webp" alt="" style="position:absolute;top:1860px;left:100px;width:560px;height:380px;object-fit:cover;object-position:center;display:block;"/>
-  <div style="position:absolute;top:1870px;left:740px;width:360px;">
+  <img data-anim="step" loading="lazy" decoding="async" src="assets/media/slots/s3-control.webp" alt="" style="position:absolute;top:1860px;left:100px;width:560px;height:380px;object-fit:cover;object-position:center;display:block;opacity:{{ s5O }};transform:translateY({{ s5Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);"/>
+  <div style="position:absolute;top:1860px;left:100px;width:560px;height:380px;pointer-events:none;opacity:{{ qcOpacity5 }};transition:opacity 0.5s ease;">
+    <div style="position:absolute;top:10px;left:10px;width:16px;height:16px;border-top:1.5px solid {{ ivory }};border-left:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;top:10px;right:10px;width:16px;height:16px;border-top:1.5px solid {{ ivory }};border-right:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;bottom:10px;left:10px;width:16px;height:16px;border-bottom:1.5px solid {{ ivory }};border-left:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;bottom:10px;right:10px;width:16px;height:16px;border-bottom:1.5px solid {{ ivory }};border-right:1.5px solid {{ ivory }};"></div>
+    <div style="position:absolute;top:34px;left:10px;font-size:9px;letter-spacing:1.5px;font-weight:600;color:{{ ivory }};background:rgba(84,31,43,0.85);padding:3px 7px;">QC</div>
+  </div>
+  <div data-anim="step" style="position:absolute;top:1870px;left:740px;width:360px;opacity:{{ s5O }};transform:translateY({{ s5Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
     <h3 style="margin:0 0 14px 0;font-size:26px;line-height:1.2;font-weight:700;text-transform:uppercase;">ЗАПУСКАЕМ И КОНТРОЛИРУЕМ ПАРТИЮ</h3>
     <p style="font-size:13px;line-height:1.55;max-width:340px;margin:0 0 16px 0;opacity:0.75;">Команда находится в Китае и контролирует производство по ходу процесса, чтобы результат соответствовал утверждённому образцу.</p>
     <div style="display:flex;flex-wrap:wrap;gap:8px 16px;">
@@ -107,7 +124,7 @@
   </div>
 
   <!-- 06 / SHIPMENT — image right -->
-  <div style="position:absolute;top:2320px;left:100px;width:380px;">
+  <div data-anim="step" style="position:absolute;top:2320px;left:100px;width:380px;opacity:{{ s6O }};transform:translateY({{ s6Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
     <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:{{ accent }};margin-bottom:10px;">06</div>
     <h3 style="margin:0 0 14px 0;font-size:26px;line-height:1.2;font-weight:700;text-transform:uppercase;">ОРГАНИЗУЕМ ОТГРУЗКУ</h3>
     <p style="font-size:13px;line-height:1.55;max-width:340px;margin:0 0 16px 0;opacity:0.75;">Передаём товар проверенной логистике и контролируем свою часть процесса.</p>
@@ -117,7 +134,7 @@
       <span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;">CN → CLIENT</span>
     </div>
   </div>
-  <img loading="lazy" decoding="async" src="assets/media/slots/s3-shipment.webp" alt="" style="position:absolute;top:2340px;left:660px;width:420px;height:300px;object-fit:cover;object-position:center 7.8%;display:block;"/>
+  <img data-anim="step" loading="lazy" decoding="async" src="assets/media/slots/s3-shipment.webp" alt="" style="position:absolute;top:2340px;left:660px;width:420px;height:300px;object-fit:cover;object-position:center 7.8%;display:block;opacity:{{ s6O }};transform:translateY({{ s6Y }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);"/>
 
 
 </div>
@@ -135,6 +152,8 @@ class Component extends DCLogic {
   ticking = false;
 
   componentDidMount() {
+    this.reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.reduceMotion) return;
     this.onScroll = this.onScroll.bind(this);
     window.addEventListener('scroll', this.onScroll, { passive: true });
     this.onScroll();
@@ -158,8 +177,11 @@ class Component extends DCLogic {
   renderVals() {
     const accent = this.props.accent ?? '#541F2B';
     const inactive = 'rgba(24,23,21,0.3)';
-    const p = this.state.progress;
+    const p = this.reduceMotion ? 1 : this.state.progress;
     const tickAt = (t) => (p >= t ? accent : inactive);
+    const stepAt = (t) => (p >= t ? { o: 1, y: 0 } : { o: 0, y: 24 });
+    const s1 = stepAt(0.02), s2 = stepAt(0.14), s3 = stepAt(0.28);
+    const s4 = stepAt(0.42), s5 = stepAt(0.57), s6 = stepAt(0.73);
     return {
       ivory: this.props.ivory ?? '#F2EFE8',
       ink: this.props.ink ?? '#181715',
@@ -168,6 +190,12 @@ class Component extends DCLogic {
       lineOffset: Math.round(1000 * (1 - p)),
       tick1: tickAt(0.06), tick2: tickAt(0.19), tick3: tickAt(0.33),
       tick4: tickAt(0.47), tick5: tickAt(0.62), tick6: tickAt(0.78),
+      s1O: s1.o, s1Y: s1.y, s2O: s2.o, s2Y: s2.y, s3O: s3.o, s3Y: s3.y,
+      s4O: s4.o, s4Y: s4.y, s5O: s5.o, s5Y: s5.y, s6O: s6.o, s6Y: s6.y,
+      // QC micro-overlays on the factory and control shots — appear briefly as
+      // each image reveals, then settle to a quiet resting opacity.
+      qcOpacity3: p < 0.28 ? 0 : (p < 0.34 ? 1 : 0.35),
+      qcOpacity5: p < 0.57 ? 0 : (p < 0.63 ? 1 : 0.35),
     };
   }
 }

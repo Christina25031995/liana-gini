@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="assets/js/support.js"></script>
+<script src="assets/js/dc-runtime.js"></script>
 </head>
 <body>
 <x-dc>
@@ -14,13 +14,16 @@
 <style>
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-anim] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 </style>
 </helmet>
 
-<div id="products" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:56px 60px 44px 60px;box-sizing:border-box;">
+<div id="products" ref="{{ rootRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:56px 60px 44px 60px;box-sizing:border-box;">
 
   <!-- HEADER -->
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:32px;">
+  <div data-anim style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:32px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
     <div>
       <h2 style="margin:0 0 16px 0;font-size:38px;line-height:1.1;font-weight:700;letter-spacing:-0.8px;text-transform:uppercase;">НЕ ГОТОВЫ<br/>К ПРОИЗВОДСТВУ?</h2>
       <div style="display:flex;align-items:baseline;gap:10px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">
@@ -37,7 +40,7 @@
   </div>
 
   <!-- MAIN PRODUCT -->
-  <div style="display:flex;gap:44px;border-top:1px solid rgba(24,23,21,0.15);padding-top:28px;align-items:stretch;margin-bottom:32px;">
+  <div data-anim style="display:flex;gap:44px;border-top:1px solid rgba(24,23,21,0.15);padding-top:28px;align-items:stretch;margin-bottom:32px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .08s, transform .6s cubic-bezier(.16,1,.3,1) .08s;">
     <div style="width:400px;flex-shrink:0;">
       <img loading="lazy" decoding="async" src="assets/media/showroom.jpg" alt="" style="width:400px;height:390px;object-fit:cover;object-position:center 62%;display:block;"/>
       <div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.45;margin-top:8px;">GUANGZHOU / CLOSED SHOWROOMS</div>
@@ -62,34 +65,34 @@
 
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-top:1px solid rgba(24,23,21,0.12);padding-top:18px;margin-top:20px;">
         <div style="font-size:44px;font-weight:700;line-height:0.9;letter-spacing:-2px;">999 ₽</div>
-        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="pdf-collections" data-product-name="PDF-подборки коллекций" data-price="999" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};border-bottom:2px solid {{ accent }};padding-bottom:4px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ ПОДБОРКУ →</a>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="pdf-collections" data-product-name="PDF-подборки коллекций" data-price="999" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};border-bottom:2px solid {{ accent }};padding-bottom:4px;white-space:nowrap;display:inline-block;transition:transform 0.2s ease, color 0.2s ease;" style-hover="color:{{ accent }};transform:translateX(4px);">ПОЛУЧИТЬ ПОДБОРКУ →</a>
       </div>
     </div>
   </div>
 
   <!-- THREE TOOLS -->
   <div style="display:flex;gap:40px;border-top:1px solid rgba(24,23,21,0.15);padding-top:22px;align-items:stretch;margin-bottom:30px;">
-    <div style="flex:1;">
+    <div data-anim style="flex:1;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .16s, transform .6s cubic-bezier(.16,1,.3,1) .16s;">
       <div style="font-size:17px;font-weight:700;line-height:1.2;text-transform:uppercase;margin-bottom:16px;">9 ШАГОВ<br/>ПРОВЕРКИ ФАБРИКИ</div>
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;">
         <span style="font-size:22px;font-weight:700;letter-spacing:-0.5px;">490 ₽</span>
-        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="factory-check-guide" data-product-name="9 шагов проверки фабрики" data-price="490" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ ГАЙД →</a>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="factory-check-guide" data-product-name="9 шагов проверки фабрики" data-price="490" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;display:inline-block;transition:transform 0.2s ease, color 0.2s ease;" style-hover="color:{{ accent }};transform:translateX(4px);">ПОЛУЧИТЬ ГАЙД →</a>
       </div>
     </div>
     <div style="width:1px;align-self:stretch;background:rgba(24,23,21,0.1);"></div>
-    <div style="flex:1;">
+    <div data-anim style="flex:1;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .22s, transform .6s cubic-bezier(.16,1,.3,1) .22s;">
       <div style="font-size:17px;font-weight:700;line-height:1.2;text-transform:uppercase;margin-bottom:16px;">САМОСТОЯТЕЛЬНЫЙ<br/>ПОИСК ФАБРИКИ</div>
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;">
         <span style="font-size:22px;font-weight:700;letter-spacing:-0.5px;">490 ₽</span>
-        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="factory-search-guide" data-product-name="Самостоятельный поиск фабрики" data-price="490" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ ГАЙД →</a>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="factory-search-guide" data-product-name="Самостоятельный поиск фабрики" data-price="490" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;display:inline-block;transition:transform 0.2s ease, color 0.2s ease;" style-hover="color:{{ accent }};transform:translateX(4px);">ПОЛУЧИТЬ ГАЙД →</a>
       </div>
     </div>
     <div style="width:1px;align-self:stretch;background:rgba(24,23,21,0.1);"></div>
-    <div style="flex:1;">
+    <div data-anim style="flex:1;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .28s, transform .6s cubic-bezier(.16,1,.3,1) .28s;">
       <div style="font-size:17px;font-weight:700;line-height:1.2;text-transform:uppercase;margin-bottom:16px;">РЫНКИ ГУАНЧЖОУ<br/>С АДРЕСАМИ</div>
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;">
         <span style="font-size:22px;font-weight:700;letter-spacing:-0.5px;">5 500 ₽</span>
-        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="guangzhou-markets" data-product-name="Рынки Гуанчжоу с адресами" data-price="5500" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;" style-hover="color:{{ accent }};">ПОЛУЧИТЬ БАЗУ →</a>
+        <a href="#checkout" onClick="{{ onBuy }}" data-product-id="guangzhou-markets" data-product-name="Рынки Гуанчжоу с адресами" data-price="5500" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};border-bottom:1px solid {{ accent }};padding-bottom:3px;white-space:nowrap;display:inline-block;transition:transform 0.2s ease, color 0.2s ease;" style-hover="color:{{ accent }};transform:translateX(4px);">ПОЛУЧИТЬ БАЗУ →</a>
       </div>
     </div>
   </div>
@@ -98,10 +101,10 @@
   <div id="order-success" data-order-state="{{ orderState }}" style="display:none;"></div>
 
   <!-- BRIDGE TO MAIN SERVICE -->
-  <div style="border-top:2px solid {{ accent }};padding-top:22px;display:flex;justify-content:space-between;align-items:center;gap:40px;">
+  <div data-anim style="border-top:2px solid {{ accent }};padding-top:22px;display:flex;justify-content:space-between;align-items:center;gap:40px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .1s, transform .6s cubic-bezier(.16,1,.3,1) .1s;">
     <div style="font-size:20px;font-weight:700;line-height:1.25;text-transform:uppercase;max-width:560px;">НАШЛИ ТО, ЧТО ХОТИТЕ<br/>ВЫПУСТИТЬ ПОД СВОИМ БРЕНДОМ?</div>
     <div style="flex:1;height:1px;background:rgba(84,31,43,0.35);"></div>
-    <a href="#contact" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 24px;white-space:nowrap;" style-hover="background:{{ ink }};">ПЕРЕДАТЬ ПРОИЗВОДСТВО КОМАНДЕ →</a>
+    <a href="#contact" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 24px;white-space:nowrap;display:inline-block;transition:transform 0.2s ease, background 0.2s ease;" style-hover="background:{{ ink }};transform:translateX(4px);">ПЕРЕДАТЬ ПРОИЗВОДСТВО КОМАНДЕ →</a>
   </div>
 
 </div>
@@ -114,7 +117,26 @@
   &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#541F2B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#541F2B&quot;, &quot;#6B2A38&quot;, &quot;#3F1620&quot;], &quot;section&quot;: &quot;Brand&quot;}
 }">
 class Component extends DCLogic {
-  state = { orderState: 'idle' };
+  rootRef = React.createRef();
+  state = { orderState: 'idle', revealed: false };
+
+  componentDidMount() {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      this.setState({ revealed: true });
+      return;
+    }
+    this.io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.setState({ revealed: true });
+        this.io.disconnect();
+      }
+    }, { threshold: 0.1 });
+    if (this.rootRef.current) this.io.observe(this.rootRef.current);
+  }
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+  }
 
   // Single payment trigger for every product. Reads the product contract off the
   // clicked CTA's data-* attributes and hands it to the payment layer, which will
@@ -139,12 +161,16 @@ class Component extends DCLogic {
   };
 
   renderVals() {
+    const on = this.state.revealed;
     return {
       onBuy: this.onBuy,
       orderState: this.state.orderState,
       ivory: this.props.ivory ?? '#F2EFE8',
       ink: this.props.ink ?? '#181715',
       accent: this.props.accent ?? '#541F2B',
+      rootRef: this.rootRef,
+      rO: on ? 1 : 0,
+      rY: on ? 0 : 20,
     };
   }
 }

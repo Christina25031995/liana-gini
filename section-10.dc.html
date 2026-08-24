@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="assets/js/support.js"></script>
+<script src="assets/js/dc-runtime.js"></script>
 </head>
 <body>
 <x-dc>
@@ -16,14 +16,18 @@
   .brief-input { font-family: 'Archivo', sans-serif; background: transparent; border: none; border-bottom: 1px solid rgba(242,239,232,0.22); outline: none; color: #F2EFE8; font-size: 15px; font-weight: 500; width: 100%; height: 34px; padding: 0; display: block; }
   .brief-input::placeholder { color: rgba(242,239,232,0.28); }
   .brief-input:focus { border-bottom-color: #8C4457; }
+  .brief-input { transition: border-bottom-color 0.25s ease; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-anim] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 </style>
 </helmet>
 
-<div id="contact" style="width:100vw;margin-left:calc(min(0px, 50% - 50vw));background:{{ charcoal }};color:{{ ivory }};font-family:'Archivo',sans-serif;">
+<div id="contact" ref="{{ rootRef }}" style="width:100vw;margin-left:calc(min(0px, 50% - 50vw));background:{{ charcoal }};color:{{ ivory }};font-family:'Archivo',sans-serif;">
   <div style="width:1440px;max-width:100%;margin:0 auto;padding:76px 60px 40px 60px;box-sizing:border-box;">
 
     <!-- PRODUCTION ENQUIRY -->
-    <div style="display:flex;gap:80px;align-items:flex-start;margin-bottom:60px;">
+    <div data-anim style="display:flex;gap:80px;align-items:flex-start;margin-bottom:60px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
       <div style="width:400px;flex-shrink:0;">
         <h2 style="margin:0 0 18px 0;font-size:40px;line-height:1.1;font-weight:700;letter-spacing:-1px;text-transform:uppercase;">РАССКАЖИТЕ,<br/>ЧТО ХОТИТЕ<br/>ПРОИЗВЕСТИ.</h2>
         <p style="margin:0;font-size:13px;line-height:1.6;max-width:320px;opacity:0.55;">Несколько вопросов помогут понять задачу до первого разговора с командой.</p>
@@ -75,7 +79,7 @@
 
         <div style="border-top:2px solid {{ accentLight }};padding-top:22px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;">
           <div style="display:flex;align-items:center;gap:28px;">
-            <button type="submit" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ivory }};color:{{ charcoal }};">ОБСУДИТЬ ПРОЕКТ С КОМАНДОЙ →</button>
+            <button type="submit" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;transition:transform 0.2s ease, background 0.2s ease, color 0.2s ease;" style-hover="background:{{ ivory }};color:{{ charcoal }};transform:translateX(4px);">ОБСУДИТЬ ПРОЕКТ С КОМАНДОЙ →</button>
             <a href="https://t.me/lianagini" style="display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};opacity:0.5;white-space:nowrap;" style-hover="opacity:1;color:{{ accentLight }};">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21.5 4.5L2.5 12.1c-1.1.44-1.1 1.06-.2 1.34l4.9 1.53 1.9 5.83c.23.63.4.88.82.88.4 0 .57-.18.79-.4l2.24-2.16 4.66 3.44c.86.47 1.48.23 1.7-.8l3.06-14.4c.33-1.28-.48-1.85-1.37-1.44z" fill="currentColor"/></svg>
  НАПИСАТЬ СРАЗУ В TELEGRAM →
@@ -88,7 +92,7 @@
     </div>
 
     <!-- FOOTER -->
-    <div style="border-top:1px solid rgba(242,239,232,0.18);padding-top:34px;display:flex;gap:80px;align-items:flex-start;">
+    <div data-anim style="border-top:1px solid rgba(242,239,232,0.18);padding-top:34px;display:flex;gap:80px;align-items:flex-start;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .1s, transform .6s cubic-bezier(.16,1,.3,1) .1s;">
       <div style="width:400px;flex-shrink:0;">
         <div style="font-size:18px;font-weight:700;letter-spacing:2px;margin-bottom:12px;">LIANA GINI</div>
         <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;line-height:1.7;text-transform:uppercase;opacity:0.45;">ПРОИЗВОДСТВО В КИТАЕ<br/>ДЛЯ FASHION-БРЕНДОВ</div>
@@ -120,7 +124,7 @@
     </div>
 
     <!-- LEGAL -->
-    <div style="border-top:1px solid rgba(242,239,232,0.1);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:40px;flex-wrap:wrap;">
+    <div data-anim style="border-top:1px solid rgba(242,239,232,0.1);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:40px;flex-wrap:wrap;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .18s, transform .6s cubic-bezier(.16,1,.3,1) .18s;">
       <div style="font-size:10px;letter-spacing:1.2px;opacity:0.35;">© 2026 LIANA GINI</div>
       <div style="display:flex;gap:24px;flex-wrap:wrap;">
         <a href="#privacy" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Политика конфиденциальности</a>
@@ -141,7 +145,26 @@
   &quot;accentLight&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#8C4457&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#8C4457&quot;, &quot;#A85566&quot;], &quot;section&quot;: &quot;Brand&quot;}
 }">
 class Component extends DCLogic {
-  state = { formState: 'idle' };
+  rootRef = React.createRef();
+  state = { formState: 'idle', revealed: false };
+
+  componentDidMount() {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      this.setState({ revealed: true });
+      return;
+    }
+    this.io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.setState({ revealed: true });
+        this.io.disconnect();
+      }
+    }, { threshold: 0.08 });
+    if (this.rootRef.current) this.io.observe(this.rootRef.current);
+  }
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+  }
 
   // Destination (Liana's Telegram relay vs shared team email) is not confirmed yet,
   // so submitEnquiry never fabricates a success state — see enquiry.js (WIRED=false).
@@ -173,6 +196,7 @@ class Component extends DCLogic {
  success: 'Заявка отправлена. Свяжемся с вами.',
  error: 'Канал отправки пока не подключён — напишите в Telegram.',
  };
+ const on = this.state.revealed;
  return {
  charcoal: this.props.charcoal ?? '#1A1817',
  ivory: this.props.ivory ?? '#F2EFE8',
@@ -181,6 +205,9 @@ class Component extends DCLogic {
  onSubmit: this.onSubmit,
  formState: s,
  formNote: notes[s] || notes.idle,
+ rootRef: this.rootRef,
+ rO: on ? 1 : 0,
+ rY: on ? 0 : 20,
  };
  }
 }
