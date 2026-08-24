@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#541F2B">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Liana Gini">
 <script>
 (function(){
   try{
@@ -12,6 +19,13 @@
     if (w >= 1100 && !touch) location.replace('index.html' + location.hash);
   }catch(e){}
 })();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('sw.js').catch(function(){});
+    });
+  }
 </script>
 <script src="assets/js/dc-runtime.js"></script>
 </head>
@@ -29,6 +43,12 @@
   .brief-input::placeholder { color: rgba(24,23,21,0.32); }
   .brief-input:focus { border-bottom-color: #541F2B; }
   .cards-track::-webkit-scrollbar, .tabbar::-webkit-scrollbar { display: none; }
+  @keyframes mRevealUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes mChevron { from { opacity: 0; transform: translateX(-50%) rotate(45deg) translateY(-6px); } to { opacity: 1; transform: translateX(-50%) rotate(45deg) translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    [data-manim] { animation: none !important; opacity: 1 !important; transform: none !important; }
+    [data-manim-fade] { animation: none !important; opacity: 1 !important; }
+  }
 </style>
 </helmet>
 
@@ -51,12 +71,12 @@
 
       <div style="position:relative;height:calc(100vh - 56px);height:calc(100dvh - 56px);min-height:560px;overflow:hidden;background:#0e0b0a;color:{{ ivory }};">
         <video poster="assets/media/hero-poster.jpg" src="assets/media/hero-video.mp4" autoplay="true" muted="true" loop="true" playsinline="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;"></video>
-        <div style="position:absolute;left:{{ heroInset }};right:{{ heroInset }};bottom:28px;background:rgba(14,11,10,0.42);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:{{ heroPanelPad }};box-sizing:border-box;">
+        <div data-manim style="position:absolute;left:{{ heroInset }};right:{{ heroInset }};bottom:28px;background:rgba(14,11,10,0.42);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:{{ heroPanelPad }};box-sizing:border-box;animation:mRevealUp 0.6s cubic-bezier(.16,1,.3,1) 0.1s both;">
           <h1 style="margin:0 0 10px 0;font-size:{{ heroH1Size }};line-height:1.22;font-weight:600;letter-spacing:-0.2px;text-transform:uppercase;">Ваш производственный<br/>отдел в&nbsp;Китае</h1>
           <p style="margin:0 0 16px 0;font-size:{{ heroPSize }};line-height:1.5;opacity:0.85;max-width:{{ heroPMax }};">Разработка и&nbsp;производство одежды, обуви и&nbsp;аксессуаров в&nbsp;Китае — от&nbsp;идеи до&nbsp;готовой&nbsp;партии.</p>
           <a href="#contact" onClick="{{ goContact }}" style="display:block;text-align:center;background:{{ accent }};color:{{ ivory }};font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:15px;">Обсудить производство</a>
         </div>
-        <div style="position:absolute;left:50%;bottom:8px;width:12px;height:12px;border-right:1.5px solid rgba(255,255,255,0.5);border-bottom:1.5px solid rgba(255,255,255,0.5);transform:translateX(-50%) rotate(45deg);"></div>
+        <div data-manim-fade style="position:absolute;left:50%;bottom:8px;width:12px;height:12px;border-right:1.5px solid rgba(255,255,255,0.5);border-bottom:1.5px solid rgba(255,255,255,0.5);opacity:0;animation:mChevron 0.5s ease 0.5s both;"></div>
       </div>
 
       <div style="padding:28px {{ secPadX }} 20px {{ secPadX }};text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;">
@@ -113,7 +133,7 @@
         <p style="margin:0 0 8px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.55;">Подборки, гайды и база рынков Китая — готовые инструменты, которые можно получить сразу после оплаты.</p>
       </div>
 
-      <div style="padding:0 20px 40px 20px;">
+      <div ref="{{ catalogRef }}" style="padding:0 20px 40px 20px;opacity:{{ catalogOpacity }};transform:translateY({{ catalogY }}px);transition:opacity 0.5s ease, transform 0.5s ease;">
         <div style="border:1px solid rgba(24,23,21,0.12);padding:20px;margin:20px 0 16px 0;">
           <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">ОДЕЖДА / СУМКИ / ОБУВЬ / АКСЕССУАРЫ</div>
           <h4 style="margin:0 0 10px 0;font-size:20px;font-weight:700;text-transform:uppercase;line-height:1.2;">PDF-подборки коллекций</h4>
@@ -156,16 +176,16 @@
         <h2 style="margin:0;font-size:24px;line-height:1.25;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;">Берём производство на&nbsp;себя.<br/><span style="color:{{ accent }};">От идеи до&nbsp;готовой партии.</span></h2>
       </div>
 
-      <div style="padding:24px {{ secPadX }} 8px {{ secPadX }};display:{{ tlDisplay }};grid-template-columns:{{ tlCols }};column-gap:40px;">
+      <div ref="{{ servicesRef }}" style="padding:24px {{ secPadX }} 8px {{ secPadX }};display:{{ tlDisplay }};grid-template-columns:{{ tlCols }};column-gap:40px;">
         <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="6">
           <div style="display:flex;gap:16px;">
             <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
-              <div style="width:10px;height:10px;border-radius:50%;background:{{ accent }};flex-shrink:0;margin-top:4px;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:{{ t.dotColor }};flex-shrink:0;margin-top:4px;transition:background 0.4s ease {{ t.lineDelay }};"></div>
               <sc-if value="{{ t.hasLine }}" hint-placeholder-val="{{ true }}">
-                <div style="width:1px;flex:1;background:rgba(84,31,43,0.25);min-height:22px;"></div>
+                <div style="width:1px;flex:1;background:rgba(84,31,43,0.25);min-height:22px;transform:scaleY({{ t.lineScale }});transform-origin:top;transition:transform 0.5s cubic-bezier(.4,0,.2,1) {{ t.lineDelay }};"></div>
               </sc-if>
             </div>
-            <div style="flex:1;min-width:0;padding-bottom:14px;">
+            <div style="flex:1;min-width:0;padding-bottom:14px;opacity:{{ t.contentOpacity }};transform:translateY({{ t.contentY }}px);transition:opacity 0.5s ease {{ t.contentDelay }}, transform 0.5s ease {{ t.contentDelay }};">
               <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:{{ accent }};margin-bottom:5px;">{{ t.num }}</div>
               <h3 style="margin:0 0 5px 0;font-size:17px;line-height:1.22;font-weight:700;text-transform:uppercase;max-width:22ch;">{{ t.title }}</h3>
               <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;max-width:{{ measure }};opacity:0.7;">{{ t.body }}</p>
@@ -222,9 +242,9 @@
         <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;opacity:0.5;">ЯЗЫК. КОНТЕКСТ. ПРИСУТСТВИЕ.</div>
       </div>
 
-      <div style="position:relative;height:{{ teamVideoH }};overflow:hidden;background:#0e0b0a;">
+      <div ref="{{ teamWrapRef }}" style="position:relative;height:{{ teamVideoH }};overflow:hidden;background:#0e0b0a;">
         <video poster="assets/media/team-poster.jpg" ref="{{ teamVideoRef }}" src="assets/media/team-video.mp4" autoplay="true" muted="true" loop="true" playsinline="true" preload="auto" style="position:relative;width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block;"></video>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:{{ teamVideoTextOpacity }};transform:translateY({{ teamVideoTextY }}px);transition:opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1);">
           <h2 style="margin:0;font-size:32px;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;color:#F2EFE8;text-shadow:0 2px 16px rgba(0,0,0,0.55);">МЫ ЗДЕСЬ.</h2>
         </div>
       </div>
@@ -233,9 +253,9 @@
         <h3 style="margin:0;font-size:19px;line-height:1.25;font-weight:700;text-transform:uppercase;">Не просто присутствуем.<br/><span style="color:{{ accent }};">Знаем, как договариваться.</span></h3>
       </div>
 
-      <div style="padding:16px {{ secPadX }};display:{{ credDisplay }};grid-template-columns:{{ credCols }};column-gap:40px;flex-direction:column;gap:0;border-bottom:1px solid rgba(24,23,21,0.08);">
+      <div ref="{{ credRef }}" style="padding:16px {{ secPadX }};display:{{ credDisplay }};grid-template-columns:{{ credCols }};column-gap:40px;flex-direction:column;gap:0;border-bottom:1px solid rgba(24,23,21,0.08);">
         <sc-for list="{{ credibility }}" as="c" hint-placeholder-count="6">
-          <div style="font-size:14px;font-weight:700;text-transform:uppercase;line-height:1.35;color:{{ c.color }};padding:9px 0;border-top:1px solid rgba(24,23,21,0.08);max-width:26ch;">{{ c.text }}</div>
+          <div style="font-size:14px;font-weight:700;text-transform:uppercase;line-height:1.35;color:{{ c.color }};padding:9px 0;border-top:1px solid rgba(24,23,21,0.08);max-width:26ch;opacity:{{ c.opacity }};transform:translateY({{ c.y }}px);transition:opacity 0.45s ease {{ c.delay }}, transform 0.45s ease {{ c.delay }};">{{ c.text }}</div>
         </sc-for>
       </div>
 
@@ -265,13 +285,13 @@
         <p style="margin:0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.55;">Производим для крупных игроков fashion-индустрии — и для брендов, которые только начинают расти.</p>
       </div>
 
-      <div style="padding:4px {{ secPadX }} 8px {{ secPadX }};">
+      <div ref="{{ casesRef }}" style="padding:4px {{ secPadX }} 8px {{ secPadX }};">
         <sc-for list="{{ cases }}" as="cs" hint-placeholder-count="3">
           <div style="border-top:1px solid rgba(24,23,21,0.12);padding:24px 0 28px 0;">
-            <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">{{ cs.tag }}</div>
-            <h3 style="margin:0 0 10px 0;font-size:19px;line-height:1.25;font-weight:700;text-transform:uppercase;max-width:{{ cs.titleMaxWidth }};white-space:{{ cs.titleWrap }};">{{ cs.title }}</h3>
-            <p style="margin:0 0 16px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.6;">{{ cs.body }}</p>
-            <div style="border-top:1.5px solid {{ accent }};padding-top:10px;font-size:14px;font-weight:700;line-height:1.35;text-transform:uppercase;">{{ cs.result }}</div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;opacity:{{ cs.aOpacity }};transform:translateY({{ cs.aY }}px);transition:opacity 0.5s ease {{ cs.aDelay }}, transform 0.5s ease {{ cs.aDelay }};">{{ cs.tag }}</div>
+            <h3 style="margin:0 0 10px 0;font-size:19px;line-height:1.25;font-weight:700;text-transform:uppercase;max-width:{{ cs.titleMaxWidth }};white-space:{{ cs.titleWrap }};opacity:{{ cs.aOpacity }};transform:translateY({{ cs.aY }}px);transition:opacity 0.5s ease {{ cs.aDelay }}, transform 0.5s ease {{ cs.aDelay }};">{{ cs.title }}</h3>
+            <p style="margin:0 0 16px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:{{ cs.aOpacity }};transform:translateY({{ cs.aY }}px);transition:opacity 0.5s ease {{ cs.aDelay }}, transform 0.5s ease {{ cs.aDelay }};">{{ cs.body }}</p>
+            <div style="border-top:1.5px solid {{ accent }};padding-top:10px;font-size:14px;font-weight:700;line-height:1.35;text-transform:uppercase;opacity:{{ cs.bOpacity }};transform:translateY({{ cs.bY }}px);transition:opacity 0.5s ease {{ cs.bDelay }}, transform 0.5s ease {{ cs.bDelay }};">{{ cs.result }}</div>
           </div>
         </sc-for>
       </div>
@@ -292,7 +312,7 @@
     <!-- ============ TAB: CONTACT ============ -->
     <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
 
-      <div style="padding:28px {{ secPadX }} 8px {{ secPadX }};">
+      <div ref="{{ consultRef }}" style="padding:28px {{ secPadX }} 8px {{ secPadX }};opacity:{{ consultOpacity }};transform:translateY({{ consultY }}px);transition:opacity 0.5s ease, transform 0.5s ease;">
         <h2 style="margin:0 0 12px 0;font-size:26px;line-height:1.2;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;">Разберём вашу<br/>ситуацию лично.</h2>
         <p style="margin:0 0 20px 0;font-size:13px;line-height:1.55;max-width:{{ measure }};opacity:0.7;">Личная консультация с&nbsp;Лианой Гини по вашей задаче, продукту или производству в&nbsp;Китае.</p>
         <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid rgba(24,23,21,0.12);padding-top:16px;margin-bottom:20px;">
@@ -463,15 +483,59 @@ const SERVICES = [
 class Component extends DCLogic {
   cardsRef = React.createRef();
   contentRef = React.createRef();
-  state = { tab: 'home', cardIdx: 0, formState: 'idle', buyState: 'idle', bookState: 'idle', heroPassed: false, teamVideoReady: false, vw: 390 };
+  state = { tab: 'home', cardIdx: 0, formState: 'idle', buyState: 'idle', bookState: 'idle', heroPassed: false, teamVideoReady: false, vw: 390,
+    revealed: { services: false, teamVideo: false, cred: false, cases: false, catalog: false, consult: false } };
   teamVideoRef = React.createRef();
+
+  // Refs for the lightweight, tab-scoped signature reveals below. Each tab's
+  // content is lazily mounted (sc-if), so these are (re)observed whenever the
+  // matching tab becomes active — see componentDidUpdate.
+  servicesRef = React.createRef();
+  teamWrapRef = React.createRef();
+  credRef = React.createRef();
+  casesRef = React.createRef();
+  catalogRef = React.createRef();
+  consultRef = React.createRef();
+  observers = {};
 
   componentDidMount() {
     this.onResize = () => { const w = window.innerWidth; if (w !== this.state.vw) this.setState({ vw: w }); };
     this.onResize();
     window.addEventListener('resize', this.onResize);
+    this.reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.reduceMotion) {
+      this.setState({ revealed: { services: true, teamVideo: true, cred: true, cases: true, catalog: true, consult: true } });
+    } else {
+      this.armRevealObservers();
+    }
   }
-  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  componentDidUpdate() {
+    if (!this.reduceMotion) this.armRevealObservers();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    Object.values(this.observers).forEach(io => io && io.disconnect());
+  }
+
+  // (Re)observe whichever tab-scoped refs are mounted but not yet revealed —
+  // cheap to call repeatedly since it skips keys already true or lacking a ref.
+  armRevealObservers = () => {
+    const map = { services: this.servicesRef, teamVideo: this.teamWrapRef, cred: this.credRef, cases: this.casesRef, catalog: this.catalogRef, consult: this.consultRef };
+    Object.keys(map).forEach((key) => {
+      if (this.state.revealed[key] || this.observers[key]) return;
+      const el = map[key].current;
+      if (!el) return;
+      const io = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          this.setState((s) => ({ revealed: { ...s.revealed, [key]: true } }));
+          io.disconnect();
+          this.observers[key] = null;
+        }
+      }, { threshold: key === 'teamVideo' ? 0.35 : 0.1 });
+      io.observe(el);
+      this.observers[key] = io;
+    });
+  };
 
   setTab = (tab) => () => { this.setState({ tab, heroPassed: false }); if (this.cardsRef.current) this.cardsRef.current.scrollLeft = 0; if (this.contentRef.current) this.contentRef.current.scrollTop = 0; };
   goContact = (e) => { e.preventDefault(); this.setState({ tab: 'contact' }); };
@@ -601,7 +665,17 @@ class Component extends DCLogic {
       onContentScroll: this.onContentScroll,
       showNav,
       teamVideoRef: this.teamVideoRef,
-      teamVideoOpacity: this.state.teamVideoReady ? 1 : 0,
+      teamWrapRef: this.teamWrapRef,
+      teamVideoTextOpacity: this.state.revealed.teamVideo ? 1 : 0,
+      teamVideoTextY: this.state.revealed.teamVideo ? 0 : 14,
+      credRef: this.credRef,
+      catalogRef: this.catalogRef,
+      catalogOpacity: this.state.revealed.catalog ? 1 : 0,
+      catalogY: this.state.revealed.catalog ? 0 : 16,
+      consultRef: this.consultRef,
+      consultOpacity: this.state.revealed.consult ? 1 : 0,
+      consultY: this.state.revealed.consult ? 0 : 16,
+      casesRef: this.casesRef,
       problems: PROBLEMS,
       dots: PROBLEMS.map((_, i) => ({
         onClick: this.scrollToCard(i),
@@ -609,12 +683,38 @@ class Component extends DCLogic {
         size: i === this.state.cardIdx ? '20px' : '6px',
       })),
       cardCounterLabel: String(this.state.cardIdx + 1).padStart(2, '0') + ' / ' + String(PROBLEMS.length).padStart(2, '0'),
-      timeline: TIMELINE.map((t, i) => ({ ...t, tags: t.tags.map(text => ({ text })), hasLine: !tab768 && i < TIMELINE.length - 1 })),
+      servicesRef: this.servicesRef,
+      timeline: TIMELINE.map((t, i) => {
+        const on = this.state.revealed.services;
+        return {
+          ...t,
+          tags: t.tags.map(text => ({ text })),
+          hasLine: !tab768 && i < TIMELINE.length - 1,
+          dotColor: on ? accent : inactive,
+          lineScale: on ? 1 : 0,
+          lineDelay: (i * 0.12).toFixed(2) + 's',
+          contentOpacity: on ? 1 : 0,
+          contentY: on ? 0 : 10,
+          contentDelay: (i * 0.12 + 0.08).toFixed(2) + 's',
+        };
+      }),
       costParams: COST_PARAMS.map((label, i) => ({ label, num: '0' + (i + 1) })),
       onBuyMain: this.buy('pdf-collections'),
       guides: GUIDES.map(g => ({ ...g, onBuy: this.buy(g.id) })),
-      credibility: CREDIBILITY.map(parseColor),
-      cases: CASES.map((c, i) => ({ ...c, titleMaxWidth: i === 0 ? 'none' : '26ch', titleWrap: i === 0 ? 'nowrap' : 'normal' })),
+      credibility: CREDIBILITY.map(parseColor).map((c, i) => {
+        const on = this.state.revealed.cred;
+        return { ...c, opacity: on ? 1 : 0, y: on ? 0 : 10, delay: (i * 0.06).toFixed(2) + 's' };
+      }),
+      cases: CASES.map((c, i) => {
+        const on = this.state.revealed.cases;
+        return {
+          ...c,
+          titleMaxWidth: i === 0 ? 'none' : '26ch',
+          titleWrap: i === 0 ? 'nowrap' : 'normal',
+          aOpacity: on ? 1 : 0, aY: on ? 0 : 12, aDelay: (i * 0.1).toFixed(2) + 's',
+          bOpacity: on ? 1 : 0, bY: on ? 0 : 10, bDelay: (i * 0.1 + 0.22).toFixed(2) + 's',
+        };
+      }),
       consultReasons: CONSULT_REASONS.map((text, i) => ({ text, num: '0' + (i + 1) })),
       services: SERVICES.map(parseColor).map((s, i) => ({ ...s, num: '0' + (i + 1) })),
       onBook: this.onBook,
