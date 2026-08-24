@@ -8,7 +8,7 @@
   div[style*="width: 1440px"] { width: 100% !important; max-width: 100% !important; box-shadow: none !important; }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
 
   /* ---- containers ---- */
 [style*="width: 200px"],
@@ -179,7 +179,7 @@
   #contact input, #contact textarea { width: 100% !important; box-sizing: border-box !important; }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   /* nav is a <nav>, not a div — stack it and let it wrap */
   nav[style*="display: flex"] { flex-wrap: wrap !important; gap: 14px 18px !important; }
   nav a { font-size: 11px !important; }
@@ -207,9 +207,104 @@
   div[style*="height: 940px"] > video { position: absolute !important; height: 100% !important; aspect-ratio: auto !important; }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   /* Section 03 intro headlines shrank when they left absolute positioning */
   #services h2 { width: 100% !important; max-width: 100% !important; }
   /* hero headline stays the loudest element on the page */
   h1 { font-size: 32px !important; }
+}
+
+@media (max-width: 1024px) {
+  /* --- hero fills the phone screen --- */
+  div[style*="height: 940px"] { min-height: 88vh !important; }
+  h1[style*="font-size"] { font-size: 32px !important; line-height: 1.1 !important; }
+
+  /* --- problems block: five screens, shorter travel --- */
+  #problems-zone { height: 4900px !important; }
+
+  /* --- secondary headings back to a readable step --- */
+  h3[style*="font-size: 24px"], h3[style*="font-size: 26px"] { font-size: 23px !important; }
+  h3[style*="font-size: 22px"], h3[style*="font-size: 20px"] { font-size: 21px !important; }
+  div[style*="font-size: 19px"], div[style*="font-size: 18px"] { font-size: 18px !important; }
+
+  /* --- client screenshots must stay legible: full column width --- */
+  #cases div[style*="width: 100%"][style*="background-image"] {
+    width: 100% !important;
+    height: 230px !important;
+    background-size: 100% auto !important;
+    background-position: center top !important;
+  }
+  #cases img { width: 100% !important; max-width: 320px !important; height: auto !important; aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 1024px) {
+  /* the small "произвели → носят" crop was being squeezed by its flex row */
+  #cases div[style*="width: 78px"][style*="background-image"] { width: 78px !important; flex: 0 0 78px !important; }
+}
+
+/* ---------- tablet 768-1024: same single-column structure, larger type ---------- */
+@media (min-width: 768px) and (max-width: 1024px) {
+  [style*="font-family: Archivo"] { padding-left: 48px !important; padding-right: 48px !important; }
+  h1[style*="font-size"] { font-size: 46px !important; }
+  h2[style*="font-size"] { font-size: 40px !important; }
+  h3[style*="font-size"] { font-size: 28px !important; }
+  p, li { font-size: 16px !important; }
+  #cases div[style*="width: 100%"][style*="background-image"] { height: 340px !important; }
+  #cases img { max-width: 460px !important; }
+  #problems-zone img { width: 190px !important; }
+  #services > img { max-width: 560px !important; }
+}
+
+@media (max-width: 1024px) {
+  /* Section 05: the play badge sat on top of the placeholder caption */
+  #liana-video { width: 100% !important; }
+  #liana-video > div[style*="position: absolute"] {
+    position: static !important;
+    display: inline-flex !important;
+    margin-top: 10px !important;
+  }
+  #liana-video image-slot, #liana-video > div:first-child { width: 100% !important; }
+
+  /* prices and short money strings must never break across lines */
+  [style*="font-size: 46px"], [style*="font-size: 44px"] { white-space: nowrap !important; }
+}
+
+@media (max-width: 1024px) {
+  /* Section 05 headline used desktop white-space:nowrap — clipped on narrow screens */
+  h1[style*="white-space: nowrap"],
+  h2[style*="white-space: nowrap"],
+  h3[style*="white-space: nowrap"],
+  div[style*="white-space: nowrap"] { white-space: normal !important; }
+
+  /* hero frosted panel: long Russian words need room, tighten padding */
+  div[style*="backdrop-filter"] { padding: 28px 24px !important; box-sizing: border-box !important; }
+  div[style*="backdrop-filter"] h1 { font-size: 26px !important; word-break: break-word !important; }
+}
+
+@media (max-width: 1024px) {
+  /* ---- MOBILE HEADER: compact app bar, not a squeezed desktop nav ---- */
+  nav[style*="display: flex"] { display: none !important; }
+  div[style*="height: 96px"] {
+    height: auto !important;
+    padding: 14px 20px !important;
+    position: relative !important;
+  }
+  /* CTA moves into the compact bar as the single visible action */
+  div[style*="height: 96px"] a[data-product-id],
+  div[style*="height: 96px"] a[href="#contact"] { font-size: 11px !important; padding: 8px 14px !important; }
+
+  /* ---- kill oversized empty scroll gaps between modules ---- */
+  div[style*="padding: 120px"], div[style*="padding: 100px"], div[style*="padding: 96px"] { padding-top: 40px !important; padding-bottom: 40px !important; }
+  h1, h2, h3 { margin-top: 0 !important; }
+
+  /* ---- Section 09: CTA + price are the conversion, services list is secondary ---- */
+  #consultation { display: flex !important; flex-direction: column !important; }
+  #consultation > div { order: 0; }
+
+  /* ---- Section 06: keep the strongest evidence, drop the small secondary crop ---- */
+  #cases div[style*="width: 78px"] { display: none !important; }
+  #cases span[style*="opacity: 0.3"] { display: none !important; }
+
+  /* ---- Liana video module: static teaser, not an editor affordance ---- */
+  #liana-video, #liana-video * { pointer-events: none; }
 }
