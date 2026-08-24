@@ -52,7 +52,7 @@
 </style>
 </helmet>
 
-<div style="background:#6E6A63;height:100vh;height:100dvh;display:flex;justify-content:center;padding:0;box-sizing:border-box;overflow:hidden;">
+<div style="background:#6E6A63;height:100vh;height:100dvh;height:100svh;display:flex;justify-content:center;padding:0;box-sizing:border-box;overflow:hidden;">
 <div style="width:100%;max-width:{{ shellMax }};height:100%;background:{{ ivory }};display:flex;flex-direction:column;font-family:'Archivo',sans-serif;color:{{ ink }};box-shadow:0 0 40px rgba(0,0,0,0.25);position:relative;overflow:hidden;">
 
   <!-- SCROLLABLE CONTENT -->
@@ -69,7 +69,7 @@
     <!-- ============ TAB: HOME ============ -->
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
 
-      <div style="position:relative;height:calc(100vh - 56px);height:calc(100dvh - 56px);min-height:560px;overflow:hidden;background:#0e0b0a;color:{{ ivory }};">
+      <div style="position:relative;height:calc(100vh - 56px);height:calc(100dvh - 56px);height:calc(100svh - 56px);min-height:560px;overflow:hidden;background:#0e0b0a;color:{{ ivory }};">
         <video poster="assets/media/hero-poster.jpg" src="assets/media/hero-video.mp4" autoplay="true" muted="true" loop="true" playsinline="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;"></video>
         <div data-manim style="position:absolute;left:{{ heroInset }};right:{{ heroInset }};bottom:28px;background:rgba(14,11,10,0.42);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:{{ heroPanelPad }};box-sizing:border-box;animation:mRevealUp 0.6s cubic-bezier(.16,1,.3,1) 0.1s both;">
           <h1 style="margin:0 0 10px 0;font-size:{{ heroH1Size }};line-height:1.22;font-weight:600;letter-spacing:-0.2px;text-transform:uppercase;">Ваш производственный<br/>отдел в&nbsp;Китае</h1>
@@ -81,7 +81,7 @@
 
       <div style="padding:28px {{ secPadX }} 20px {{ secPadX }};text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;">
         <div style="width:28px;height:1px;background:{{ accent }};"></div>
-        <h2 style="margin:0;font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-0.3px;text-transform:uppercase;">ПРОИЗВОДСТВО В&nbsp;КИТАЕ НЕ&nbsp;ДОЛЖНО СТАНОВИТЬСЯ<br/><span style="color:{{ accent }};">ВАШЕЙ ВТОРОЙ РАБОТОЙ</span></h2>
+        <h2 style="margin:0;font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-0.3px;text-transform:uppercase;">ПРОИЗВОДСТВО В&nbsp;КИТАЕ НЕ&nbsp;ДОЛЖНО&nbsp;СТАНОВИТЬСЯ<br/><span style="color:{{ accent }};">ВАШЕЙ ВТОРОЙ РАБОТОЙ</span></h2>
       </div>
 
       <div style="padding-bottom:8px;">
@@ -115,7 +115,7 @@
 
       <div style="margin:0 20px 36px 20px;border:1px solid rgba(24,23,21,0.12);padding:24px 22px;">
         <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;opacity:0.5;margin-bottom:10px;">ЛИЧНАЯ КОНСУЛЬТАЦИЯ</div>
-        <h3 style="margin:0 0 10px 0;font-size:20px;font-weight:700;line-height:1.25;text-transform:uppercase;">Разберём вашу&nbsp;ситуацию лично</h3>
+        <h3 style="margin:0 0 10px 0;font-size:20px;font-weight:700;line-height:1.25;text-transform:uppercase;">Разберём вашу&nbsp;ситуацию&nbsp;лично</h3>
         <p style="margin:0 0 18px 0;font-size:13px;line-height:1.55;max-width:{{ measure }};opacity:0.7;">Личная консультация с&nbsp;Лианой Гини по&nbsp;вашей задаче, продукту или&nbsp;производству.</p>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;border-top:1px solid rgba(24,23,21,0.1);">
           <span style="font-size:26px;font-weight:700;letter-spacing:-1px;">15 000 ₽</span>
@@ -313,7 +313,7 @@
     <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
 
       <div ref="{{ consultRef }}" style="padding:28px {{ secPadX }} 8px {{ secPadX }};opacity:{{ consultOpacity }};transform:translateY({{ consultY }}px);transition:opacity 0.5s ease, transform 0.5s ease;">
-        <h2 style="margin:0 0 12px 0;font-size:26px;line-height:1.2;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;">Разберём вашу<br/>ситуацию лично.</h2>
+        <h2 style="margin:0 0 12px 0;font-size:26px;line-height:1.2;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;">Разберём вашу<br/>ситуацию&nbsp;лично.</h2>
         <p style="margin:0 0 20px 0;font-size:13px;line-height:1.55;max-width:{{ measure }};opacity:0.7;">Личная консультация с&nbsp;Лианой Гини по вашей задаче, продукту или производству в&nbsp;Китае.</p>
         <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid rgba(24,23,21,0.12);padding-top:16px;margin-bottom:20px;">
           <sc-for list="{{ consultReasons }}" as="r" hint-placeholder-count="4">
@@ -511,6 +511,15 @@ class Component extends DCLogic {
   }
   componentDidUpdate() {
     if (!this.reduceMotion) this.armRevealObservers();
+    // iOS Safari can skip the declarative `autoplay` on a <video> that is
+    // inserted after the tab switch (it's mounted a tick after the tap, so
+    // it's not always treated as still "within" that gesture) — muted+
+    // playsinline videos are allowed to autoplay via an explicit play() call
+    // with no gesture required, so nudge it once the element exists.
+    if (this.state.tab === 'team' && this.teamVideoRef.current) {
+      const p = this.teamVideoRef.current.play();
+      if (p && p.catch) p.catch(() => {});
+    }
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize);
