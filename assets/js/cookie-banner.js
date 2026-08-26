@@ -1,7 +1,13 @@
 // Self-contained first-visit cookie notice. Injects its own markup so every
 // page just needs <script src="assets/js/cookie-banner.js" defer></script>.
-// Wording matches the supplied Cookie Policy (technical + analytical cookies;
-// continuing to use the site after this notice = consent to their use).
+//
+// Banner copy describes what the site ACTUALLY does right now (necessary
+// storage only — see assets/js/cookie-banner.js's own localStorage use,
+// audited: no analytics/tracking currently loads anywhere on the site).
+// The lawyer-prepared Cookie Policy itself (cookie-policy.html) is NOT
+// touched here — it separately describes technical + analytical cookies as
+// a category the site may use; if/when analytics is actually added, this
+// banner copy should be revisited together with that policy text.
 (function () {
   var STORAGE_KEY = 'lg_cookie_ack_v1';
 
@@ -26,7 +32,7 @@
       '#lg-cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:2147483000;' +
       'display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;' +
       'padding:14px 20px;padding-bottom:calc(14px + env(safe-area-inset-bottom));' +
-      'background:#181715;color:#F2EFE8;font-family:Archivo,-apple-system,BlinkMacSystemFont,sans-serif;' +
+      'background:#181715;color:#F2EFE8;font-family:Manrope,-apple-system,BlinkMacSystemFont,sans-serif;' +
       'box-shadow:0 -2px 24px rgba(0,0,0,0.2);}' +
       '#lg-cookie-banner p{margin:0;font-size:12px;line-height:1.5;max-width:560px;opacity:0.85;}' +
       '#lg-cookie-banner a{color:#F2EFE8;text-decoration:underline;}' +
@@ -43,7 +49,7 @@
     el.setAttribute('aria-label', 'Уведомление об использовании cookie');
 
     var p = document.createElement('p');
-    p.textContent = 'Мы используем файлы cookie для работы сайта и аналитики. Подробнее — в ';
+    p.textContent = 'Мы используем файлы cookie и локальное хранилище для корректной работы сайта. Подробнее — в ';
     var a = document.createElement('a');
     a.href = cookiePolicyHref();
     a.textContent = 'Политике Cookie';
