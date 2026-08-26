@@ -23,6 +23,20 @@
     return 'cookie-policy.html';
   }
 
+  // Reports the banner's own rendered height as a CSS custom property, so any
+  // page that cares (currently just mobile.html's app-shell) can reserve that
+  // much space at the bottom while the banner is up, instead of letting the
+  // banner's fixed overlay sit on top of whatever content/CTA happens to be
+  // scrolled to the bottom edge. Inert on any page that doesn't reference the
+  // variable (e.g. desktop) — setting an unused custom property changes
+  // nothing there.
+  function setSafeBottom(px) {
+    document.documentElement.style.setProperty('--lg-cookie-safe-bottom', px + 'px');
+  }
+  function syncSafeBottom(el) {
+    setSafeBottom(el ? el.offsetHeight : 0);
+  }
+
   function mount() {
     if (alreadyAcknowledged()) return;
     if (document.getElementById('lg-cookie-banner')) return;
@@ -59,14 +73,22 @@
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.textContent = 'Принять';
+    var onResize = function () { syncSafeBottom(el); };
     btn.addEventListener('click', function () {
       acknowledge();
       el.remove();
+      window.removeEventListener('resize', onResize);
+      setSafeBottom(0); // no permanent reserved space once dismissed
     });
 
     el.appendChild(p);
     el.appendChild(btn);
     document.body.appendChild(el);
+
+    // Measure after layout (banner text can wrap differently per viewport),
+    // and keep it in sync across resizes/orientation changes while it's up.
+    requestAnimationFrame(function () { syncSafeBottom(el); });
+    window.addEventListener('resize', onResize);
   }
 
   if (document.readyState === 'loading') {
