@@ -91,24 +91,42 @@
         <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">{{ checkoutName }}</div>
         <div id="checkout-title" style="font-size:32px;font-weight:700;letter-spacing:-1px;margin-bottom:26px;">{{ checkoutPriceLabel }}</div>
 
-        <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:10px;">
-          <input type="checkbox" name="pdConsent" required="true" checked="{{ pdConsent }}" onChange="{{ onPdConsentChange }}" aria-describedby="checkout-pd-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
-          <span>Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">обработку персональных данных</a> в соответствии с <a href="privacy-policy.html" target="_blank" rel="noopener" style="text-decoration:underline;">Политикой ПДн</a>.</span>
-        </label>
-        <div id="checkout-pd-error" role="alert" style="display:{{ pdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;margin-bottom:10px;">Отметьте согласие на обработку персональных данных, чтобы продолжить.</div>
+        <!-- Prepared, but only reachable once a real provider is wired in and
+             startCheckout() can resolve to STATES.SUCCESS — today it always
+             resolves to IDLE, so this branch never renders. -->
+        <sc-if value="{{ checkoutSuccess }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:20px;font-weight:700;letter-spacing:-0.3px;text-transform:uppercase;margin-bottom:14px;">Оплата прошла</div>
+          <p style="font-size:14px;line-height:1.6;opacity:0.75;margin:0;">Команда свяжется с вами<br/>для согласования даты и времени консультации.</p>
+        </sc-if>
 
-        <p style="font-size:12px;line-height:1.55;opacity:0.65;margin:0 0 18px 0;">Оплачивая заказ, вы принимаете условия <a href="oferta.html" target="_blank" rel="noopener" style="text-decoration:underline;">Публичной оферты</a>.</p>
+        <sc-if value="{{ checkoutFormVisible }}" hint-placeholder-val="{{ true }}">
+          <label for="checkout-name" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Имя</label>
+          <input id="checkout-name" type="text" required="true" value="{{ checkoutBuyerName }}" onChange="{{ onCheckoutNameChange }}" aria-describedby="checkout-name-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
+          <div id="checkout-name-error" role="alert" style="display:{{ checkoutNameErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:10px;">Укажите имя, чтобы продолжить.</div>
 
-        <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:26px;">
-          <input type="checkbox" name="marketingConsent" checked="{{ marketingConsent }}" onChange="{{ onMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
-          <span style="opacity:0.7;">Хочу получать новости и специальные предложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">согласие на рассылки</a>.</span>
-        </label>
+          <label for="checkout-contact" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Контакт для связи</label>
+          <input id="checkout-contact" type="text" required="true" value="{{ checkoutBuyerContact }}" onChange="{{ onCheckoutContactChange }}" placeholder="Telegram / телефон / e-mail" aria-describedby="checkout-contact-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
+          <div id="checkout-contact-error" role="alert" style="display:{{ checkoutContactErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:16px;">Укажите контакт для связи, чтобы продолжить.</div>
 
-        <div style="display:flex;gap:16px;align-items:center;">
-          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
-          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
-        </div>
-        <p style="font-size:11px;line-height:1.5;opacity:0.4;margin:16px 0 0 0;">{{ checkoutNote }}</p>
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:10px;">
+            <input type="checkbox" name="pdConsent" required="true" checked="{{ pdConsent }}" onChange="{{ onPdConsentChange }}" aria-describedby="checkout-pd-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+            <span>Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">обработку персональных данных</a> в соответствии с <a href="privacy-policy.html" target="_blank" rel="noopener" style="text-decoration:underline;">Политикой ПДн</a>.</span>
+          </label>
+          <div id="checkout-pd-error" role="alert" style="display:{{ pdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;margin-bottom:10px;">Отметьте согласие на обработку персональных данных, чтобы продолжить.</div>
+
+          <p style="font-size:12px;line-height:1.55;opacity:0.65;margin:0 0 18px 0;">Оплачивая заказ, вы принимаете условия <a href="oferta.html" target="_blank" rel="noopener" style="text-decoration:underline;">Публичной оферты</a>.</p>
+
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:26px;">
+            <input type="checkbox" name="marketingConsent" checked="{{ marketingConsent }}" onChange="{{ onMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+            <span style="opacity:0.7;">Хочу получать новости и специальные предложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">согласие на рассылки</a>.</span>
+          </label>
+
+          <div style="display:flex;gap:16px;align-items:center;">
+            <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
+            <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
+          </div>
+          <p style="font-size:11px;line-height:1.5;opacity:0.4;margin:16px 0 0 0;">{{ checkoutNote }}</p>
+        </sc-if>
       </div>
     </div>
   </sc-if>
@@ -125,7 +143,8 @@
 class Component extends DCLogic {
   rootRef = React.createRef();
   state = { bookingState: 'idle', revealed: false,
-    checkoutOpen: false, checkoutProduct: null, pdConsent: false, marketingConsent: false, pdConsentError: false };
+    checkoutOpen: false, checkoutProduct: null, pdConsent: false, marketingConsent: false, pdConsentError: false,
+    checkoutBuyerName: '', checkoutBuyerContact: '', checkoutNameError: false, checkoutContactError: false, consultationOrder: null };
 
   componentDidMount() {
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -156,6 +175,12 @@ class Component extends DCLogic {
       pdConsent: false,
       marketingConsent: false,
       pdConsentError: false,
+      checkoutBuyerName: '',
+      checkoutBuyerContact: '',
+      checkoutNameError: false,
+      checkoutContactError: false,
+      bookingState: 'idle',
+      consultationOrder: null,
       checkoutProduct: {
         productId: el.dataset.productId,
         name: el.dataset.productName,
@@ -169,16 +194,38 @@ class Component extends DCLogic {
   stopPropagation = (e) => e.stopPropagation();
   onPdConsentChange = (e) => this.setState({ pdConsent: e.target.checked, pdConsentError: false });
   onMarketingConsentChange = (e) => this.setState({ marketingConsent: e.target.checked });
+  onCheckoutNameChange = (e) => this.setState({ checkoutBuyerName: e.target.value, checkoutNameError: false });
+  onCheckoutContactChange = (e) => this.setState({ checkoutBuyerContact: e.target.value, checkoutContactError: false });
 
   // Actual payment trigger — only reachable from the consent gate, only once
-  // required personal-data consent is checked. No provider, no keys, no
-  // scheduling links in the frontend.
+  // name, contact and required personal-data consent are all filled in. No
+  // provider, no keys, no scheduling links in the frontend.
   onProceedCheckout = async () => {
-    if (!this.state.pdConsent) { this.setState({ pdConsentError: true }); return; }
+    const name = this.state.checkoutBuyerName.trim();
+    const contact = this.state.checkoutBuyerContact.trim();
+    const nameOk = name.length > 0;
+    const contactOk = contact.length > 0;
+    if (!nameOk || !contactOk || !this.state.pdConsent) {
+      this.setState({
+        checkoutNameError: !nameOk,
+        checkoutContactError: !contactOk,
+        pdConsentError: !this.state.pdConsent,
+      });
+      return;
+    }
     const product = this.state.checkoutProduct;
     if (!product) return;
     try {
       const mod = await import('/assets/js/payments.js');
+      // Future Robokassa payload — built now, not sent anywhere yet (no
+      // provider connected). Kept in state so it's ready the moment a real
+      // provider call replaces the startCheckout() stub below.
+      const order = mod.buildConsultationOrder({
+        name, contact,
+        pdConsent: this.state.pdConsent,
+        marketingConsent: this.state.marketingConsent,
+      });
+      this.setState({ consultationOrder: order });
       const res = await mod.startCheckout(product.productId);
       this.setState({ bookingState: res.state });
       if (res.checkoutUrl) window.location.href = res.checkoutUrl;
@@ -217,6 +264,16 @@ class Component extends DCLogic {
       marketingConsent: this.state.marketingConsent,
       pdErrorDisplay: this.state.pdConsentError ? 'block' : 'none',
       checkoutNote: bookingNotes[this.state.bookingState] || bookingNotes.idle,
+      checkoutBuyerName: this.state.checkoutBuyerName,
+      checkoutBuyerContact: this.state.checkoutBuyerContact,
+      onCheckoutNameChange: this.onCheckoutNameChange,
+      onCheckoutContactChange: this.onCheckoutContactChange,
+      checkoutNameErrorDisplay: this.state.checkoutNameError ? 'block' : 'none',
+      checkoutContactErrorDisplay: this.state.checkoutContactError ? 'block' : 'none',
+      // Success view is prepared but unreachable: bookingState only ever
+      // becomes 'idle' from the current startCheckout() stub, never 'success'.
+      checkoutSuccess: this.state.bookingState === 'success',
+      checkoutFormVisible: this.state.bookingState !== 'success',
     };
   }
 }

@@ -450,24 +450,47 @@
         <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:8px;">{{ checkoutName }}</div>
         <div id="mcheckout-title" style="font-size:26px;font-weight:700;letter-spacing:-1px;margin-bottom:20px;">{{ checkoutPriceLabel }}</div>
 
-        <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;margin-bottom:8px;">
-          <input type="checkbox" name="checkoutPdConsent" required="true" checked="{{ checkoutPdConsent }}" onChange="{{ onCheckoutPdConsentChange }}" aria-describedby="mcheckout-pd-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
-          <span>Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">обработку персональных данных</a> — <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">Политика ПДн</a>.</span>
-        </label>
-        <div id="mcheckout-pd-error" role="alert" style="display:{{ checkoutPdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;margin-bottom:8px;">Отметьте согласие на обработку персональных данных.</div>
+        <!-- Prepared, but only reachable once a real provider is wired in and
+             startCheckout() can resolve to STATES.SUCCESS — today it always
+             resolves to IDLE, so this branch never renders. -->
+        <sc-if value="{{ checkoutSuccess }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:18px;font-weight:700;letter-spacing:-0.3px;text-transform:uppercase;margin-bottom:12px;">Оплата прошла</div>
+          <p style="font-size:13px;line-height:1.6;opacity:0.75;margin:0;">Команда свяжется с вами<br/>для согласования даты и времени консультации.</p>
+        </sc-if>
 
-        <p style="font-size:11px;line-height:1.5;opacity:0.65;margin:0 0 14px 0;">Оплачивая заказ, вы принимаете условия <a href="oferta.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">Публичной оферты</a>.</p>
+        <sc-if value="{{ checkoutFormVisible }}" hint-placeholder-val="{{ true }}">
+          <!-- Name/contact are consultation-specific — the shared modal also
+               serves the 4 digital products, which stay download-only and
+               never render these fields. -->
+          <sc-if value="{{ checkoutIsConsultation }}" hint-placeholder-val="{{ false }}">
+            <label for="mcheckout-name" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Имя</label>
+            <input id="mcheckout-name" type="text" required="true" value="{{ checkoutBuyerName }}" onChange="{{ onCheckoutNameChange }}" aria-describedby="mcheckout-name-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
+            <div id="mcheckout-name-error" role="alert" style="display:{{ checkoutNameErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:8px;">Укажите имя, чтобы продолжить.</div>
 
-        <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;margin-bottom:22px;">
-          <input type="checkbox" name="checkoutMarketingConsent" checked="{{ checkoutMarketingConsent }}" onChange="{{ onCheckoutMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
-          <span style="opacity:0.65;">Хочу получать новости и спецпредложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">согласие на рассылки</a>.</span>
-        </label>
+            <label for="mcheckout-contact" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Контакт для связи</label>
+            <input id="mcheckout-contact" type="text" required="true" value="{{ checkoutBuyerContact }}" onChange="{{ onCheckoutContactChange }}" placeholder="Telegram / телефон / e-mail" aria-describedby="mcheckout-contact-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
+            <div id="mcheckout-contact-error" role="alert" style="display:{{ checkoutContactErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:14px;">Укажите контакт для связи, чтобы продолжить.</div>
+          </sc-if>
 
-        <div style="display:flex;gap:14px;align-items:center;">
-          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 22px;white-space:nowrap;">Оплатить →</button>
-          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
-        </div>
-        <p style="font-size:10px;line-height:1.5;opacity:0.4;margin:14px 0 0 0;">{{ checkoutNote }}</p>
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;margin-bottom:8px;">
+            <input type="checkbox" name="checkoutPdConsent" required="true" checked="{{ checkoutPdConsent }}" onChange="{{ onCheckoutPdConsentChange }}" aria-describedby="mcheckout-pd-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+            <span>Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">обработку персональных данных</a> — <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">Политика ПДн</a>.</span>
+          </label>
+          <div id="mcheckout-pd-error" role="alert" style="display:{{ checkoutPdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;margin-bottom:8px;">Отметьте согласие на обработку персональных данных.</div>
+
+          <p style="font-size:11px;line-height:1.5;opacity:0.65;margin:0 0 14px 0;">Оплачивая заказ, вы принимаете условия <a href="oferta.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">Публичной оферты</a>.</p>
+
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;margin-bottom:22px;">
+            <input type="checkbox" name="checkoutMarketingConsent" checked="{{ checkoutMarketingConsent }}" onChange="{{ onCheckoutMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+            <span style="opacity:0.65;">Хочу получать новости и спецпредложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">согласие на рассылки</a>.</span>
+          </label>
+
+          <div style="display:flex;gap:14px;align-items:center;">
+            <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 22px;white-space:nowrap;">Оплатить →</button>
+            <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
+          </div>
+          <p style="font-size:10px;line-height:1.5;opacity:0.4;margin:14px 0 0 0;">{{ checkoutNote }}</p>
+        </sc-if>
       </div>
     </div>
   </sc-if>
@@ -537,6 +560,7 @@ class Component extends DCLogic {
   state = { tab: 'home', cardIdx: 0, formState: 'idle', buyState: 'idle', bookState: 'idle', heroPassed: false, teamVideoReady: false, vw: 390,
     pdConsent: false, marketingConsent: false, pdConsentError: false,
     checkoutOpen: false, checkoutProduct: null, checkoutPdConsent: false, checkoutMarketingConsent: false, checkoutPdConsentError: false,
+    checkoutBuyerName: '', checkoutBuyerContact: '', checkoutNameError: false, checkoutContactError: false, consultationOrder: null,
     revealed: { services: false, teamVideo: false, cred: false, cases: false, catalog: false, consult: false } };
   teamVideoRef = React.createRef();
 
@@ -665,27 +689,59 @@ class Component extends DCLogic {
       checkoutPdConsent: false,
       checkoutMarketingConsent: false,
       checkoutPdConsentError: false,
+      checkoutBuyerName: '',
+      checkoutBuyerContact: '',
+      checkoutNameError: false,
+      checkoutContactError: false,
+      buyState: 'idle',
+      consultationOrder: null,
     });
   };
   closeCheckout = () => this.setState({ checkoutOpen: false });
   stopPropagation = (e) => e.stopPropagation();
   onCheckoutPdConsentChange = (e) => this.setState({ checkoutPdConsent: e.target.checked, checkoutPdConsentError: false });
   onCheckoutMarketingConsentChange = (e) => this.setState({ checkoutMarketingConsent: e.target.checked });
+  onCheckoutNameChange = (e) => this.setState({ checkoutBuyerName: e.target.value, checkoutNameError: false });
+  onCheckoutContactChange = (e) => this.setState({ checkoutBuyerContact: e.target.value, checkoutContactError: false });
 
   onBook = (e) => {
     e.preventDefault();
     this.openCheckout('personal-consultation', 'Личная консультация с Лианой Гини', '15 000 ₽');
   };
 
-  // Actual payment trigger — only reachable from the consent gate, only once
-  // required personal-data consent is checked.
+  // Actual payment trigger — only reachable from the consent gate. For the
+  // consultation, name + contact are also required before proceeding; the 4
+  // digital products keep the exact same pdConsent-only gate as before.
   onProceedCheckout = async () => {
-    if (!this.state.checkoutPdConsent) { this.setState({ checkoutPdConsentError: true }); return; }
     const product = this.state.checkoutProduct;
     if (!product) return;
+    const isConsultation = product.productId === 'personal-consultation';
+    const name = this.state.checkoutBuyerName.trim();
+    const contact = this.state.checkoutBuyerContact.trim();
+    const nameOk = !isConsultation || name.length > 0;
+    const contactOk = !isConsultation || contact.length > 0;
+    if (!nameOk || !contactOk || !this.state.checkoutPdConsent) {
+      this.setState({
+        checkoutNameError: !nameOk,
+        checkoutContactError: !contactOk,
+        checkoutPdConsentError: !this.state.checkoutPdConsent,
+      });
+      return;
+    }
     this.setState({ buyState: 'pending' });
     try {
       const mod = await import('/assets/js/payments.js');
+      if (isConsultation) {
+        // Future Robokassa payload — built now, not sent anywhere yet (no
+        // provider connected). Kept in state so it's ready the moment a real
+        // provider call replaces the startCheckout() stub below.
+        const order = mod.buildConsultationOrder({
+          name, contact,
+          pdConsent: this.state.checkoutPdConsent,
+          marketingConsent: this.state.checkoutMarketingConsent,
+        });
+        this.setState({ consultationOrder: order });
+      }
       const res = await mod.startCheckout(product.productId);
       this.setState({ buyState: res.state });
       if (res.checkoutUrl) window.location.href = res.checkoutUrl;
@@ -862,6 +918,17 @@ class Component extends DCLogic {
       onCheckoutMarketingConsentChange: this.onCheckoutMarketingConsentChange,
       checkoutPdErrorDisplay: this.state.checkoutPdConsentError ? 'block' : 'none',
       checkoutNote: this.state.buyState === 'pending' ? 'Переходим к оплате…' : 'Оплата пока не подключена — эта кнопка не спишет средства.',
+      checkoutIsConsultation: !!(this.state.checkoutProduct && this.state.checkoutProduct.productId === 'personal-consultation'),
+      checkoutBuyerName: this.state.checkoutBuyerName,
+      checkoutBuyerContact: this.state.checkoutBuyerContact,
+      onCheckoutNameChange: this.onCheckoutNameChange,
+      onCheckoutContactChange: this.onCheckoutContactChange,
+      checkoutNameErrorDisplay: this.state.checkoutNameError ? 'block' : 'none',
+      checkoutContactErrorDisplay: this.state.checkoutContactError ? 'block' : 'none',
+      // Success view is prepared but unreachable: buyState only ever becomes
+      // 'idle' from the current startCheckout() stub, never 'success'.
+      checkoutSuccess: this.state.buyState === 'success',
+      checkoutFormVisible: this.state.buyState !== 'success',
       tabs: TABS.map(t => ({
         label: t.label, onClick: this.setTab(t.key),
         color: tab === t.key ? accent : ink,
