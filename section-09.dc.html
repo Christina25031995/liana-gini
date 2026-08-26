@@ -178,7 +178,7 @@ class Component extends DCLogic {
     const product = this.state.checkoutProduct;
     if (!product) return;
     try {
-      const mod = await import('./assets/js/payments.js');
+      const mod = await import('/assets/js/payments.js');
       const res = await mod.startCheckout(product.productId);
       this.setState({ bookingState: res.state });
       if (res.checkoutUrl) window.location.href = res.checkoutUrl;

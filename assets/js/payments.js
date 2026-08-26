@@ -4,11 +4,12 @@
 // Download/access URLs are intentionally NOT present in page source — they are issued
 // by the backend only after the provider confirms payment (webhook -> signed link).
 
+// Canonical product matrix — client-confirmed final IDs/names/prices.
 export const PRODUCTS = {
-  'pdf-collections':      { id: 'pdf-collections',      name: 'Каталоги готовых трендовых и базовых коллекций', price: 999,  currency: 'RUB' },
-  'factory-check-guide':  { id: 'factory-check-guide',  name: '9 шагов проверки фабрики',    price: 490,  currency: 'RUB' },
-  'factory-search-guide': { id: 'factory-search-guide', name: 'Самостоятельный поиск фабрики', price: 490, currency: 'RUB' },
-  'guangzhou-markets':    { id: 'guangzhou-markets',    name: 'Рынки Гуанчжоу с адресами',   price: 5500, currency: 'RUB' },
+  'catalog_collections': { id: 'catalog_collections', name: 'Каталоги готовых трендовых и базовых коллекций', price: 3999, currency: 'RUB' },
+  'factory_check_9':     { id: 'factory_check_9',     name: '9 шагов проверки фабрики',                        price: 490,  currency: 'RUB' },
+  'brand_china_7':       { id: 'brand_china_7',       name: 'Как запустить свой бренд через Китай',            price: 490,  currency: 'RUB' },
+  'guangzhou_markets':   { id: 'guangzhou_markets',   name: 'Список рынков Гуанчжоу с адресами',                price: 1490, currency: 'RUB' },
   // Service, not a download: after payment the backend confirms and schedules.
   'personal-consultation': { id: 'personal-consultation', name: 'Личная консультация с Лианой Гини', price: 15000, currency: 'RUB',
     kind: 'service', collect: ['name', 'contact', 'email', 'question'] },
