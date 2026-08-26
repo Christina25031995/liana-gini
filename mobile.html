@@ -357,6 +357,7 @@
         <p style="margin:0 0 20px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.55;">Несколько вопросов помогут понять задачу до первого разговора с&nbsp;командой.</p>
 
         <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;max-width:{{ formMax }};">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"/>
           <div style="border-top:1px solid rgba(24,23,21,0.15);padding:14px 0;">
             <label for="mq-product" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Что хотите производить?</label>
             <input class="brief-input" id="mq-product" name="product" type="text" required="true" placeholder="категория, изделие"/>
@@ -706,12 +707,20 @@ class Component extends DCLogic {
       product: form.product?.value || '', design: form.design?.value || '',
       volume: form.volume?.value || '', targetCost: form.targetCost?.value || '',
       contact: form.contact?.value || '',
+      pdConsent: this.state.pdConsent, marketingConsent: this.state.marketingConsent,
+      _honey: form._honey?.value || '',
     };
     this.setState({ formState: 'pending' });
     try {
       const mod = await import('/assets/js/enquiry.js');
       const res = await mod.submitEnquiry(payload);
       this.setState({ formState: res.state });
+      // Only clear the form/consents once FormSubmit has actually confirmed
+      // delivery — on error the user's entered data must stay exactly as typed.
+      if (res.state === 'success') {
+        form.reset();
+        this.setState({ pdConsent: false, marketingConsent: false });
+      }
     } catch (err) { this.setState({ formState: 'error' }); }
   };
 
@@ -741,8 +750,8 @@ class Component extends DCLogic {
     const notes = {
       idle: 'Ответим в Telegram или по указанному контакту.',
       pending: 'Отправляем…',
-      success: 'Заявка отправлена. Свяжемся с вами.',
-      error: 'Канал отправки пока не подключён — напишите в Telegram.',
+      success: 'ЗАДАЧА ПЕРЕДАНА. КОМАНДА СВЯЖЕТСЯ С ВАМИ.',
+      error: 'Не удалось отправить — попробуйте ещё раз или напишите в Telegram →',
     };
 
     const tab768 = this.state.vw >= 700;
