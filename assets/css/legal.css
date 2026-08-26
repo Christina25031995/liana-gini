@@ -1,0 +1,164 @@
+/* Shared stylesheet for standalone legal/requisites pages.
+   Reuses the main site's fonts, palette and spacing language, but prioritises
+   plain-document readability over the marketing site's layout system. */
+
+:root {
+  --ivory: #F2EFE8;
+  --ink: #181715;
+  --accent: #541F2B;
+  --accent-light: #8C4457;
+  --rule: rgba(24, 23, 21, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--ink); text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Header — minimal, matches the main site's mark */
+.legal-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.legal-header .mark {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.legal-header .back {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.6;
+}
+.legal-header .back:hover { opacity: 1; color: var(--accent); text-decoration: none; }
+
+/* Reading column */
+main.legal {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 24px 80px 24px;
+}
+
+main.legal .eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0 0 14px 0;
+}
+
+main.legal h1 {
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+}
+
+main.legal .revision {
+  font-size: 12px;
+  opacity: 0.5;
+  margin: 0 0 40px 0;
+}
+
+main.legal h2 {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.2px;
+  margin: 40px 0 14px 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+main.legal h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+main.legal p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px 0;
+}
+
+main.legal strong { font-weight: 700; }
+
+main.legal .requisites-block {
+  margin-top: 8px;
+  padding: 24px;
+  background: rgba(84, 31, 43, 0.04);
+  border: 1px solid var(--rule);
+}
+main.legal .requisites-block p { margin: 0 0 6px 0; font-size: 14px; }
+main.legal .requisites-block p:last-child { margin-bottom: 0; }
+
+main.legal .fill-line {
+  display: inline-block;
+  border-bottom: 1px solid var(--rule);
+  min-width: 12em;
+}
+
+main.legal .field-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 0 0 16px 0;
+  font-size: 15px;
+}
+
+main.legal ol.clauses {
+  padding-left: 20px;
+  margin: 0 0 16px 0;
+}
+main.legal ol.clauses li {
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+
+/* Footer — link back, kept quiet */
+.legal-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--rule);
+  padding: 24px;
+  text-align: center;
+}
+.legal-footer a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.legal-footer a:hover { opacity: 1; }
+
+@media (max-width: 480px) {
+  main.legal { padding: 40px 18px 64px 18px; }
+  main.legal h1 { font-size: 24px; }
+  .legal-header { padding: 16px 18px; }
+}

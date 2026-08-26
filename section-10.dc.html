@@ -77,6 +77,18 @@
           </div>
         </div>
 
+        <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(242,239,232,0.18);padding-top:18px;margin-top:16px;">
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;">
+            <input type="checkbox" name="pdConsent" required="true" checked="{{ pdConsent }}" onChange="{{ onPdConsentChange }}" aria-describedby="pd-consent-error" style="margin-top:2px;width:16px;height:16px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+            <span style="opacity:0.75;">Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="color:{{ ivory }};text-decoration:underline;">обработку персональных данных</a> в соответствии с <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:{{ ivory }};text-decoration:underline;">Политикой обработки персональных данных</a>.</span>
+          </label>
+          <div id="pd-consent-error" role="alert" style="display:{{ pdErrorDisplay }};font-size:11px;color:#E8B4B8;padding-left:26px;">Отметьте согласие на обработку персональных данных, чтобы отправить заявку.</div>
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;">
+            <input type="checkbox" name="marketingConsent" checked="{{ marketingConsent }}" onChange="{{ onMarketingConsentChange }}" style="margin-top:2px;width:16px;height:16px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+            <span style="opacity:0.55;">Хочу получать новости и специальные предложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="color:{{ ivory }};text-decoration:underline;">согласие на рекламные рассылки</a>.</span>
+          </label>
+        </div>
+
         <div style="border-top:2px solid {{ accentLight }};padding-top:22px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;">
           <div style="display:flex;align-items:center;gap:28px;">
             <button type="submit" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;transition:transform 0.2s ease, background 0.2s ease, color 0.2s ease;" style-hover="background:{{ ivory }};color:{{ charcoal }};transform:translateX(4px);">ОБСУДИТЬ ПРОЕКТ С КОМАНДОЙ →</button>
@@ -124,13 +136,19 @@
     </div>
 
     <!-- LEGAL -->
-    <div data-anim style="border-top:1px solid rgba(242,239,232,0.1);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:40px;flex-wrap:wrap;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .18s, transform .6s cubic-bezier(.16,1,.3,1) .18s;">
-      <div style="font-size:10px;letter-spacing:1.2px;opacity:0.35;">© 2026 LIANA GINI</div>
-      <div style="display:flex;gap:24px;flex-wrap:wrap;">
-        <a href="#privacy" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Политика конфиденциальности</a>
-        <a href="#offer" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Публичная оферта</a>
-        <a href="#details" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Реквизиты</a>
+    <div data-anim style="border-top:1px solid rgba(242,239,232,0.1);margin-top:34px;padding-top:18px;display:flex;flex-direction:column;gap:14px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .18s, transform .6s cubic-bezier(.16,1,.3,1) .18s;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px 40px;flex-wrap:wrap;">
+        <div style="font-size:10px;letter-spacing:1.2px;opacity:0.35;">© 2026 LIANA GINI</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <a href="oferta.html" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Публичная оферта</a>
+          <a href="privacy-policy.html" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Политика ПДн</a>
+          <a href="pd-consent.html" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Согласие на обработку ПДн</a>
+          <a href="cookie-policy.html" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Cookie</a>
+          <a href="ad-consent.html" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Согласие на рассылки</a>
+          <a href="requisites.html" style="font-size:10px;letter-spacing:0.5px;color:{{ ivory }};opacity:0.35;" style-hover="opacity:0.8;">Реквизиты</a>
+        </div>
       </div>
+      <div style="font-size:9px;letter-spacing:0.5px;line-height:1.6;opacity:0.3;">ИП Гиниятулина Лиана Ринатовна · ИНН 861003465408 · ОГРНИП 323861700006196</div>
     </div>
 
   </div>
@@ -146,7 +164,7 @@
 }">
 class Component extends DCLogic {
   rootRef = React.createRef();
-  state = { formState: 'idle', revealed: false };
+  state = { formState: 'idle', revealed: false, pdConsent: false, marketingConsent: false, pdConsentError: false };
 
   componentDidMount() {
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -166,10 +184,18 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect();
   }
 
+  onPdConsentChange = (e) => {
+    this.setState({ pdConsent: e.target.checked, pdConsentError: false });
+  };
+  onMarketingConsentChange = (e) => {
+    this.setState({ marketingConsent: e.target.checked });
+  };
+
   // Destination (Liana's Telegram relay vs shared team email) is not confirmed yet,
   // so submitEnquiry never fabricates a success state — see enquiry.js (WIRED=false).
   onSubmit = async (e) => {
  e.preventDefault();
+ if (!this.state.pdConsent) { this.setState({ pdConsentError: true }); return; }
  const form = e.currentTarget;
  const payload = {
  product: form.product?.value || '',
@@ -205,6 +231,11 @@ class Component extends DCLogic {
  onSubmit: this.onSubmit,
  formState: s,
  formNote: notes[s] || notes.idle,
+ pdConsent: this.state.pdConsent,
+ marketingConsent: this.state.marketingConsent,
+ onPdConsentChange: this.onPdConsentChange,
+ onMarketingConsentChange: this.onMarketingConsentChange,
+ pdErrorDisplay: this.state.pdConsentError ? 'block' : 'none',
  rootRef: this.rootRef,
  rO: on ? 1 : 0,
  rY: on ? 0 : 20,

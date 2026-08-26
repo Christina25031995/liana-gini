@@ -55,7 +55,7 @@
           <div>
             <div style="font-size:46px;font-weight:700;line-height:0.9;letter-spacing:-2px;">15 000 ₽</div>
           </div>
-          <button type="button" onClick="{{ onBook }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ink }};">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ →</button>
+          <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ink }};">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ →</button>
         </div>
         <p style="margin:14px 0 0 0;font-size:11px;line-height:1.6;opacity:0.45;max-width:420px;">Сначала разберём задачу. Потом решим, какой следующий шаг действительно нужен.</p>
       </div>
@@ -84,6 +84,35 @@
   <!-- booking + payment + scheduling mount, filled by backend after confirmed payment -->
   <div id="consultation-confirmed" data-booking-state="{{ bookingState }}" style="display:none;"></div>
 
+  <!-- CHECKOUT CONSENT GATE — same shared pattern as the products page. -->
+  <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(24,23,21,0.55);box-sizing:border-box;" onClick="{{ closeCheckout }}">
+      <div role="dialog" aria-modal="true" aria-labelledby="checkout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:440px;padding:36px;box-sizing:border-box;font-family:'Archivo',sans-serif;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">{{ checkoutName }}</div>
+        <div id="checkout-title" style="font-size:32px;font-weight:700;letter-spacing:-1px;margin-bottom:26px;">{{ checkoutPriceLabel }}</div>
+
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:10px;">
+          <input type="checkbox" name="pdConsent" required="true" checked="{{ pdConsent }}" onChange="{{ onPdConsentChange }}" aria-describedby="checkout-pd-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+          <span>Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">обработку персональных данных</a> в соответствии с <a href="privacy-policy.html" target="_blank" rel="noopener" style="text-decoration:underline;">Политикой ПДн</a>.</span>
+        </label>
+        <div id="checkout-pd-error" role="alert" style="display:{{ pdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;margin-bottom:10px;">Отметьте согласие на обработку персональных данных, чтобы продолжить.</div>
+
+        <p style="font-size:12px;line-height:1.55;opacity:0.65;margin:0 0 18px 0;">Оплачивая заказ, вы принимаете условия <a href="oferta.html" target="_blank" rel="noopener" style="text-decoration:underline;">Публичной оферты</a>.</p>
+
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:26px;">
+          <input type="checkbox" name="marketingConsent" checked="{{ marketingConsent }}" onChange="{{ onMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+          <span style="opacity:0.7;">Хочу получать новости и специальные предложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">согласие на рассылки</a>.</span>
+        </label>
+
+        <div style="display:flex;gap:16px;align-items:center;">
+          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
+          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Archivo',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
+        </div>
+        <p style="font-size:11px;line-height:1.5;opacity:0.4;margin:16px 0 0 0;">{{ checkoutNote }}</p>
+      </div>
+    </div>
+  </sc-if>
+
 </div>
 
 </x-dc>
@@ -95,7 +124,8 @@
 }">
 class Component extends DCLogic {
   rootRef = React.createRef();
-  state = { bookingState: 'idle', revealed: false };
+  state = { bookingState: 'idle', revealed: false,
+    checkoutOpen: false, checkoutProduct: null, pdConsent: false, marketingConsent: false, pdConsentError: false };
 
   componentDidMount() {
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -115,22 +145,41 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect();
   }
 
-  // Booking CTA -> payment layer. Product contract lives on the button's data-*
-  // attributes; the booking fields it must collect are declared in data-booking-fields.
-  // No provider, no keys, no scheduling links in the frontend.
-  onBook = async (e) => {
+  // Opens the consent gate for the booking CTA — reads the product contract off
+  // the button's data-* attributes (booking fields it must collect are declared
+  // in data-booking-fields). No payment call happens yet.
+  openCheckout = (e) => {
     e.preventDefault();
     const el = e.currentTarget;
-    const order = {
-      productId: el.dataset.productId,
-      name: el.dataset.productName,
-      price: Number(el.dataset.price),
-      currency: el.dataset.currency,
-      collect: (el.dataset.bookingFields || '').split(','),
-    };
+    this.setState({
+      checkoutOpen: true,
+      pdConsent: false,
+      marketingConsent: false,
+      pdConsentError: false,
+      checkoutProduct: {
+        productId: el.dataset.productId,
+        name: el.dataset.productName,
+        price: Number(el.dataset.price),
+        currency: el.dataset.currency,
+        collect: (el.dataset.bookingFields || '').split(','),
+      },
+    });
+  };
+  closeCheckout = () => this.setState({ checkoutOpen: false });
+  stopPropagation = (e) => e.stopPropagation();
+  onPdConsentChange = (e) => this.setState({ pdConsent: e.target.checked, pdConsentError: false });
+  onMarketingConsentChange = (e) => this.setState({ marketingConsent: e.target.checked });
+
+  // Actual payment trigger — only reachable from the consent gate, only once
+  // required personal-data consent is checked. No provider, no keys, no
+  // scheduling links in the frontend.
+  onProceedCheckout = async () => {
+    if (!this.state.pdConsent) { this.setState({ pdConsentError: true }); return; }
+    const product = this.state.checkoutProduct;
+    if (!product) return;
     try {
       const mod = await import('./assets/js/payments.js');
-      const res = await mod.startCheckout(order.productId);
+      const res = await mod.startCheckout(product.productId);
       this.setState({ bookingState: res.state });
       if (res.checkoutUrl) window.location.href = res.checkoutUrl;
     } catch (err) {
@@ -140,15 +189,34 @@ class Component extends DCLogic {
 
   renderVals() {
     const on = this.state.revealed;
+    const product = this.state.checkoutProduct;
+    const bookingNotes = {
+      idle: 'Оплата пока не подключена — эта кнопка не спишет средства.',
+      pending: 'Переходим к оплате…',
+      error: 'Оплата временно недоступна.',
+    };
     return {
       ivory: this.props.ivory ?? '#F2EFE8',
       ink: this.props.ink ?? '#181715',
       accent: this.props.accent ?? '#541F2B',
-      onBook: this.onBook,
       bookingState: this.state.bookingState,
       rootRef: this.rootRef,
       rO: on ? 1 : 0,
       rY: on ? 0 : 20,
+
+      openCheckout: this.openCheckout,
+      closeCheckout: this.closeCheckout,
+      stopPropagation: this.stopPropagation,
+      onProceedCheckout: this.onProceedCheckout,
+      onPdConsentChange: this.onPdConsentChange,
+      onMarketingConsentChange: this.onMarketingConsentChange,
+      checkoutOpen: this.state.checkoutOpen,
+      checkoutName: product ? product.name : '',
+      checkoutPriceLabel: product ? product.price.toLocaleString('ru-RU') + ' ₽' : '',
+      pdConsent: this.state.pdConsent,
+      marketingConsent: this.state.marketingConsent,
+      pdErrorDisplay: this.state.pdConsentError ? 'block' : 'none',
+      checkoutNote: bookingNotes[this.state.bookingState] || bookingNotes.idle,
     };
   }
 }

@@ -1,0 +1,71 @@
+// Self-contained first-visit cookie notice. Injects its own markup so every
+// page just needs <script src="assets/js/cookie-banner.js" defer></script>.
+// Wording matches the supplied Cookie Policy (technical + analytical cookies;
+// continuing to use the site after this notice = consent to their use).
+(function () {
+  var STORAGE_KEY = 'lg_cookie_ack_v1';
+
+  function alreadyAcknowledged() {
+    try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
+  }
+  function acknowledge() {
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+  }
+
+  function cookiePolicyHref() {
+    // All pages (including the legal pages themselves) live at the site root.
+    return 'cookie-policy.html';
+  }
+
+  function mount() {
+    if (alreadyAcknowledged()) return;
+    if (document.getElementById('lg-cookie-banner')) return;
+
+    var style = document.createElement('style');
+    style.textContent =
+      '#lg-cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:2147483000;' +
+      'display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;' +
+      'padding:14px 20px;padding-bottom:calc(14px + env(safe-area-inset-bottom));' +
+      'background:#181715;color:#F2EFE8;font-family:Archivo,-apple-system,BlinkMacSystemFont,sans-serif;' +
+      'box-shadow:0 -2px 24px rgba(0,0,0,0.2);}' +
+      '#lg-cookie-banner p{margin:0;font-size:12px;line-height:1.5;max-width:560px;opacity:0.85;}' +
+      '#lg-cookie-banner a{color:#F2EFE8;text-decoration:underline;}' +
+      '#lg-cookie-banner button{flex-shrink:0;font-family:inherit;border:none;cursor:pointer;' +
+      'background:#541F2B;color:#F2EFE8;font-size:12px;font-weight:700;letter-spacing:0.5px;' +
+      'text-transform:uppercase;padding:11px 20px;}' +
+      '#lg-cookie-banner button:hover{background:#8C4457;}' +
+      '#lg-cookie-banner button:focus-visible{outline:2px solid #F2EFE8;outline-offset:2px;}';
+    document.head.appendChild(style);
+
+    var el = document.createElement('div');
+    el.id = 'lg-cookie-banner';
+    el.setAttribute('role', 'region');
+    el.setAttribute('aria-label', 'Уведомление об использовании cookie');
+
+    var p = document.createElement('p');
+    p.textContent = 'Мы используем файлы cookie для работы сайта и аналитики. Подробнее — в ';
+    var a = document.createElement('a');
+    a.href = cookiePolicyHref();
+    a.textContent = 'Политике Cookie';
+    p.appendChild(a);
+    p.appendChild(document.createTextNode('.'));
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = 'Принять';
+    btn.addEventListener('click', function () {
+      acknowledge();
+      el.remove();
+    });
+
+    el.appendChild(p);
+    el.appendChild(btn);
+    document.body.appendChild(el);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount);
+  } else {
+    mount();
+  }
+})();

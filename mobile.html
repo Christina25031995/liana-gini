@@ -28,6 +28,7 @@
   }
 </script>
 <script src="assets/js/dc-runtime.js"></script>
+<script src="assets/js/cookie-banner.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -376,6 +377,17 @@
             <label for="mq-contact" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Как с&nbsp;вами связаться?</label>
             <input class="brief-input" id="mq-contact" name="contact" type="text" required="true" placeholder="Telegram / телефон / email"/>
           </div>
+          <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(24,23,21,0.15);padding-top:16px;margin-bottom:18px;">
+            <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;">
+              <input type="checkbox" name="pdConsent" required="true" checked="{{ pdConsent }}" onChange="{{ onPdConsentChange }}" aria-describedby="mq-pd-consent-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+              <span style="opacity:0.8;">Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">обработку персональных данных</a> в соответствии с <a href="privacy-policy.html" target="_blank" rel="noopener" style="text-decoration:underline;">Политикой ПДн</a>.</span>
+            </label>
+            <div id="mq-pd-consent-error" role="alert" style="display:{{ pdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;">Отметьте согласие на обработку персональных данных.</div>
+            <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;">
+              <input type="checkbox" name="marketingConsent" checked="{{ marketingConsent }}" onChange="{{ onMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+              <span style="opacity:0.6;">Хочу получать новости и спецпредложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">согласие на рассылки</a>.</span>
+            </label>
+          </div>
           <button type="submit" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px;margin-bottom:14px;">Обсудить проект с командой →</button>
           <a href="https://t.me/lianagini" style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6;padding-bottom:8px;">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21.5 4.5L2.5 12.1c-1.1.44-1.1 1.06-.2 1.34l4.9 1.53 1.9 5.83c.23.63.4.88.82.88.4 0 .57-.18.79-.4l2.24-2.16 4.66 3.44c.86.47 1.48.23 1.7-.8l3.06-14.4c.33-1.28-.48-1.85-1.37-1.44z" fill="currentColor"/></svg>
@@ -404,7 +416,15 @@
           <a href="https://youtube.com/@lianagini_17" target="_blank" rel="noopener" style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};opacity:0.4;">YOUTUBE</a>
           <a href="https://www.tiktok.com/@liana.ginii" target="_blank" rel="noopener" style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:{{ ivory }};opacity:0.4;">TIKTOK</a>
         </div>
-        <div style="font-size:9px;letter-spacing:0.5px;opacity:0.35;line-height:1.7;">© 2026 LIANA GINI<br/><a href="#privacy" style="color:{{ ivory }};opacity:1;">Политика конфиденциальности</a> · <a href="#offer" style="color:{{ ivory }};opacity:1;">Оферта</a> · <a href="#details" style="color:{{ ivory }};opacity:1;">Реквизиты</a></div>
+        <div style="font-size:9px;letter-spacing:0.5px;line-height:1.9;opacity:0.35;">
+          <a href="oferta.html" style="color:{{ ivory }};opacity:1;">Оферта</a> ·
+          <a href="privacy-policy.html" style="color:{{ ivory }};opacity:1;">Политика ПДн</a> ·
+          <a href="pd-consent.html" style="color:{{ ivory }};opacity:1;">Согласие ПДн</a> ·
+          <a href="cookie-policy.html" style="color:{{ ivory }};opacity:1;">Cookie</a> ·
+          <a href="ad-consent.html" style="color:{{ ivory }};opacity:1;">Рассылки</a> ·
+          <a href="requisites.html" style="color:{{ ivory }};opacity:1;">Реквизиты</a>
+          <br/>© 2026 LIANA GINI · ИП Гиниятулина Л. Р. · ИНН 861003465408 · ОГРНИП 323861700006196
+        </div>
       </div>
 
     </sc-if>
@@ -419,6 +439,39 @@
           <span style="font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:{{ tb.color }};">{{ tb.label }}</span>
         </button>
       </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- CHECKOUT CONSENT GATE — shared by every buy/book CTA. Personal-data consent
+       is required before the (still-stubbed) payment call proceeds; the Offer is
+       linked, not gated behind its own checkbox; marketing consent is optional and
+       never blocks proceeding. Absolutely positioned within the app shell rather
+       than the viewport, so it stays inside the phone frame on wide screens. -->
+  <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(24,23,21,0.55);box-sizing:border-box;" onClick="{{ closeCheckout }}">
+      <div role="dialog" aria-modal="true" aria-labelledby="mcheckout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:360px;padding:26px;box-sizing:border-box;font-family:'Archivo',sans-serif;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:8px;">{{ checkoutName }}</div>
+        <div id="mcheckout-title" style="font-size:26px;font-weight:700;letter-spacing:-1px;margin-bottom:20px;">{{ checkoutPriceLabel }}</div>
+
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;margin-bottom:8px;">
+          <input type="checkbox" name="checkoutPdConsent" required="true" checked="{{ checkoutPdConsent }}" onChange="{{ onCheckoutPdConsentChange }}" aria-describedby="mcheckout-pd-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+          <span>Я даю согласие на <a href="pd-consent.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">обработку персональных данных</a> — <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">Политика ПДн</a>.</span>
+        </label>
+        <div id="mcheckout-pd-error" role="alert" style="display:{{ checkoutPdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;margin-bottom:8px;">Отметьте согласие на обработку персональных данных.</div>
+
+        <p style="font-size:11px;line-height:1.5;opacity:0.65;margin:0 0 14px 0;">Оплачивая заказ, вы принимаете условия <a href="oferta.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">Публичной оферты</a>.</p>
+
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;margin-bottom:22px;">
+          <input type="checkbox" name="checkoutMarketingConsent" checked="{{ checkoutMarketingConsent }}" onChange="{{ onCheckoutMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
+          <span style="opacity:0.65;">Хочу получать новости и спецпредложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="color:{{ ink }};text-decoration:underline;">согласие на рассылки</a>.</span>
+        </label>
+
+        <div style="display:flex;gap:14px;align-items:center;">
+          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 22px;white-space:nowrap;">Оплатить →</button>
+          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Archivo',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
+        </div>
+        <p style="font-size:10px;line-height:1.5;opacity:0.4;margin:14px 0 0 0;">{{ checkoutNote }}</p>
+      </div>
     </div>
   </sc-if>
 
@@ -484,6 +537,8 @@ class Component extends DCLogic {
   cardsRef = React.createRef();
   contentRef = React.createRef();
   state = { tab: 'home', cardIdx: 0, formState: 'idle', buyState: 'idle', bookState: 'idle', heroPassed: false, teamVideoReady: false, vw: 390,
+    pdConsent: false, marketingConsent: false, pdConsentError: false,
+    checkoutOpen: false, checkoutProduct: null, checkoutPdConsent: false, checkoutMarketingConsent: false, checkoutPdConsentError: false,
     revealed: { services: false, teamVideo: false, cred: false, cases: false, catalog: false, consult: false } };
   teamVideoRef = React.createRef();
 
@@ -572,30 +627,57 @@ class Component extends DCLogic {
     this.setState({ cardIdx: i });
   };
 
-  buy = (productId) => async (e) => {
+  // Opens the shared consent gate instead of buying directly — name/priceLabel
+  // are passed in since mobile's product data lives inline in the templates,
+  // not on data-* attributes the way the desktop CTAs read theirs.
+  buy = (productId, name, priceLabel) => (e) => {
     e.preventDefault();
+    this.openCheckout(productId, name, priceLabel);
+  };
+  openCheckout = (productId, name, priceLabel) => {
+    this.setState({
+      checkoutOpen: true,
+      checkoutProduct: { productId, name, priceLabel },
+      checkoutPdConsent: false,
+      checkoutMarketingConsent: false,
+      checkoutPdConsentError: false,
+    });
+  };
+  closeCheckout = () => this.setState({ checkoutOpen: false });
+  stopPropagation = (e) => e.stopPropagation();
+  onCheckoutPdConsentChange = (e) => this.setState({ checkoutPdConsent: e.target.checked, checkoutPdConsentError: false });
+  onCheckoutMarketingConsentChange = (e) => this.setState({ checkoutMarketingConsent: e.target.checked });
+
+  onBook = (e) => {
+    e.preventDefault();
+    this.openCheckout('personal-consultation', 'Личная консультация с Лианой Гини', '15 000 ₽');
+  };
+
+  // Actual payment trigger — only reachable from the consent gate, only once
+  // required personal-data consent is checked.
+  onProceedCheckout = async () => {
+    if (!this.state.checkoutPdConsent) { this.setState({ checkoutPdConsentError: true }); return; }
+    const product = this.state.checkoutProduct;
+    if (!product) return;
     this.setState({ buyState: 'pending' });
     try {
       const mod = await import('./payments.js');
-      const res = await mod.startCheckout(productId);
+      const res = await mod.startCheckout(product.productId);
       this.setState({ buyState: res.state });
       if (res.checkoutUrl) window.location.href = res.checkoutUrl;
     } catch (err) { this.setState({ buyState: 'idle' }); }
   };
 
-  onBook = async (e) => {
-    e.preventDefault();
-    this.setState({ bookState: 'pending' });
-    try {
-      const mod = await import('./payments.js');
-      const res = await mod.startCheckout('personal-consultation');
-      this.setState({ bookState: res.state });
-      if (res.checkoutUrl) window.location.href = res.checkoutUrl;
-    } catch (err) { this.setState({ bookState: 'idle' }); }
+  onPdConsentChange = (e) => {
+    this.setState({ pdConsent: e.target.checked, pdConsentError: false });
+  };
+  onMarketingConsentChange = (e) => {
+    this.setState({ marketingConsent: e.target.checked });
   };
 
   onSubmit = async (e) => {
     e.preventDefault();
+    if (!this.state.pdConsent) { this.setState({ pdConsentError: true }); return; }
     const form = e.currentTarget;
     const payload = {
       product: form.product?.value || '', design: form.design?.value || '',
@@ -708,8 +790,8 @@ class Component extends DCLogic {
         };
       }),
       costParams: COST_PARAMS.map((label, i) => ({ label, num: '0' + (i + 1) })),
-      onBuyMain: this.buy('pdf-collections'),
-      guides: GUIDES.map(g => ({ ...g, onBuy: this.buy(g.id) })),
+      onBuyMain: this.buy('pdf-collections', 'PDF-подборки коллекций', '999 ₽'),
+      guides: GUIDES.map(g => ({ ...g, onBuy: this.buy(g.id, g.title, g.price) })),
       credibility: CREDIBILITY.map(parseColor).map((c, i) => {
         const on = this.state.revealed.cred;
         return { ...c, opacity: on ? 1 : 0, y: on ? 0 : 10, delay: (i * 0.06).toFixed(2) + 's' };
@@ -729,6 +811,24 @@ class Component extends DCLogic {
       onBook: this.onBook,
       onSubmit: this.onSubmit,
       formNote: notes[this.state.formState] || notes.idle,
+      pdConsent: this.state.pdConsent,
+      marketingConsent: this.state.marketingConsent,
+      onPdConsentChange: this.onPdConsentChange,
+      onMarketingConsentChange: this.onMarketingConsentChange,
+      pdErrorDisplay: this.state.pdConsentError ? 'block' : 'none',
+
+      checkoutOpen: this.state.checkoutOpen,
+      checkoutName: this.state.checkoutProduct ? this.state.checkoutProduct.name : '',
+      checkoutPriceLabel: this.state.checkoutProduct ? this.state.checkoutProduct.priceLabel : '',
+      closeCheckout: this.closeCheckout,
+      stopPropagation: this.stopPropagation,
+      onProceedCheckout: this.onProceedCheckout,
+      checkoutPdConsent: this.state.checkoutPdConsent,
+      checkoutMarketingConsent: this.state.checkoutMarketingConsent,
+      onCheckoutPdConsentChange: this.onCheckoutPdConsentChange,
+      onCheckoutMarketingConsentChange: this.onCheckoutMarketingConsentChange,
+      checkoutPdErrorDisplay: this.state.checkoutPdConsentError ? 'block' : 'none',
+      checkoutNote: this.state.buyState === 'pending' ? 'Переходим к оплате…' : 'Оплата пока не подключена — эта кнопка не спишет средства.',
       tabs: TABS.map(t => ({
         label: t.label, onClick: this.setTab(t.key),
         color: tab === t.key ? accent : ink,
