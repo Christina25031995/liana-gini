@@ -10,7 +10,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
@@ -20,7 +20,7 @@
 </style>
 </helmet>
 
-<div id="consultation" ref="{{ rootRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:32px 60px 76px 60px;box-sizing:border-box;">
+<div id="consultation" ref="{{ rootRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Manrope',sans-serif;color:{{ ink }};position:relative;padding:32px 60px 76px 60px;box-sizing:border-box;">
 
 
   <div style="display:flex;gap:56px;align-items:stretch;">
@@ -55,7 +55,7 @@
           <div>
             <div style="font-size:46px;font-weight:700;line-height:0.9;letter-spacing:-2px;">15 000 ₽</div>
           </div>
-          <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ink }};">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ →</button>
+          <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ink }};">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ →</button>
         </div>
         <p style="margin:14px 0 0 0;font-size:11px;line-height:1.6;opacity:0.45;max-width:420px;">Сначала разберём задачу. Потом решим, какой следующий шаг действительно нужен.</p>
       </div>
@@ -87,7 +87,7 @@
   <!-- CHECKOUT CONSENT GATE — same shared pattern as the products page. -->
   <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(24,23,21,0.55);box-sizing:border-box;" onClick="{{ closeCheckout }}">
-      <div role="dialog" aria-modal="true" aria-labelledby="checkout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:440px;padding:36px;box-sizing:border-box;font-family:'Archivo',sans-serif;">
+      <div role="dialog" aria-modal="true" aria-labelledby="checkout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:440px;padding:36px;box-sizing:border-box;font-family:'Manrope',sans-serif;">
         <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">{{ checkoutName }}</div>
         <div id="checkout-title" style="font-size:32px;font-weight:700;letter-spacing:-1px;margin-bottom:26px;">{{ checkoutPriceLabel }}</div>
 
@@ -105,8 +105,8 @@
         </label>
 
         <div style="display:flex;gap:16px;align-items:center;">
-          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
-          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Archivo',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
+          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
+          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
         </div>
         <p style="font-size:11px;line-height:1.5;opacity:0.4;margin:16px 0 0 0;">{{ checkoutNote }}</p>
       </div>

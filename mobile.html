@@ -35,12 +35,12 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="assets/js/image-slot.js"></script>
 <style>
   html, body { margin: 0; background: #6E6A63; }
   a { color: #541F2B; text-decoration: none; }
-  .brief-input { font-family: 'Archivo', sans-serif; background: transparent; border: none; border-bottom: 1px solid rgba(24,23,21,0.18); outline: none; color: #181715; font-size: 15px; font-weight: 500; width: 100%; height: 32px; padding: 0; display: block; }
+  .brief-input { font-family: 'Manrope', sans-serif; background: transparent; border: none; border-bottom: 1px solid rgba(24,23,21,0.18); outline: none; color: #181715; font-size: 15px; font-weight: 500; width: 100%; height: 32px; padding: 0; display: block; }
   .brief-input::placeholder { color: rgba(24,23,21,0.32); }
   .brief-input:focus { border-bottom-color: #541F2B; }
   .cards-track::-webkit-scrollbar, .tabbar::-webkit-scrollbar { display: none; }
@@ -54,7 +54,7 @@
 </helmet>
 
 <div style="background:#6E6A63;height:100vh;height:100dvh;height:100svh;display:flex;justify-content:center;padding:0;box-sizing:border-box;overflow:hidden;">
-<div style="width:100%;max-width:{{ shellMax }};height:100%;background:{{ ivory }};display:flex;flex-direction:column;font-family:'Archivo',sans-serif;color:{{ ink }};box-shadow:0 0 40px rgba(0,0,0,0.25);position:relative;overflow:hidden;">
+<div style="width:100%;max-width:{{ shellMax }};height:100%;background:{{ ivory }};display:flex;flex-direction:column;font-family:'Manrope',sans-serif;color:{{ ink }};box-shadow:0 0 40px rgba(0,0,0,0.25);position:relative;overflow:hidden;">
 
   <!-- SCROLLABLE CONTENT -->
   <div ref="{{ contentRef }}" onScroll="{{ onContentScroll }}" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:{{ contentPadBottom }};">
@@ -120,7 +120,7 @@
         <p style="margin:0 0 18px 0;font-size:13px;line-height:1.55;max-width:{{ measure }};opacity:0.7;">Личная консультация с&nbsp;Лианой Гини по&nbsp;вашей задаче, продукту или&nbsp;производству.</p>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;border-top:1px solid rgba(24,23,21,0.1);">
           <span style="font-size:26px;font-weight:700;letter-spacing:-1px;">15 000 ₽</span>
-          <button type="button" onClick="{{ goContact }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px {{ secPadX }};white-space:nowrap;">Записаться →</button>
+          <button type="button" onClick="{{ goContact }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px {{ secPadX }};white-space:nowrap;">Записаться →</button>
         </div>
       </div>
 
@@ -137,12 +137,12 @@
       <div ref="{{ catalogRef }}" style="padding:0 20px 40px 20px;opacity:{{ catalogOpacity }};transform:translateY({{ catalogY }}px);transition:opacity 0.5s ease, transform 0.5s ease;">
         <div style="border:1px solid rgba(24,23,21,0.12);padding:20px;margin:20px 0 16px 0;">
           <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">ОДЕЖДА / СУМКИ / ОБУВЬ / АКСЕССУАРЫ</div>
-          <h4 style="margin:0 0 10px 0;font-size:20px;font-weight:700;text-transform:uppercase;line-height:1.2;">PDF-подборки коллекций</h4>
-          <p style="margin:0 0 8px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">Подборки из закрытых шоурумов Гуанчжоу.<br/>Модель можно адаптировать под свой бренд.</p>
+          <h4 style="margin:0 0 10px 0;font-size:18px;font-weight:700;text-transform:uppercase;line-height:1.25;">Каталоги готовых трендовых и базовых коллекций</h4>
+          <p style="margin:0 0 8px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">Подборки из закрытых шоурумов Гуанчжоу.<br/>Модель можно адаптировать под бренд с вашими бирками.</p>
           <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:16px;">Партия — от 50 шт.</div>
           <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(24,23,21,0.1);padding-top:14px;">
             <span style="font-size:26px;font-weight:700;letter-spacing:-1px;">999 ₽</span>
-            <button type="button" onClick="{{ onBuyMain }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:2px solid {{ accent }};padding:12px 2px 3px 2px;">Получить →</button>
+            <button type="button" onClick="{{ onBuyMain }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:2px solid {{ accent }};padding:12px 2px 3px 2px;">Получить →</button>
           </div>
         </div>
 
@@ -151,7 +151,7 @@
             <div style="font-size:14px;font-weight:700;text-transform:uppercase;line-height:1.3;flex:1;min-width:0;">{{ g.title }}</div>
             <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;width:{{ guideRowW }};justify-content:space-between;">
               <span style="font-size:17px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;">{{ g.price }}</span>
-              <button type="button" onClick="{{ g.onBuy }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:1px solid {{ accent }};padding:10px 2px;white-space:nowrap;flex-shrink:0;">Получить →</button>
+              <button type="button" onClick="{{ g.onBuy }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:1px solid {{ accent }};padding:10px 2px;white-space:nowrap;flex-shrink:0;">Получить →</button>
             </div>
           </div>
         </sc-for>
@@ -334,7 +334,7 @@
         <div style="border-top:2px solid {{ accent }};padding-top:18px;">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;">
             <span style="font-size:30px;font-weight:700;letter-spacing:-1px;">15 000 ₽</span>
-            <button type="button" onClick="{{ onBook }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 18px;white-space:nowrap;">Записаться →</button>
+            <button type="button" onClick="{{ onBook }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 18px;white-space:nowrap;">Записаться →</button>
           </div>
           <p style="margin:0;font-size:11px;line-height:1.5;max-width:{{ measure }};opacity:0.45;">Сначала разберём задачу. Потом решим, какой следующий шаг действительно нужен.</p>
         </div>
@@ -388,7 +388,7 @@
               <span style="opacity:0.6;">Хочу получать новости и спецпредложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">согласие на рассылки</a>.</span>
             </label>
           </div>
-          <button type="submit" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px;margin-bottom:14px;">Обсудить проект с командой →</button>
+          <button type="submit" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px;margin-bottom:14px;">Обсудить проект с командой →</button>
           <a href="https://t.me/lianagini" style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6;padding-bottom:8px;">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21.5 4.5L2.5 12.1c-1.1.44-1.1 1.06-.2 1.34l4.9 1.53 1.9 5.83c.23.63.4.88.82.88.4 0 .57-.18.79-.4l2.24-2.16 4.66 3.44c.86.47 1.48.23 1.7-.8l3.06-14.4c.33-1.28-.48-1.85-1.37-1.44z" fill="currentColor"/></svg>
             Написать сразу в Telegram
@@ -404,10 +404,6 @@
           <div>
             <div style="font-size:9px;letter-spacing:1.2px;text-transform:uppercase;opacity:0.4;margin-bottom:4px;">TELEGRAM</div>
             <a href="https://t.me/lianagini" style="font-size:14px;font-weight:700;color:{{ ivory }};">@lianagini</a>
-          </div>
-          <div>
-            <div style="font-size:9px;letter-spacing:1.2px;text-transform:uppercase;opacity:0.4;margin-bottom:4px;">INSTAGRAM</div>
-            <a href="https://www.instagram.com/liana.gini" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;color:{{ ivory }};">@lianagini</a>
           </div>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid rgba(242,239,232,0.15);padding-top:16px;margin-bottom:16px;">
@@ -435,7 +431,7 @@
   <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
     <div style="flex-shrink:0;display:flex;border-top:1px solid rgba(24,23,21,0.12);background:{{ ivory }};padding-bottom:env(safe-area-inset-bottom);">
       <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="5">
-        <button type="button" onClick="{{ tb.onClick }}" style="flex:1;background:none;border:none;cursor:pointer;font-family:'Archivo',sans-serif;padding:12px 4px 10px 4px;display:flex;flex-direction:column;align-items:center;gap:6px;border-top:2px solid {{ tb.borderColor }};">
+        <button type="button" onClick="{{ tb.onClick }}" style="flex:1;background:none;border:none;cursor:pointer;font-family:'Manrope',sans-serif;padding:12px 4px 10px 4px;display:flex;flex-direction:column;align-items:center;gap:6px;border-top:2px solid {{ tb.borderColor }};">
           <span style="font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:{{ tb.color }};">{{ tb.label }}</span>
         </button>
       </sc-for>
@@ -449,7 +445,7 @@
        than the viewport, so it stays inside the phone frame on wide screens. -->
   <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:absolute;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(24,23,21,0.55);box-sizing:border-box;" onClick="{{ closeCheckout }}">
-      <div role="dialog" aria-modal="true" aria-labelledby="mcheckout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:360px;padding:26px;box-sizing:border-box;font-family:'Archivo',sans-serif;">
+      <div role="dialog" aria-modal="true" aria-labelledby="mcheckout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:360px;padding:26px;box-sizing:border-box;font-family:'Manrope',sans-serif;">
         <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:8px;">{{ checkoutName }}</div>
         <div id="mcheckout-title" style="font-size:26px;font-weight:700;letter-spacing:-1px;margin-bottom:20px;">{{ checkoutPriceLabel }}</div>
 
@@ -467,8 +463,8 @@
         </label>
 
         <div style="display:flex;gap:14px;align-items:center;">
-          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 22px;white-space:nowrap;">Оплатить →</button>
-          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Archivo',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
+          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 22px;white-space:nowrap;">Оплатить →</button>
+          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
         </div>
         <p style="font-size:10px;line-height:1.5;opacity:0.4;margin:14px 0 0 0;">{{ checkoutNote }}</p>
       </div>
@@ -516,7 +512,7 @@ const CREDIBILITY = [
 
 const CASES = [
   { tag: '01 — НИЖНЕЕ БЕЛЬЁ', title: 'Из 3 моделей —\u00A0в\u00A038 позиций.', body: 'Пришли с тремя моделями. Переработали ассортимент, размерную сетку по ГОСТу, добавили авторские принты.', result: '60 продаж в день на пиковых моделях.' },
-  { tag: '02 — ПИЖАМЫ', title: 'Дорогое ощущение. Нужная\u00A0экономика.', body: 'Задача — сохранить ощущение зарубежного продукта, но уложиться в экономику бренда.', result: 'Линейка стабильно держится в\u00A0целевой\u00A0марже.' },
+  { tag: '02 — ПИЖАМЫ', title: 'Ощущение люкса.', body: 'Задача — сохранить ощущение зарубежного продукта, но уложиться в экономику бренда.', result: 'Линейка стабильно держится в\u00A0целевой\u00A0марже.' },
   { tag: '03 — ДЕТСКАЯ ОДЕЖДА', title: 'Размер, который фабрика не\u00A0шила.', body: 'Фабрика отказывалась делать малышковый размер. Разработали сетку от 66 размера.', result: 'Сегодня активный ассортимент клиента производится с\u00A0нами.' },
 ];
 
@@ -790,7 +786,7 @@ class Component extends DCLogic {
         };
       }),
       costParams: COST_PARAMS.map((label, i) => ({ label, num: '0' + (i + 1) })),
-      onBuyMain: this.buy('pdf-collections', 'PDF-подборки коллекций', '999 ₽'),
+      onBuyMain: this.buy('pdf-collections', 'Каталоги готовых трендовых и базовых коллекций', '999 ₽'),
       guides: GUIDES.map(g => ({ ...g, onBuy: this.buy(g.id, g.title, g.price) })),
       credibility: CREDIBILITY.map(parseColor).map((c, i) => {
         const on = this.state.revealed.cred;

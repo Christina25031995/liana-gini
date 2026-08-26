@@ -5,7 +5,7 @@
 // by the backend only after the provider confirms payment (webhook -> signed link).
 
 export const PRODUCTS = {
-  'pdf-collections':      { id: 'pdf-collections',      name: 'PDF-подборки коллекций',      price: 999,  currency: 'RUB' },
+  'pdf-collections':      { id: 'pdf-collections',      name: 'Каталоги готовых трендовых и базовых коллекций', price: 999,  currency: 'RUB' },
   'factory-check-guide':  { id: 'factory-check-guide',  name: '9 шагов проверки фабрики',    price: 490,  currency: 'RUB' },
   'factory-search-guide': { id: 'factory-search-guide', name: 'Самостоятельный поиск фабрики', price: 490, currency: 'RUB' },
   'guangzhou-markets':    { id: 'guangzhou-markets',    name: 'Рынки Гуанчжоу с адресами',   price: 5500, currency: 'RUB' },

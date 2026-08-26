@@ -10,7 +10,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
@@ -22,7 +22,7 @@
 </style>
 </helmet>
 
-<div ref="{{ scrollRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;">
+<div ref="{{ scrollRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Manrope',sans-serif;color:{{ ink }};position:relative;">
   <div style="position:relative;">
 
     <!-- INTRO -->
@@ -58,8 +58,11 @@
           </div>
         </div>
 
-        <!-- RIGHT: active problem -->
-        <div style="flex:1;padding:64px 72px;position:relative;overflow:hidden;box-sizing:border-box;">
+        <!-- RIGHT: active problem. overflow:hidden removed — the 5 problem
+             states are mutually-exclusive normal-flow content (never stacked
+             for a cross-fade), so clipping served no animation purpose here
+             and only risked silently cutting off content that runs long. -->
+        <div style="flex:1;padding:64px 72px;position:relative;box-sizing:border-box;">
 
           <sc-if value="{{ isP1 }}" hint-placeholder-val="{{ true }}">
             <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{{ accent }};margin-bottom:20px;">CONTROL</div>
@@ -189,7 +192,7 @@ class Component extends DCLogic {
         this.setState({ introInView: true });
         this.io.disconnect();
       }
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1 });
     if (this.introRef.current) this.io.observe(this.introRef.current);
   }
 
@@ -232,8 +235,12 @@ class Component extends DCLogic {
     // (e.g. body + its solution line together) rather than a separate stop
     // per element.
     const ramp = (start, width) => Math.max(0, Math.min(1, (lp - start) / width));
-    const textOn = ramp(0.02, 0.16);   // headline's supporting copy — one beat
-    const visualOn = ramp(0.32, 0.2);  // image / secondary visual — one beat
+    // Starts a touch earlier per stage than before (was 0.02/0.32) — the
+    // headline itself is already static/instant on stage change, so this
+    // trims the remaining dead scroll before its supporting copy and image
+    // commit, without altering the sequence or motion style.
+    const textOn = ramp(0.0, 0.14);    // headline's supporting copy — one beat
+    const visualOn = ramp(0.24, 0.18); // image / secondary visual — one beat
 
     const bodyOpacity = textOn, bodyY = 12 * (1 - textOn);
     const solutionOpacity = textOn, solutionY = 12 * (1 - textOn);

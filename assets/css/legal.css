@@ -16,7 +16,7 @@ html, body {
   margin: 0;
   background: var(--ivory);
   color: var(--ink);
-  font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {

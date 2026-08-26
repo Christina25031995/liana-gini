@@ -10,7 +10,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   body { margin: 0; background: #EAE6DC; }
   a { color: #541F2B; text-decoration: none; }
@@ -20,7 +20,7 @@
 </style>
 </helmet>
 
-<div id="products" ref="{{ rootRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Archivo',sans-serif;color:{{ ink }};position:relative;padding:56px 60px 44px 60px;box-sizing:border-box;">
+<div id="products" ref="{{ rootRef }}" style="width:1440px;margin:0 auto;background:{{ ivory }};font-family:'Manrope',sans-serif;color:{{ ink }};position:relative;padding:56px 60px 44px 60px;box-sizing:border-box;">
 
   <!-- HEADER -->
   <div data-anim style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:32px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);">
@@ -34,8 +34,8 @@
       </div>
     </div>
     <div style="text-align:right;">
-      <div style="font-size:22px;font-weight:700;line-height:1.15;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;">НАЧНИТЕ<br/>С ГОТОВОГО.</div>
-      <p style="margin:0;font-size:12px;line-height:1.55;max-width:360px;opacity:0.6;text-align:right;">Подборки, гайды и база рынков Китая — готовые инструменты, которые можно получить сразу после оплаты.</p>
+      <div style="font-size:18px;font-weight:700;line-height:1.15;text-transform:uppercase;color:{{ accent }};margin-bottom:14px;">НАЧНИТЕ С ГОТОВОГО.</div>
+      <p style="margin:0;font-size:15px;line-height:1.5;max-width:380px;opacity:0.8;text-align:right;">Подборки, гайды и база рынков Китая — готовые инструменты, которые можно получить сразу после оплаты.</p>
     </div>
   </div>
 
@@ -48,7 +48,7 @@
 
     <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;">
       <div>
-        <h3 style="margin:0 0 16px 0;font-size:34px;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-0.5px;">PDF-ПОДБОРКИ<br/>КОЛЛЕКЦИЙ</h3>
+        <h3 style="margin:0 0 16px 0;font-size:34px;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-0.5px;">КАТАЛОГИ ГОТОВЫХ ТРЕНДОВЫХ<br/>И БАЗОВЫХ КОЛЛЕКЦИЙ</h3>
         <div style="display:flex;gap:18px;border-top:1px solid rgba(24,23,21,0.12);border-bottom:1px solid rgba(24,23,21,0.12);padding:10px 0;margin-bottom:18px;max-width:520px;">
           <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">ОДЕЖДА</span>
           <span style="font-size:10px;opacity:0.3;">/</span>
@@ -59,13 +59,13 @@
           <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">АКСЕССУАРЫ</span>
         </div>
         <p style="margin:0 0 8px 0;font-size:13px;line-height:1.55;max-width:460px;opacity:0.7;">Подборки из закрытых шоурумов Гуанчжоу.</p>
-        <p style="margin:0 0 14px 0;font-size:13px;line-height:1.55;max-width:460px;opacity:0.7;">Понравившуюся модель можно адаптировать под свой бренд и запустить в производство.</p>
+        <p style="margin:0 0 14px 0;font-size:13px;line-height:1.55;max-width:460px;opacity:0.7;">Понравившуюся модель можно адаптировать под бренд с вашими бирками и запустить в производство.</p>
         <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ accent }};">ПАРТИЯ — ОТ 50 ШТ.</div>
       </div>
 
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-top:1px solid rgba(24,23,21,0.12);padding-top:18px;margin-top:20px;">
         <div style="font-size:44px;font-weight:700;line-height:0.9;letter-spacing:-2px;">999 ₽</div>
-        <a href="#checkout" onClick="{{ openCheckout }}" data-product-id="pdf-collections" data-product-name="PDF-подборки коллекций" data-price="999" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};border-bottom:2px solid {{ accent }};padding-bottom:4px;white-space:nowrap;display:inline-block;transition:transform 0.2s ease, color 0.2s ease;" style-hover="color:{{ accent }};transform:translateX(4px);">ПОЛУЧИТЬ ПОДБОРКУ →</a>
+        <a href="#checkout" onClick="{{ openCheckout }}" data-product-id="pdf-collections" data-product-name="Каталоги готовых трендовых и базовых коллекций" data-price="999" data-currency="RUB" data-payment-trigger="checkout" data-success-target="#order-success" style="font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};border-bottom:2px solid {{ accent }};padding-bottom:4px;white-space:nowrap;display:inline-block;transition:transform 0.2s ease, color 0.2s ease;" style-hover="color:{{ accent }};transform:translateX(4px);">ПОЛУЧИТЬ ПОДБОРКУ →</a>
       </div>
     </div>
   </div>
@@ -106,7 +106,7 @@
        never blocks proceeding. -->
   <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(24,23,21,0.55);box-sizing:border-box;" onClick="{{ closeCheckout }}">
-      <div role="dialog" aria-modal="true" aria-labelledby="checkout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:440px;padding:36px;box-sizing:border-box;font-family:'Archivo',sans-serif;">
+      <div role="dialog" aria-modal="true" aria-labelledby="checkout-title" onClick="{{ stopPropagation }}" style="background:{{ ivory }};color:{{ ink }};width:100%;max-width:440px;padding:36px;box-sizing:border-box;font-family:'Manrope',sans-serif;">
         <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">{{ checkoutName }}</div>
         <div id="checkout-title" style="font-size:32px;font-weight:700;letter-spacing:-1px;margin-bottom:26px;">{{ checkoutPriceLabel }}</div>
 
@@ -124,8 +124,8 @@
         </label>
 
         <div style="display:flex;gap:16px;align-items:center;">
-          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Archivo',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
-          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Archivo',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
+          <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
+          <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
         </div>
         <p style="font-size:11px;line-height:1.5;opacity:0.4;margin:16px 0 0 0;">{{ checkoutNote }}</p>
       </div>
