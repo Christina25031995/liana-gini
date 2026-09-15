@@ -71,7 +71,7 @@
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
 
       <div style="position:relative;height:calc(100vh - 56px);height:calc(100dvh - 56px);height:calc(100svh - 56px);min-height:560px;overflow:hidden;background:#0e0b0a;color:{{ ivory }};">
-        <video poster="assets/media/hero-poster.jpg" src="assets/media/hero-video.mp4" autoplay="true" muted="true" loop="true" playsinline="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;"></video>
+        <video poster="assets/media/hero-poster.jpg" src="assets/media/hero-video.mp4" autoplay="true" muted="true" loop="true" playsinline="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;background-image:url('assets/media/hero-poster.jpg');background-size:cover;background-position:center 30%;"></video>
         <div data-manim style="position:absolute;left:{{ heroInset }};right:{{ heroInset }};bottom:28px;background:rgba(14,11,10,0.42);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:{{ heroPanelPad }};box-sizing:border-box;animation:mRevealUp 0.6s cubic-bezier(.16,1,.3,1) 0.1s both;">
           <h1 style="margin:0 0 10px 0;font-size:{{ heroH1Size }};line-height:1.22;font-weight:600;letter-spacing:-0.2px;text-transform:uppercase;">Ваш производственный<br/>отдел в&nbsp;Китае</h1>
           <p style="margin:0 0 16px 0;font-size:{{ heroPSize }};line-height:1.5;opacity:0.85;max-width:{{ heroPMax }};">Разработка и&nbsp;производство одежды, обуви и&nbsp;аксессуаров в&nbsp;Китае — от&nbsp;идеи до&nbsp;готовой&nbsp;партии.</p>
@@ -251,7 +251,7 @@
       </div>
 
       <div ref="{{ teamWrapRef }}" style="position:relative;height:{{ teamVideoH }};overflow:hidden;background:#0e0b0a;">
-        <video poster="assets/media/team-poster.jpg" ref="{{ teamVideoRef }}" src="assets/media/team-video.mp4" autoplay="true" muted="true" loop="true" playsinline="true" preload="auto" style="position:relative;width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block;"></video>
+        <video poster="assets/media/team-poster.jpg" ref="{{ teamVideoRef }}" src="assets/media/team-video.mp4" autoplay="true" muted="true" loop="true" playsinline="true" preload="auto" style="position:relative;width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block;background-image:url('assets/media/team-poster.jpg');background-size:cover;background-position:center 55%;"></video>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:{{ teamVideoTextOpacity }};transform:translateY({{ teamVideoTextY }}px);transition:opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1);">
           <h2 style="margin:0;font-size:32px;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;color:#F2EFE8;text-shadow:0 2px 16px rgba(0,0,0,0.55);">МЫ ЗДЕСЬ.</h2>
         </div>
