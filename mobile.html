@@ -57,7 +57,7 @@
 <div style="width:100%;max-width:{{ shellMax }};height:100%;background:{{ ivory }};display:flex;flex-direction:column;font-family:'Manrope',sans-serif;color:{{ ink }};box-shadow:0 0 40px rgba(0,0,0,0.25);position:relative;overflow:hidden;">
 
   <!-- SCROLLABLE CONTENT -->
-  <div ref="{{ contentRef }}" onScroll="{{ onContentScroll }}" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:{{ contentPadBottom }};">
+  <div id="lg-scroll" ref="{{ contentRef }}" onScroll="{{ onContentScroll }}" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:{{ contentPadBottom }};">
 
     <!-- TOP BAR: scrolls with content, not sticky/fixed -->
     <div style="flex-shrink:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid rgba(24,23,21,0.1);background:{{ ivory }};">
@@ -75,6 +75,7 @@
         <div data-manim style="position:absolute;left:{{ heroInset }};right:{{ heroInset }};bottom:28px;background:rgba(14,11,10,0.42);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:{{ heroPanelPad }};box-sizing:border-box;animation:mRevealUp 0.6s cubic-bezier(.16,1,.3,1) 0.1s both;">
           <h1 style="margin:0 0 10px 0;font-size:{{ heroH1Size }};line-height:1.22;font-weight:600;letter-spacing:-0.2px;text-transform:uppercase;">Ваш производственный<br/>отдел в&nbsp;Китае</h1>
           <p style="margin:0 0 16px 0;font-size:{{ heroPSize }};line-height:1.5;opacity:0.85;max-width:{{ heroPMax }};">Разработка и&nbsp;производство одежды, обуви и&nbsp;аксессуаров в&nbsp;Китае — от&nbsp;идеи до&nbsp;готовой&nbsp;партии.</p>
+          <p style="margin:0 0 16px 0;font-size:11px;font-weight:600;line-height:1.4;opacity:0.75;max-width:{{ heroPMax }};">Превращаю «сделано в Китае» в «сделано качественно»</p>
           <a href="https://t.me/lianagini" target="_blank" rel="noopener" style="display:block;text-align:center;background:{{ accent }};color:{{ ivory }};font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:15px;">Обсудить производство</a>
         </div>
         <div data-manim-fade style="position:absolute;left:50%;bottom:8px;width:12px;height:12px;border-right:1.5px solid rgba(255,255,255,0.5);border-bottom:1.5px solid rgba(255,255,255,0.5);opacity:0;animation:mChevron 0.5s ease 0.5s both;"></div>
@@ -99,13 +100,17 @@
             </div>
           </sc-for>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 0 0 0;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 0 0 0;">
           <div style="display:flex;justify-content:center;gap:8px;">
             <sc-for list="{{ dots }}" as="d" hint-placeholder-count="5">
               <button type="button" onClick="{{ d.onClick }}" style="width:{{ d.size }};height:6px;padding:0;border:none;border-radius:3px;background:{{ d.color }};cursor:pointer;transition:all 0.2s ease;"></button>
             </sc-for>
           </div>
-          <div style="font-size:11px;font-weight:600;letter-spacing:0.5px;opacity:0.4;">{{ cardCounterLabel }}</div>
+          <div style="display:flex;align-items:center;gap:18px;">
+            <button type="button" onClick="{{ onPrevCard }}" disabled="{{ isFirstCard }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};opacity:{{ prevOpacity }};padding:4px;">← Вернуться</button>
+            <div style="font-size:11px;font-weight:600;letter-spacing:0.5px;opacity:0.4;">{{ cardCounterLabel }}</div>
+            <button type="button" onClick="{{ onNextCard }}" disabled="{{ isLastCard }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};opacity:{{ nextOpacity }};padding:4px;">Далее →</button>
+          </div>
         </div>
       </div>
 
@@ -136,12 +141,13 @@
 
       <div ref="{{ catalogRef }}" style="padding:0 20px 40px 20px;opacity:{{ catalogOpacity }};transform:translateY({{ catalogY }}px);transition:opacity 0.5s ease, transform 0.5s ease;">
         <div style="border:1px solid rgba(24,23,21,0.12);padding:20px;margin:20px 0 16px 0;">
-          <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">ОДЕЖДА / СУМКИ / ОБУВЬ / АКСЕССУАРЫ</div>
-          <h4 style="margin:0 0 10px 0;font-size:18px;font-weight:700;text-transform:uppercase;line-height:1.25;">Каталоги готовых трендовых и базовых коллекций</h4>
-          <p style="margin:0 0 8px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">Подборки из закрытых шоурумов Гуанчжоу.<br/>Модель можно адаптировать под бренд с вашими бирками.</p>
+          <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">ОДЕЖДА / ОБУВЬ / АКСЕССУАРЫ / ТКАНИ</div>
+          <h4 style="margin:0 0 10px 0;font-size:18px;font-weight:700;text-transform:uppercase;line-height:1.25;">Каталоги готовых трендовых и базовых коллекций от наших проверенных партнеров</h4>
+          <p style="margin:0 0 6px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">Подборки из закрытых шоурумов Гуанчжоу.<br/>Модель можно адаптировать под бренд с вашими бирками.</p>
+          <p style="margin:0 0 8px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">При записи на консультацию каталоги готовых коллекций прилагаются.</p>
           <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:16px;">Партия — от 50 шт.</div>
           <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(24,23,21,0.1);padding-top:14px;">
-            <span style="font-size:26px;font-weight:700;letter-spacing:-1px;">3 999 ₽</span>
+            <span style="font-size:26px;font-weight:700;letter-spacing:-1px;">390 ₽</span>
             <button type="button" onClick="{{ onBuyMain }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:2px solid {{ accent }};padding:12px 2px 3px 2px;">Получить →</button>
           </div>
         </div>
@@ -158,7 +164,7 @@
 
         <!-- contextual Q&A: MOQ -->
         <div style="border-left:2px solid {{ accent }};padding:4px 0 4px 16px;margin:20px 0 4px 0;">
-          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;">В Китае вообще работают с&nbsp;небольшими партиями?</div>
+          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;">Работают ли в Китае с небольшими партиями?</div>
           <p style="margin:0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Да — но MOQ зависит от продукта и производства: для малых и средних партий ориентир от 100–300 единиц, для готовых решений возможен старт от 50.</p>
         </div>
 
@@ -206,12 +212,13 @@
       </div>
       <div style="padding:10px {{ secPadX }} 32px {{ secPadX }};border-top:1px solid rgba(24,23,21,0.08);padding-top:28px;display:flex;flex-direction:column;gap:18px;">
         <div style="border-left:2px solid {{ accent }};padding:2px 0 2px 16px;">
-          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:8px;">Как я пойму, кто на самом деле шьёт мой заказ?</div>
+          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:8px;">Как понять, кто реально производит заказ?</div>
           <p style="margin:0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Мы подбираем производство под конкретный продукт, технологию и объём, работаем на месте и понимаем, кому передаётся заказ.</p>
         </div>
         <div style="border-left:2px solid {{ accent }};padding:2px 0 2px 16px;">
-          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:8px;">Образец хороший. А партия будет такой же?</div>
-          <p style="margin:0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Качество контролируется и во время производства: материал, посадка, обработка и фурнитура должны соответствовать согласованному образцу.</p>
+          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:8px;">Будет ли партия соответствовать образцу?</div>
+          <p style="margin:0 0 6px 0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Эталонный образец — это стандарт, по которому идёт вся партия. Если фабрика честная и образец утверждён, партия ему соответствует.</p>
+          <p style="margin:0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Настоящий риск в другом: недобросовестная фабрика может подменить состав или материал в самом образце. Заявляют один хлопок — кладут дешёвый. Я проверяю это лично, до того как образец уходит в работу.</p>
         </div>
         <div style="border-left:2px solid {{ accent }};padding:2px 0 2px 16px;">
           <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:8px;">Сколько времени занимает первая коллекция?</div>
@@ -264,14 +271,14 @@
         <image-slot id="mob-team-liana-video" shape="rect" style="width:120px;height:150px;flex-shrink:0;" placeholder="Видеовизитка Лианы"></image-slot>
         <div style="flex:1;min-width:0;">
           <h3 style="margin:0 0 8px 0;font-size:22px;font-weight:700;text-transform:uppercase;line-height:1.1;">Лиана Гини</h3>
-          <p style="margin:0 0 14px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">Дипломат-востоковед. Переговорщик. Многолетний опыт работы с производством в&nbsp;Китае.</p>
+          <p style="margin:0 0 14px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">Востоковед. Магистр делового администрирования. Переговорная экспертиза. Многолетний опыт работы с производством в&nbsp;Китае.</p>
           <a href="#liana-video" style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;border-bottom:2px solid {{ accent }};padding:10px 2px 3px 2px;">Смотреть визитку →</a>
         </div>
       </div>
 
       <div style="padding:0 20px 48px 20px;">
         <div style="border-left:2px solid {{ accent }};padding:4px 0 4px 16px;">
-          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;">А вы точно поняли, что&nbsp;я&nbsp;хочу?</div>
+          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;">Поймут ли на фабрике, что именно мне нужно?</div>
           <p style="margin:0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Дело не только в переводе. Лиана говорит на китайском, понимает контекст переговоров и помогает перевести задачу бизнеса на язык производства.</p>
         </div>
       </div>
@@ -301,7 +308,7 @@
         <div style="border-top:1px solid rgba(24,23,21,0.12);padding-top:24px;margin-bottom:20px;">
           <p style="margin:0 0 12px 0;font-size:11px;line-height:1.55;max-width:{{ measure }};opacity:0.45;">Имена брендов и детали производства не раскрываем. NDA работает в обе стороны.</p>
           <div style="border-left:2px solid {{ accent }};padding:4px 0 4px 16px;">
-            <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;">А мою модель потом не&nbsp;увижу<br/>у&nbsp;конкурента?</div>
+            <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;">Защищена ли моя модель<br/>от копирования конкурентами?</div>
             <p style="margin:0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Для собственных разработок предусмотрена работа по NDA — особенно важно для новых моделей, эксклюзивных тканей и решений, принадлежащих бренду клиента.</p>
           </div>
         </div>
@@ -327,7 +334,7 @@
 
         <!-- contextual Q&A: don't know what to produce yet -->
         <div style="border-left:2px solid {{ accent }};padding:4px 0 4px 16px;margin-bottom:20px;">
-          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;color:{{ accent }};">А если я ещё сама не понимаю,<br/>что мне производить?</div>
+          <div style="font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.3;margin-bottom:6px;color:{{ accent }};">Что если вы ещё<br/>не определились с продуктом?</div>
           <p style="margin:0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Мы не выбираем за вас, что будет продаваться — вы знаете свой рынок. Наша задача — помочь превратить её в производимый продукт.</p>
         </div>
 
@@ -336,20 +343,40 @@
             <span style="font-size:30px;font-weight:700;letter-spacing:-1px;">15 000 ₽</span>
             <button type="button" onClick="{{ onBook }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:14px 18px;white-space:nowrap;">Записаться →</button>
           </div>
-          <p style="margin:0;font-size:11px;line-height:1.5;max-width:{{ measure }};opacity:0.45;">Сначала разберём задачу. Потом решим, какой следующий шаг действительно нужен.</p>
+          <p style="margin:0;font-size:11px;line-height:1.5;max-width:{{ measure }};opacity:0.45;">Сначала разберём задачу. Потом решим, какой следующий шаг нужен.</p>
         </div>
       </div>
 
+      <div style="padding:24px {{ secPadX }} 8px {{ secPadX }};border-top:1px solid rgba(24,23,21,0.1);margin-top:8px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.45;margin-bottom:12px;">Что входит</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+          <p style="margin:0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.75;">— Подбираю артикулы из готовых решений под вашу задачу</p>
+          <p style="margin:0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.75;">— Считаю стоимость с учётом доставки</p>
+          <p style="margin:0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.75;">— Отвечаю по конкретным моделям: можно ли поменять цвет, добавить бирку, изменить деталь</p>
+          <p style="margin:0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.75;">— Если у вас есть образец — подбираю ткань, считаю цену и доставку под него</p>
+          <p style="margin:0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.75;">— Говорю честно: стоит ли заходить в Китай с этим продуктом и как</p>
+        </div>
+        <p style="margin:0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.6;">Вы уходите с расчётом и планом, а не с новыми вопросами. Каталоги готовых коллекций прилагаются.</p>
+      </div>
+
       <div style="padding:32px {{ secPadX }} 8px {{ secPadX }};border-top:1px solid rgba(24,23,21,0.1);margin-top:20px;">
-        <h3 style="margin:0 0 14px 0;font-size:16px;font-weight:700;line-height:1.25;text-transform:uppercase;">После консультации можем<br/>продолжить работу.</h3>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:6px;">
+          <h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.2;text-transform:uppercase;">Агентские услуги</h3>
+          <span style="font-size:15px;font-weight:700;white-space:nowrap;">от 50 000/мес ₽</span>
+        </div>
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;opacity:0.7;margin-bottom:10px;">Организуем производство в Китае как ваши агенты</div>
+        <p style="margin:0 0 16px 0;font-size:12px;line-height:1.55;max-width:{{ measure }};opacity:0.65;">Работаем по агентскому договору: действуем в ваших интересах и ведем процесс между вами и фабрикой. Можно оформить весь цикл целиком, можно — только нужные этапы.</p>
+        <div style="font-size:9px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;opacity:0.4;margin-bottom:8px;">Что мы организуем</div>
         <div style="display:flex;flex-direction:column;">
-          <sc-for list="{{ services }}" as="s" hint-placeholder-count="9">
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="7">
             <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:10px 0;">
               <span style="font-size:9px;opacity:0.35;width:16px;flex-shrink:0;">{{ s.num }}</span>
               <span style="font-size:13px;font-weight:600;color:{{ s.color }};">{{ s.text }}</span>
             </div>
           </sc-for>
         </div>
+        <p style="margin:14px 0 16px 0;font-size:11px;line-height:1.5;max-width:{{ measure }};opacity:0.45;">Точную стоимость считаем индивидуально в зависимости от продукта, объёма и логистики и определяем после консультации.</p>
+        <button type="button" onClick="{{ onBook }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:2px solid {{ accent }};padding:10px 2px 3px 2px;">Обсудить на консультации →</button>
       </div>
 
       <div ref="{{ formSectionRef }}" style="padding:36px {{ secPadX }} 8px {{ secPadX }};border-top:1px solid rgba(24,23,21,0.1);margin-top:16px;">
@@ -359,12 +386,12 @@
         <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;max-width:{{ formMax }};">
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"/>
           <div style="border-top:1px solid rgba(24,23,21,0.15);padding:14px 0;">
-            <label for="mq-product" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Что хотите производить?</label>
+            <label for="mq-product" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Опишите вашу задачу</label>
             <input class="brief-input" id="mq-product" name="product" type="text" required="true" placeholder="категория, изделие"/>
           </div>
           <div style="border-top:1px solid rgba(24,23,21,0.15);padding:14px 0;">
-            <label for="mq-design" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Есть готовый дизайн или референс?</label>
-            <input class="brief-input" id="mq-design" name="design" type="text" placeholder="да / нет / ссылка"/>
+            <label for="mq-design" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Есть готовый дизайн или прототип?</label>
+            <input class="brief-input" id="mq-design" name="design" type="text" placeholder="Приложите ссылку / нет"/>
           </div>
           <div style="border-top:1px solid rgba(24,23,21,0.15);padding:14px 0;">
             <label for="mq-volume" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Какой планируется объём?</label>
@@ -374,9 +401,13 @@
             <label for="mq-cost" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Есть целевая себестоимость?</label>
             <input class="brief-input" id="mq-cost" name="targetCost" type="text" placeholder="₽ / ¥ за единицу"/>
           </div>
+          <div style="border-top:1px solid rgba(24,23,21,0.15);padding:14px 0;">
+            <label for="mq-phone" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Напишите контактный номер телефона</label>
+            <input class="brief-input" id="mq-phone" name="phone" type="tel" inputmode="tel" required="true" placeholder="+7 900 000-00-00"/>
+          </div>
           <div style="border-top:1px solid rgba(24,23,21,0.15);padding:14px 0 18px 0;">
-            <label for="mq-contact" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Как с&nbsp;вами связаться?</label>
-            <input class="brief-input" id="mq-contact" name="contact" type="text" required="true" placeholder="Telegram / телефон / email"/>
+            <label for="mq-contact-handle" style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Укажите email или мессенжер (telegram/max/wechat)</label>
+            <input class="brief-input" id="mq-contact-handle" name="contactHandle" type="text" placeholder="@username / email"/>
           </div>
           <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(24,23,21,0.15);padding-top:16px;margin-bottom:18px;">
             <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;cursor:pointer;">
@@ -389,7 +420,7 @@
               <span style="opacity:0.6;">Хочу получать новости и спецпредложения — <a href="ad-consent.html" target="_blank" rel="noopener" style="text-decoration:underline;">согласие на рассылки</a>.</span>
             </label>
           </div>
-          <button type="submit" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px;margin-bottom:14px;">Обсудить проект с командой →</button>
+          <button type="submit" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px;margin-bottom:14px;">Обсудить проект →</button>
           <a href="https://t.me/lianagini" style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6;padding-bottom:8px;">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21.5 4.5L2.5 12.1c-1.1.44-1.1 1.06-.2 1.34l4.9 1.53 1.9 5.83c.23.63.4.88.82.88.4 0 .57-.18.79-.4l2.24-2.16 4.66 3.44c.86.47 1.48.23 1.7-.8l3.06-14.4c.33-1.28-.48-1.85-1.37-1.44z" fill="currentColor"/></svg>
             Написать сразу в Telegram
@@ -522,7 +553,7 @@ const COST_PARAMS = ['МАТЕРИАЛ', 'СОСТАВ', 'ТЕХНОЛОГИЯ',
 const GUIDES = [
   { id: 'factory_check_9', title: '9 шагов проверки фабрики', price: '490 ₽' },
   { id: 'brand_china_7', title: 'Как запустить свой бренд через Китай', price: '490 ₽' },
-  { id: 'guangzhou_markets', title: 'Список рынков Гуанчжоу с\u00A0адресами', price: '1 490 ₽' },
+  { id: 'guangzhou_markets', title: 'Список рынков Гуанчжоу с\u00A0адресами', price: '490 ₽' },
 ];
 
 const CREDIBILITY = [
@@ -530,12 +561,13 @@ const CREDIBILITY = [
   'Прозрачный подбор производства',
   'Защита интеллектуальной собственности||accent',
   'Многолетние отношения с фабриками',
-  'Дипломат / востоковед',
+  'Лиана - востоковед / магистр делового администрирования',
+  'Переговорная экспертиза',
   'Технолог в команде',
 ];
 
 const CASES = [
-  { tag: '01 — НИЖНЕЕ БЕЛЬЁ', title: 'Из 3 моделей —\u00A0в\u00A038 позиций.', body: 'Пришли с тремя моделями. Переработали ассортимент, размерную сетку по ГОСТу, добавили авторские принты.', result: '60 продаж в день на пиковых моделях.' },
+  { tag: '01 — НИЖНЕЕ БЕЛЬЁ', title: 'Из 3 моделей —\u00A0в\u00A038 позиций.', body: 'Пришли с тремя моделями. Переработали ассортимент, размерную сетку по ГОСТу, добавили авторские принты.', result: '260 продаж.' },
   { tag: '02 — ПИЖАМЫ', title: 'Ощущение люкса.', body: 'Задача — сохранить ощущение зарубежного продукта, но уложиться в экономику бренда.', result: 'Линейка стабильно держится в\u00A0целевой\u00A0марже.' },
   { tag: '03 — ДЕТСКАЯ ОДЕЖДА', title: 'Размер, который фабрика не\u00A0шила.', body: 'Фабрика отказывалась делать малышковый размер. Разработали сетку от 66 размера.', result: 'Сегодня активный ассортимент клиента производится с\u00A0нами.' },
 ];
@@ -548,9 +580,10 @@ const CONSULT_REASONS = [
 ];
 
 const SERVICES = [
-  'Проверка поставщика', 'Аудит производства', 'Выезд на фабрику',
-  'Подбор производств', 'Разработка образца', 'Закупка тканей',
-  'Сопровождение поездки в Гуанчжоу', 'Помощь в переговорах', 'Опт под ключ||accent',
+  'Поиск и проверку поставщика', 'Подбор производства под вашу задачу',
+  'Разработку продукта: ткань, лекала, размерная сетка, образец',
+  'Закупку тканей и фурнитуры', 'Контроль каждой партии до отгрузки',
+  'Логистику с документами до вашего склада', 'Сопровождение вашей поездки в Китай||accent',
 ];
 
 class Component extends DCLogic {
@@ -762,7 +795,7 @@ class Component extends DCLogic {
     const payload = {
       product: form.product?.value || '', design: form.design?.value || '',
       volume: form.volume?.value || '', targetCost: form.targetCost?.value || '',
-      contact: form.contact?.value || '',
+      phone: form.phone?.value || '', contactHandle: form.contactHandle?.value || '',
       pdConsent: this.state.pdConsent, marketingConsent: this.state.marketingConsent,
       _honey: form._honey?.value || '',
     };
@@ -863,6 +896,12 @@ class Component extends DCLogic {
         size: i === this.state.cardIdx ? '20px' : '6px',
       })),
       cardCounterLabel: String(this.state.cardIdx + 1).padStart(2, '0') + ' / ' + String(PROBLEMS.length).padStart(2, '0'),
+      onPrevCard: this.scrollToCard(Math.max(0, this.state.cardIdx - 1)),
+      onNextCard: this.scrollToCard(Math.min(PROBLEMS.length - 1, this.state.cardIdx + 1)),
+      isFirstCard: this.state.cardIdx === 0 ? 'true' : 'false',
+      isLastCard: this.state.cardIdx === PROBLEMS.length - 1 ? 'true' : 'false',
+      prevOpacity: this.state.cardIdx === 0 ? 0.3 : 1,
+      nextOpacity: this.state.cardIdx === PROBLEMS.length - 1 ? 0.3 : 1,
       servicesRef: this.servicesRef,
       timeline: TIMELINE.map((t, i) => {
         const on = this.state.revealed.services;
@@ -879,7 +918,7 @@ class Component extends DCLogic {
         };
       }),
       costParams: COST_PARAMS.map((label, i) => ({ label, num: '0' + (i + 1) })),
-      onBuyMain: this.buy('catalog_collections', 'Каталоги готовых трендовых и базовых коллекций', '3 999 ₽'),
+      onBuyMain: this.buy('catalog_collections', 'Каталоги готовых трендовых и базовых коллекций', '390 ₽'),
       guides: GUIDES.map(g => ({ ...g, onBuy: this.buy(g.id, g.title, g.price) })),
       credibility: CREDIBILITY.map(parseColor).map((c, i) => {
         const on = this.state.revealed.cred;
@@ -917,7 +956,7 @@ class Component extends DCLogic {
       onCheckoutPdConsentChange: this.onCheckoutPdConsentChange,
       onCheckoutMarketingConsentChange: this.onCheckoutMarketingConsentChange,
       checkoutPdErrorDisplay: this.state.checkoutPdConsentError ? 'block' : 'none',
-      checkoutNote: this.state.buyState === 'pending' ? 'Переходим к оплате…' : 'Оплата пока не подключена — эта кнопка не спишет средства.',
+      checkoutNote: this.state.buyState === 'pending' ? 'Переходим к оплате…' : '',
       checkoutIsConsultation: !!(this.state.checkoutProduct && this.state.checkoutProduct.productId === 'personal-consultation'),
       checkoutBuyerName: this.state.checkoutBuyerName,
       checkoutBuyerContact: this.state.checkoutBuyerContact,
@@ -938,6 +977,56 @@ class Component extends DCLogic {
   }
 }
 
+</script>
+<script>
+// Floating "back to top" for the app-shell's own scroll container — plain DOM,
+// independent of the dc-runtime component tree. Each tab (Услуги, Контакты)
+// scrolls internally rather than the page, so a visitor deep in a tab has no
+// other quick way back to its top / the tab bar. Requested by the client.
+(function () {
+  function init() {
+    var scroller = document.getElementById('lg-scroll');
+    if (!scroller) { setTimeout(init, 300); return; }
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Наверх');
+    btn.textContent = '↑';
+    // Appended to document.body (outside the dc-runtime/React-managed shell)
+    // deliberately: any node placed inside a React-controlled container here
+    // gets stripped on the next re-render (scroll/tab-switch state changes
+    // are frequent), so this button must live outside that tree entirely.
+    // position:fixed anchors it to the viewport, which on an actual phone is
+    // the same as anchoring to the app shell (it fills the viewport there).
+    btn.style.cssText = 'position:fixed;right:16px;bottom:88px;z-index:150;' +
+      'width:40px;height:40px;border-radius:50%;' +
+      'font-family:Manrope,sans-serif;font-size:16px;font-weight:700;' +
+      'color:#F2EFE8;background:#541F2B;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.25);' +
+      'opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity 0.25s ease, transform 0.25s ease;';
+    btn.addEventListener('click', function () {
+      scroller.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.body.appendChild(btn);
+    var visible = false;
+    function sync() {
+      var show = scroller.scrollTop > 600;
+      if (show === visible) return;
+      visible = show;
+      btn.style.opacity = show ? '1' : '0';
+      btn.style.pointerEvents = show ? 'auto' : 'none';
+      btn.style.transform = show ? 'translateY(0)' : 'translateY(8px)';
+    }
+    // Polling rather than a scroll listener: this container is inside the
+    // dc-runtime/React-managed tree and re-renders on its own state changes,
+    // which can make a listener attached at one point in time unreliable.
+    // A cheap interval sidesteps that entirely.
+    setInterval(sync, 250);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 </body>
 </html>

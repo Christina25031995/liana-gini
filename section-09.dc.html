@@ -46,8 +46,15 @@
       </div>
 
       <div data-anim style="border-top:1px solid rgba(24,23,21,0.15);padding-top:16px;margin-bottom:30px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .2s, transform .6s cubic-bezier(.16,1,.3,1) .2s;">
-        <div style="font-size:22px;font-weight:700;line-height:1.25;text-transform:uppercase;margin-bottom:12px;max-width:480px;">ПОСЛЕ КОНСУЛЬТАЦИИ —<br/><span style="color:{{ accent }};">ПОНЯТНО, ЧТО ДЕЛАТЬ ДАЛЬШЕ.</span></div>
-        <p style="margin:0;font-size:13px;line-height:1.6;max-width:460px;opacity:0.65;">Разберём исходную ситуацию, ограничения и возможный маршрут — от следующего самостоятельного шага до запуска производства с командой.</p>
+        <div style="font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;opacity:0.5;margin-bottom:12px;">Что входит:</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;max-width:480px;">
+          <p style="margin:0;font-size:13px;line-height:1.55;opacity:0.8;">— Подбираю артикулы из готовых решений под вашу задачу</p>
+          <p style="margin:0;font-size:13px;line-height:1.55;opacity:0.8;">— Считаю стоимость с учётом доставки</p>
+          <p style="margin:0;font-size:13px;line-height:1.55;opacity:0.8;">— Отвечаю по конкретным моделям: можно ли поменять цвет, добавить бирку, изменить деталь</p>
+          <p style="margin:0;font-size:13px;line-height:1.55;opacity:0.8;">— Если у вас есть образец — подбираю ткань, считаю цену и доставку под него</p>
+          <p style="margin:0;font-size:13px;line-height:1.55;opacity:0.8;">— Говорю честно: стоит ли заходить в Китай с этим продуктом и как</p>
+        </div>
+        <p style="margin:0;font-size:13px;line-height:1.6;max-width:460px;opacity:0.65;">Вы уходите с расчётом и планом, а не с новыми вопросами. Каталоги готовых коллекций прилагаются.</p>
       </div>
 
       <div data-anim style="margin-top:auto;border-top:2px solid {{ accent }};padding-top:20px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .3s, transform .6s cubic-bezier(.16,1,.3,1) .3s;">
@@ -57,28 +64,31 @@
           </div>
           <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ink }};">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ →</button>
         </div>
-        <p style="margin:14px 0 0 0;font-size:11px;line-height:1.6;opacity:0.45;max-width:420px;">Сначала разберём задачу. Потом решим, какой следующий шаг действительно нужен.</p>
+        <p style="margin:14px 0 0 0;font-size:11px;line-height:1.6;opacity:0.45;max-width:420px;">Сначала разберём задачу. Потом решим, какой следующий шаг нужен.</p>
       </div>
     </div>
   </div>
 
-  <!-- POST-CONSULTATION SERVICES — separate scope, not included in the 15 000 ₽ session -->
+  <!-- AGENCY SERVICES — separate scope, not included in the 15 000 ₽ session -->
   <div data-anim style="margin-top:52px;border-top:1px solid rgba(24,23,21,0.15);padding-top:26px;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .12s, transform .6s cubic-bezier(.16,1,.3,1) .12s;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:60px;margin-bottom:22px;">
-      <h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.25;text-transform:uppercase;max-width:520px;">ЧТО Я МОГУ СДЕЛАТЬ ДЛЯ ВАС<br/>ПОСЛЕ КОНСУЛЬТАЦИИ</h3>
-      <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;opacity:0.45;text-align:right;line-height:1.6;max-width:320px;">Отдельные этапы работы.<br/>Объём и стоимость обсуждаются по задаче.</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:8px;">
+      <h3 style="margin:0;font-size:28px;font-weight:700;line-height:1.15;text-transform:uppercase;max-width:520px;">АГЕНТСКИЕ УСЛУГИ</h3>
+      <div style="font-size:26px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;">от 50 000 / месяц ₽</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);column-gap:56px;">
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">01</span><span style="font-size:14px;font-weight:600;">Проверка поставщика</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">04</span><span style="font-size:14px;font-weight:600;">Подбор производств</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">07</span><span style="font-size:14px;font-weight:600;">Сопровождение поездки в&nbsp;Гуанчжоу</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">02</span><span style="font-size:14px;font-weight:600;">Аудит производства</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">05</span><span style="font-size:14px;font-weight:600;">Разработка образца</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">08</span><span style="font-size:14px;font-weight:600;">Помощь в&nbsp;переговорах</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">03</span><span style="font-size:14px;font-weight:600;">Выезд на&nbsp;фабрику</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">06</span><span style="font-size:14px;font-weight:600;">Закупка тканей</span></div>
-      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">09</span><span style="font-size:16px;font-weight:700;text-transform:uppercase;color:{{ accent }};">Опт под ключ</span></div>
+    <div style="font-size:14px;font-weight:700;text-transform:uppercase;opacity:0.7;margin-bottom:14px;">Организуем производство в Китае как ваши агенты</div>
+    <p style="margin:0 0 22px 0;font-size:13px;line-height:1.6;max-width:640px;opacity:0.7;">Работаем по агентскому договору: действуем в ваших интересах и ведем процесс между вами и фабрикой. Можно оформить весь цикл целиком, можно — только нужные этапы.</p>
+    <div style="font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;opacity:0.45;margin-bottom:14px;">Что мы организуем</div>
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);column-gap:56px;margin-bottom:24px;">
+      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">01</span><span style="font-size:14px;font-weight:600;">Поиск и проверку поставщика</span></div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">02</span><span style="font-size:14px;font-weight:600;">Подбор производства под вашу задачу</span></div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">03</span><span style="font-size:14px;font-weight:600;">Разработку продукта: ткань, лекала, размерная сетка, образец</span></div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">04</span><span style="font-size:14px;font-weight:600;">Закупку тканей и фурнитуры</span></div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">05</span><span style="font-size:14px;font-weight:600;">Контроль каждой партии до отгрузки</span></div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">06</span><span style="font-size:14px;font-weight:600;">Логистику с документами до вашего склада</span></div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">07</span><span style="font-size:14px;font-weight:600;">Сопровождение вашей поездки в Китай</span></div>
     </div>
+    <p style="margin:0 0 20px 0;font-size:12px;line-height:1.6;max-width:560px;opacity:0.5;">Точную стоимость считаем индивидуально в зависимости от продукта, объёма и логистики и определяем после консультации.</p>
+    <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:2px solid {{ accent }};padding:0 0 4px 0;">Обсудить на консультации →</button>
   </div>
 
   <!-- booking + payment + scheduling mount, filled by backend after confirmed payment -->
@@ -238,7 +248,7 @@ class Component extends DCLogic {
     const on = this.state.revealed;
     const product = this.state.checkoutProduct;
     const bookingNotes = {
-      idle: 'Оплата пока не подключена — эта кнопка не спишет средства.',
+      idle: '',
       pending: 'Переходим к оплате…',
       error: 'Оплата временно недоступна.',
     };

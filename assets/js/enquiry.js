@@ -16,12 +16,12 @@ export const WIRED = true;
 
 export const STATES = { IDLE: 'idle', PENDING: 'pending', SUCCESS: 'success', ERROR: 'error' };
 
-export const FIELDS = ['product', 'design', 'volume', 'targetCost', 'contact'];
+export const FIELDS = ['product', 'design', 'volume', 'targetCost', 'phone', 'contactHandle'];
 
 export function validate(payload) {
   const errors = {};
   if (!payload.product?.trim()) errors.product = 'required';
-  if (!payload.contact?.trim()) errors.contact = 'required';
+  if (!payload.phone?.trim()) errors.phone = 'required';
   if (!payload.pdConsent) errors.pdConsent = 'required';
   return { valid: Object.keys(errors).length === 0, errors };
 }
@@ -31,11 +31,12 @@ export function validate(payload) {
 // Only real form fields are included — nothing fabricated, no hidden DOM values.
 function buildFormSubmitPayload(payload) {
   return {
-    'Что хотите производить': payload.product || '',
-    'Есть готовый дизайн или референс': payload.design || '',
+    'Опишите вашу задачу': payload.product || '',
+    'Есть готовый дизайн или прототип': payload.design || '',
     'Планируемый объём': payload.volume || '',
     'Целевая себестоимость': payload.targetCost || '',
-    'Как связаться': payload.contact || '',
+    'Телефон': payload.phone || '',
+    'Email / мессенджер': payload.contactHandle || '',
     'Согласие на обработку персональных данных': payload.pdConsent ? 'Да' : 'Нет',
     'Согласие на рекламные рассылки': payload.marketingConsent ? 'Да' : 'Нет',
     _subject: 'Новая заявка с сайта LIANA GINI',
