@@ -1008,7 +1008,10 @@ class Component extends DCLogic {
     document.body.appendChild(btn);
     var visible = false;
     function sync() {
-      var show = scroller.scrollTop > 600;
+      // Hidden near the bottom of the scroller — the Контакты tab ends in a
+      // footer with legal links, and this button was sitting on top of it.
+      var nearBottom = scroller.scrollTop + scroller.clientHeight > scroller.scrollHeight - 140;
+      var show = scroller.scrollTop > 600 && !nearBottom;
       if (show === visible) return;
       visible = show;
       btn.style.opacity = show ? '1' : '0';

@@ -71,7 +71,10 @@
   document.body.appendChild(btn);
   var visible = false;
   window.addEventListener('scroll', function () {
-    var show = window.scrollY > 700;
+    // Hidden near the very bottom of the page — that's the footer, and this
+    // button was sitting right on top of its legal-links row down there.
+    var nearBottom = window.scrollY + window.innerHeight > document.documentElement.scrollHeight - 160;
+    var show = window.scrollY > 700 && !nearBottom;
     if (show === visible) return;
     visible = show;
     btn.style.opacity = show ? '1' : '0';
