@@ -268,11 +268,18 @@
       </div>
 
       <div style="padding:36px {{ secPadX }} 24px {{ secPadX }};border-top:1px solid rgba(24,23,21,0.08);display:flex;gap:16px;align-items:flex-start;">
-        <image-slot id="mob-team-liana-video" shape="rect" style="width:120px;height:150px;flex-shrink:0;" placeholder="Видеовизитка Лианы"></image-slot>
+        <div onClick="{{ toggleLianaVideo }}" style="position:relative;width:120px;height:150px;flex-shrink:0;cursor:pointer;overflow:hidden;background:#0e0b0a;">
+          <video ref="{{ lianaVideoElRef }}" onEnded="{{ onLianaVideoEnded }}" poster="assets/media/liana-video-poster.jpg" src="assets/media/liana-video-card.mp4" playsinline="true" preload="metadata" style="width:120px;height:150px;object-fit:cover;object-position:center;display:block;background-image:url('assets/media/liana-video-poster.jpg');background-size:cover;background-position:center;"></video>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:{{ lianaPlayIconOpacity }};transition:opacity 0.2s ease;">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(14,11,10,0.55);display:flex;align-items:center;justify-content:center;">
+              <span style="color:#F2EFE8;font-size:13px;margin-left:2px;">▶</span>
+            </div>
+          </div>
+        </div>
         <div style="flex:1;min-width:0;">
           <h3 style="margin:0 0 8px 0;font-size:22px;font-weight:700;text-transform:uppercase;line-height:1.1;">Лиана Гини</h3>
           <p style="margin:0 0 14px 0;font-size:12px;line-height:1.5;max-width:{{ measure }};opacity:0.65;">Востоковед. Магистр делового администрирования. Переговорная экспертиза. Многолетний опыт работы с производством в&nbsp;Китае.</p>
-          <a href="#liana-video" style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;border-bottom:2px solid {{ accent }};padding:10px 2px 3px 2px;">Смотреть визитку →</a>
+          <a href="#liana-video" onClick="{{ toggleLianaVideo }}" style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;border-bottom:2px solid {{ accent }};padding:10px 2px 3px 2px;">Смотреть визитку →</a>
         </div>
       </div>
 
@@ -594,8 +601,19 @@ class Component extends DCLogic {
     pdConsent: false, marketingConsent: false, pdConsentError: false,
     checkoutOpen: false, checkoutProduct: null, checkoutPdConsent: false, checkoutMarketingConsent: false, checkoutPdConsentError: false,
     checkoutBuyerName: '', checkoutBuyerContact: '', checkoutNameError: false, checkoutContactError: false, consultationOrder: null,
-    revealed: { services: false, teamVideo: false, cred: false, cases: false, catalog: false, consult: false } };
+    revealed: { services: false, teamVideo: false, cred: false, cases: false, catalog: false, consult: false }, lianaPlaying: false };
   teamVideoRef = React.createRef();
+  lianaVideoElRef = React.createRef();
+
+  // Click-to-play video card (real audio, unlike the muted background loops)
+  toggleLianaVideo = (e) => {
+    if (e) e.preventDefault();
+    const v = this.lianaVideoElRef.current;
+    if (!v) return;
+    if (v.paused) { v.play(); this.setState({ lianaPlaying: true }); }
+    else { v.pause(); this.setState({ lianaPlaying: false }); }
+  };
+  onLianaVideoEnded = () => this.setState({ lianaPlaying: false });
 
   // Refs for the lightweight, tab-scoped signature reveals below. Each tab's
   // content is lazily mounted (sc-if), so these are (re)observed whenever the
@@ -879,6 +897,10 @@ class Component extends DCLogic {
       showNav,
       teamVideoRef: this.teamVideoRef,
       teamWrapRef: this.teamWrapRef,
+      lianaVideoElRef: this.lianaVideoElRef,
+      toggleLianaVideo: this.toggleLianaVideo,
+      onLianaVideoEnded: this.onLianaVideoEnded,
+      lianaPlayIconOpacity: this.state.lianaPlaying ? 0 : 1,
       teamVideoTextOpacity: this.state.revealed.teamVideo ? 1 : 0,
       teamVideoTextY: this.state.revealed.teamVideo ? 0 : 14,
       credRef: this.credRef,

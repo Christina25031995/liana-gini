@@ -76,17 +76,22 @@
 
   <!-- LIANA VIDEO INTRODUCTION -->
   <div data-anim style="position:relative;padding:26px 60px 0 60px;box-sizing:border-box;display:flex;gap:36px;align-items:flex-start;opacity:{{ rO }};transform:translateY({{ rY }}px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .3s, transform .7s cubic-bezier(.16,1,.3,1) .3s;">
-    <div id="liana-video" style="position:relative;width:390px;flex-shrink:0;">
-      <div style="width:390px;height:270px;background:rgba(24,23,21,0.05);display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:16px;"><span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;line-height:1.5;color:rgba(24,23,21,0.35);">Видеовизитка Лианы</span></div>
-      <div style="position:absolute;bottom:16px;left:16px;display:flex;align-items:center;gap:8px;background:rgba(14,11,10,0.55);padding:6px 12px;">
+    <div id="liana-video" onClick="{{ toggleLianaVideo }}" style="position:relative;width:390px;height:270px;flex-shrink:0;cursor:pointer;overflow:hidden;background:#0e0b0a;">
+      <video ref="{{ lianaVideoElRef }}" onEnded="{{ onLianaVideoEnded }}" poster="assets/media/liana-video-poster.jpg" src="assets/media/liana-video-card.mp4" playsinline="true" preload="metadata" style="width:390px;height:270px;object-fit:cover;object-position:center;display:block;background-image:url('assets/media/liana-video-poster.jpg');background-size:cover;background-position:center;"></video>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:{{ lianaPlayIconOpacity }};transition:opacity 0.2s ease;">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(14,11,10,0.55);display:flex;align-items:center;justify-content:center;">
+          <span style="color:#F2EFE8;font-size:18px;margin-left:3px;">▶</span>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:16px;left:16px;display:flex;align-items:center;gap:8px;background:rgba(14,11,10,0.55);padding:6px 12px;pointer-events:none;opacity:{{ lianaPlayIconOpacity }};transition:opacity 0.2s ease;">
         <span style="color:#F2EFE8;font-size:11px;">▶</span>
-        <span style="color:#F2EFE8;font-size:10px;font-weight:600;letter-spacing:1px;">01:20</span>
+        <span style="color:#F2EFE8;font-size:10px;font-weight:600;letter-spacing:1px;">02:22</span>
       </div>
     </div>
     <div style="flex:1;">
       <h3 style="margin:0 0 12px 0;font-size:34px;font-weight:700;text-transform:uppercase;line-height:1.1;">ЛИАНА ГИНИ</h3>
       <p style="margin:0 0 20px 0;font-size:14px;line-height:1.5;font-weight:500;max-width:400px;opacity:0.65;">Востоковед. Магистр делового администрирования.<br/>Переговорная экспертиза. Многолетний опыт работы с производством в Китае.</p>
-      <a href="#liana-video" style="font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};border-bottom:2px solid {{ accent }};padding-bottom:4px;">СМОТРЕТЬ ВИДЕОВИЗИТКУ →</a>
+      <a href="#liana-video" onClick="{{ toggleLianaVideo }}" style="font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};border-bottom:2px solid {{ accent }};padding-bottom:4px;">СМОТРЕТЬ ВИДЕОВИЗИТКУ →</a>
     </div>
   </div>
 
@@ -102,8 +107,21 @@
 class Component extends DCLogic {
   rootRef = React.createRef();
   videoWrapRef = React.createRef();
-  state = { revealed: false, weAreHereOn: false, weAreHereSoft: false };
+  lianaVideoElRef = React.createRef();
+  state = { revealed: false, weAreHereOn: false, weAreHereSoft: false, lianaPlaying: false };
   ticking = false;
+
+  // Click-to-play video card: no autoplay (it has real audio, unlike the
+  // muted background loops elsewhere on this page). Play icon + duration
+  // chip fade out once playing, reappear on pause/end.
+  toggleLianaVideo = (e) => {
+    if (e) e.preventDefault();
+    const v = this.lianaVideoElRef.current;
+    if (!v) return;
+    if (v.paused) { v.play(); this.setState({ lianaPlaying: true }); }
+    else { v.pause(); this.setState({ lianaPlaying: false }); }
+  };
+  onLianaVideoEnded = () => this.setState({ lianaPlaying: false });
 
   componentDidMount() {
     this.reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -160,6 +178,10 @@ class Component extends DCLogic {
       rY: on ? 0 : 24,
       weAreHereOpacity: !this.state.weAreHereOn ? 0 : (this.state.weAreHereSoft ? 0.72 : 1),
       weAreHereY: this.state.weAreHereOn ? 0 : 18,
+      lianaVideoElRef: this.lianaVideoElRef,
+      toggleLianaVideo: this.toggleLianaVideo,
+      onLianaVideoEnded: this.onLianaVideoEnded,
+      lianaPlayIconOpacity: this.state.lianaPlaying ? 0 : 1,
     };
   }
 }
