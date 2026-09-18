@@ -42,7 +42,8 @@
         <!-- LEFT: persistent nav -->
         <div style="width:38%;flex-shrink:0;padding:64px 56px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(24,23,21,0.12);box-sizing:border-box;">
           <div>
-            <h3 style="margin:0;font-size:34px;line-height:1.15;font-weight:600;letter-spacing:-0.5px;text-transform:uppercase;">ПРОИЗВОДСТВО<br/>В КИТАЕ</h3>
+            <h3 style="margin:0 0 24px 0;font-size:34px;line-height:1.15;font-weight:600;letter-spacing:-0.5px;text-transform:uppercase;">ПРОИЗВОДСТВО<br/>В КИТАЕ</h3>
+            <button type="button" onClick="{{ skipBlock }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ ink }};opacity:0.6;border-bottom:1px solid {{ ink }};padding-bottom:3px;transition:opacity 0.2s ease;" style-hover="opacity:1;">Далее →</button>
           </div>
           <div style="display:flex;gap:28px;align-items:flex-end;">
             <div style="width:1px;height:220px;background:rgba(24,23,21,0.12);position:relative;flex-shrink:0;">
@@ -201,6 +202,18 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect();
   }
 
+  // "Далее" — skips the whole sticky-scroll problems zone in one jump, for
+  // anyone who doesn't want to scroll through all 5 problem states manually.
+  // Reads the zone's live rect at click time (not a cached offset) so it's
+  // correct regardless of where the zone's sticky inner content currently sits.
+  skipBlock = () => {
+    const zone = document.getElementById('problems-zone');
+    if (!zone) return;
+    const rect = zone.getBoundingClientRect();
+    const targetY = window.scrollY + rect.bottom - 80;
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+  };
+
   onScroll = () => {
     if (this.ticking) return;
     this.ticking = true;
@@ -250,6 +263,7 @@ class Component extends DCLogic {
       ivory, ink, accent,
       scrollRef: this.scrollRef,
       introRef: this.introRef,
+      skipBlock: this.skipBlock,
 
       introLineWidth: this.state.introInView ? '32px' : '0px',
       introOn: this.state.introInView ? 1 : 0,
