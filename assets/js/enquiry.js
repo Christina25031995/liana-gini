@@ -30,16 +30,23 @@ export function validate(payload) {
 // Liana receives is self-explanatory), plus FormSubmit's own control fields.
 // Only real form fields are included — nothing fabricated, no hidden DOM values.
 function buildFormSubmitPayload(payload) {
-  return {
+  const fields = {
     'Опишите вашу задачу': payload.product || '',
     'Есть готовый дизайн или прототип': payload.design || '',
     'Планируемый объём': payload.volume || '',
     'Целевая себестоимость': payload.targetCost || '',
     'Телефон': payload.phone || '',
     'Email / мессенджер': payload.contactHandle || '',
+  };
+  // Optional — set by callers other than the main contact form (e.g. the
+  // "Обсудить на консультации" anketa) so Liana can tell at a glance in her
+  // inbox which button on the site this came from.
+  if (payload.source) fields['Источник заявки'] = payload.source;
+  return {
+    ...fields,
     'Согласие на обработку персональных данных': payload.pdConsent ? 'Да' : 'Нет',
     'Согласие на рекламные рассылки': payload.marketingConsent ? 'Да' : 'Нет',
-    _subject: 'Новая заявка с сайта LIANA GINI',
+    _subject: payload.source ? `Новая заявка (${payload.source}) — LIANA GINI` : 'Новая заявка с сайта LIANA GINI',
     _template: 'table',
     _captcha: 'false',
     // Honeypot: FormSubmit silently discards any submission where this field is

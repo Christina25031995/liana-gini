@@ -62,7 +62,7 @@
           <div>
             <div style="font-size:46px;font-weight:700;line-height:0.9;letter-spacing:-2px;">15 000 ₽</div>
           </div>
-          <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ink }};">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ →</button>
+          <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:16px 26px;white-space:nowrap;" style-hover="background:{{ ink }};">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ →</button>
         </div>
         <p style="margin:14px 0 0 0;font-size:11px;line-height:1.6;opacity:0.45;max-width:420px;">Сначала разберём задачу. Потом решим, какой следующий шаг нужен.</p>
       </div>
@@ -88,7 +88,7 @@
       <div style="display:flex;gap:14px;align-items:baseline;border-top:1px solid rgba(24,23,21,0.1);padding:11px 0;"><span style="font-size:9px;letter-spacing:1.2px;opacity:0.35;width:16px;flex-shrink:0;">07</span><span style="font-size:14px;font-weight:600;">Сопровождение вашей поездки в Китай</span></div>
     </div>
     <p style="margin:0 0 20px 0;font-size:12px;line-height:1.6;max-width:560px;opacity:0.5;">Точную стоимость считаем индивидуально в зависимости от продукта, объёма и логистики и определяем после консультации.</p>
-    <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" data-payment-trigger="booking-checkout" data-booking-fields="name,contact,email,question" data-success-target="#consultation-confirmed" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:2px solid {{ accent }};padding:0 0 4px 0;">Обсудить на консультации →</button>
+    <button type="button" onClick="{{ openCheckout }}" data-product-id="personal-consultation" data-product-name="Личная консультация с Лианой Гини" data-price="15000" data-currency="RUB" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};background:none;border-bottom:2px solid {{ accent }};padding:0 0 4px 0;">Обсудить на консультации →</button>
   </div>
 
   <!-- booking + payment + scheduling mount, filled by backend after confirmed payment -->
@@ -101,22 +101,31 @@
         <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:{{ accent }};margin-bottom:10px;">{{ checkoutName }}</div>
         <div id="checkout-title" style="font-size:32px;font-weight:700;letter-spacing:-1px;margin-bottom:26px;">{{ checkoutPriceLabel }}</div>
 
-        <!-- Prepared, but only reachable once a real provider is wired in and
-             startCheckout() can resolve to STATES.SUCCESS — today it always
-             resolves to IDLE, so this branch never renders. -->
         <sc-if value="{{ checkoutSuccess }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:20px;font-weight:700;letter-spacing:-0.3px;text-transform:uppercase;margin-bottom:14px;">Оплата прошла</div>
-          <p style="font-size:14px;line-height:1.6;opacity:0.75;margin:0;">Команда свяжется с вами<br/>для согласования даты и времени консультации.</p>
+          <div style="font-size:20px;font-weight:700;letter-spacing:-0.3px;text-transform:uppercase;margin-bottom:14px;">Заявка передана</div>
+          <p style="font-size:14px;line-height:1.6;opacity:0.75;margin:0;">Команда свяжется с вами по вашей задаче,<br/>дальше — согласуем консультацию и оплату.</p>
         </sc-if>
 
         <sc-if value="{{ checkoutFormVisible }}" hint-placeholder-val="{{ true }}">
-          <label for="checkout-name" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Имя</label>
-          <input id="checkout-name" type="text" required="true" value="{{ checkoutBuyerName }}" onChange="{{ onCheckoutNameChange }}" aria-describedby="checkout-name-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
-          <div id="checkout-name-error" role="alert" style="display:{{ checkoutNameErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:10px;">Укажите имя, чтобы продолжить.</div>
+          <label for="checkout-product" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Опишите вашу задачу</label>
+          <input id="checkout-product" type="text" required="true" value="{{ formProduct }}" onChange="{{ onFormProductChange }}" placeholder="категория, изделие" aria-describedby="checkout-product-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
+          <div id="checkout-product-error" role="alert" style="display:{{ checkoutProductErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:10px;">Опишите задачу, чтобы продолжить.</div>
 
-          <label for="checkout-contact" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Контакт для связи</label>
-          <input id="checkout-contact" type="text" required="true" value="{{ checkoutBuyerContact }}" onChange="{{ onCheckoutContactChange }}" placeholder="Telegram / телефон / e-mail" aria-describedby="checkout-contact-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
-          <div id="checkout-contact-error" role="alert" style="display:{{ checkoutContactErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:16px;">Укажите контакт для связи, чтобы продолжить.</div>
+          <label for="checkout-design" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Есть готовый дизайн или прототип?</label>
+          <input id="checkout-design" type="text" value="{{ formDesign }}" onChange="{{ onFormDesignChange }}" placeholder="Приложите ссылку / нет" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:14px;"/>
+
+          <label for="checkout-volume" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Какой планируется объём?</label>
+          <input id="checkout-volume" type="text" value="{{ formVolume }}" onChange="{{ onFormVolumeChange }}" placeholder="шт." style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:14px;"/>
+
+          <label for="checkout-cost" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Есть ли целевая себестоимость?</label>
+          <input id="checkout-cost" type="text" value="{{ formTargetCost }}" onChange="{{ onFormTargetCostChange }}" placeholder="₽ / ¥ за единицу" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:14px;"/>
+
+          <label for="checkout-phone" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Напишите контактный номер телефона</label>
+          <input id="checkout-phone" type="tel" inputmode="tel" required="true" value="{{ formPhone }}" onChange="{{ onFormPhoneChange }}" placeholder="+7 900 000-00-00" aria-describedby="checkout-phone-error" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:4px;"/>
+          <div id="checkout-phone-error" role="alert" style="display:{{ checkoutPhoneErrorDisplay }};font-size:11px;color:{{ accent }};margin-bottom:10px;">Укажите телефон, чтобы продолжить.</div>
+
+          <label for="checkout-contact-handle" style="display:block;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Укажите email или мессенджер (telegram/max/wechat)</label>
+          <input id="checkout-contact-handle" type="text" value="{{ formContactHandle }}" onChange="{{ onFormContactHandleChange }}" placeholder="@username / email" style="width:100%;box-sizing:border-box;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px;border:1px solid rgba(24,23,21,0.25);background:{{ ivory }};color:{{ ink }};margin-bottom:16px;"/>
 
           <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:10px;">
             <input type="checkbox" name="pdConsent" required="true" checked="{{ pdConsent }}" onChange="{{ onPdConsentChange }}" aria-describedby="checkout-pd-error" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
@@ -124,7 +133,7 @@
           </label>
           <div id="checkout-pd-error" role="alert" style="display:{{ pdErrorDisplay }};font-size:11px;color:{{ accent }};padding-left:27px;margin-bottom:10px;">Отметьте согласие на обработку персональных данных, чтобы продолжить.</div>
 
-          <p style="font-size:12px;line-height:1.55;opacity:0.65;margin:0 0 18px 0;">Оплачивая заказ, вы принимаете условия <a href="oferta.html" target="_blank" rel="noopener" style="text-decoration:underline;">Публичной оферты</a>.</p>
+          <p style="font-size:12px;line-height:1.55;opacity:0.65;margin:0 0 18px 0;">Услуга оказывается на условиях <a href="oferta.html" target="_blank" rel="noopener" style="text-decoration:underline;">Публичной оферты</a>.</p>
 
           <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;cursor:pointer;margin-bottom:26px;">
             <input type="checkbox" name="marketingConsent" checked="{{ marketingConsent }}" onChange="{{ onMarketingConsentChange }}" style="margin-top:2px;width:17px;height:17px;flex-shrink:0;accent-color:{{ accent }};cursor:pointer;"/>
@@ -132,7 +141,7 @@
           </label>
 
           <div style="display:flex;gap:16px;align-items:center;">
-            <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Оплатить →</button>
+            <button type="button" onClick="{{ onProceedCheckout }}" style="font-family:'Manrope',sans-serif;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ivory }};background:{{ accent }};padding:15px 26px;white-space:nowrap;">Отправить →</button>
             <button type="button" onClick="{{ closeCheckout }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;opacity:0.55;">Отмена</button>
           </div>
           <p style="font-size:11px;line-height:1.5;opacity:0.4;margin:16px 0 0 0;">{{ checkoutNote }}</p>
@@ -154,7 +163,8 @@ class Component extends DCLogic {
   rootRef = React.createRef();
   state = { bookingState: 'idle', revealed: false,
     checkoutOpen: false, checkoutProduct: null, pdConsent: false, marketingConsent: false, pdConsentError: false,
-    checkoutBuyerName: '', checkoutBuyerContact: '', checkoutNameError: false, checkoutContactError: false, consultationOrder: null };
+    formProduct: '', formDesign: '', formVolume: '', formTargetCost: '', formPhone: '', formContactHandle: '',
+    formProductError: false, formPhoneError: false };
 
   componentDidMount() {
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -174,9 +184,9 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect();
   }
 
-  // Opens the consent gate for the booking CTA — reads the product contract off
-  // the button's data-* attributes (booking fields it must collect are declared
-  // in data-booking-fields). No payment call happens yet.
+  // Opens the anketa for the consultation CTA — reads the product contract off
+  // the button's data-* attributes. Client-confirmed order: the full anketa is
+  // filled in and sent FIRST; payment (once a provider exists) comes after.
   openCheckout = (e) => {
     e.preventDefault();
     const el = e.currentTarget;
@@ -185,18 +195,14 @@ class Component extends DCLogic {
       pdConsent: false,
       marketingConsent: false,
       pdConsentError: false,
-      checkoutBuyerName: '',
-      checkoutBuyerContact: '',
-      checkoutNameError: false,
-      checkoutContactError: false,
+      formProduct: '', formDesign: '', formVolume: '', formTargetCost: '', formPhone: '', formContactHandle: '',
+      formProductError: false, formPhoneError: false,
       bookingState: 'idle',
-      consultationOrder: null,
       checkoutProduct: {
         productId: el.dataset.productId,
         name: el.dataset.productName,
         price: Number(el.dataset.price),
         currency: el.dataset.currency,
-        collect: (el.dataset.bookingFields || '').split(','),
       },
     });
   };
@@ -204,43 +210,46 @@ class Component extends DCLogic {
   stopPropagation = (e) => e.stopPropagation();
   onPdConsentChange = (e) => this.setState({ pdConsent: e.target.checked, pdConsentError: false });
   onMarketingConsentChange = (e) => this.setState({ marketingConsent: e.target.checked });
-  onCheckoutNameChange = (e) => this.setState({ checkoutBuyerName: e.target.value, checkoutNameError: false });
-  onCheckoutContactChange = (e) => this.setState({ checkoutBuyerContact: e.target.value, checkoutContactError: false });
+  onFormProductChange = (e) => this.setState({ formProduct: e.target.value, formProductError: false });
+  onFormDesignChange = (e) => this.setState({ formDesign: e.target.value });
+  onFormVolumeChange = (e) => this.setState({ formVolume: e.target.value });
+  onFormTargetCostChange = (e) => this.setState({ formTargetCost: e.target.value });
+  onFormPhoneChange = (e) => this.setState({ formPhone: e.target.value, formPhoneError: false });
+  onFormContactHandleChange = (e) => this.setState({ formContactHandle: e.target.value });
 
-  // Actual payment trigger — only reachable from the consent gate, only once
-  // name, contact and required personal-data consent are all filled in. No
-  // provider, no keys, no scheduling links in the frontend.
+  // Sends the anketa through the same FormSubmit channel as the main contact
+  // form — not a payment call. Tagged with the product name as `source` so
+  // Liana can tell in her inbox this came from the consultation CTA.
   onProceedCheckout = async () => {
-    const name = this.state.checkoutBuyerName.trim();
-    const contact = this.state.checkoutBuyerContact.trim();
-    const nameOk = name.length > 0;
-    const contactOk = contact.length > 0;
-    if (!nameOk || !contactOk || !this.state.pdConsent) {
+    const product = this.state.formProduct.trim();
+    const phone = this.state.formPhone.trim();
+    const productOk = product.length > 0;
+    const phoneOk = phone.length > 0;
+    if (!productOk || !phoneOk || !this.state.pdConsent) {
       this.setState({
-        checkoutNameError: !nameOk,
-        checkoutContactError: !contactOk,
+        formProductError: !productOk,
+        formPhoneError: !phoneOk,
         pdConsentError: !this.state.pdConsent,
       });
       return;
     }
-    const product = this.state.checkoutProduct;
-    if (!product) return;
+    this.setState({ bookingState: 'pending' });
     try {
-      const mod = await import('/assets/js/payments.js');
-      // Future Robokassa payload — built now, not sent anywhere yet (no
-      // provider connected). Kept in state so it's ready the moment a real
-      // provider call replaces the startCheckout() stub below.
-      const order = mod.buildConsultationOrder({
-        name, contact,
+      const mod = await import('/assets/js/enquiry.js');
+      const res = await mod.submitEnquiry({
+        product,
+        design: this.state.formDesign.trim(),
+        volume: this.state.formVolume.trim(),
+        targetCost: this.state.formTargetCost.trim(),
+        phone,
+        contactHandle: this.state.formContactHandle.trim(),
         pdConsent: this.state.pdConsent,
         marketingConsent: this.state.marketingConsent,
+        source: this.state.checkoutProduct ? this.state.checkoutProduct.name : '',
       });
-      this.setState({ consultationOrder: order });
-      const res = await mod.startCheckout(product.productId);
       this.setState({ bookingState: res.state });
-      if (res.checkoutUrl) window.location.href = res.checkoutUrl;
     } catch (err) {
-      this.setState({ bookingState: 'idle' });
+      this.setState({ bookingState: 'error' });
     }
   };
 
@@ -248,9 +257,10 @@ class Component extends DCLogic {
     const on = this.state.revealed;
     const product = this.state.checkoutProduct;
     const bookingNotes = {
-      idle: '',
-      pending: 'Переходим к оплате…',
-      error: 'Оплата временно недоступна.',
+      idle: 'Ответим в Telegram или по указанному контакту.',
+      pending: 'Отправляем…',
+      success: 'Заявка передана. Команда свяжется с вами.',
+      error: 'Не удалось отправить — попробуйте ещё раз или напишите в Telegram.',
     };
     return {
       ivory: this.props.ivory ?? '#F2EFE8',
@@ -274,12 +284,20 @@ class Component extends DCLogic {
       marketingConsent: this.state.marketingConsent,
       pdErrorDisplay: this.state.pdConsentError ? 'block' : 'none',
       checkoutNote: bookingNotes[this.state.bookingState] || bookingNotes.idle,
-      checkoutBuyerName: this.state.checkoutBuyerName,
-      checkoutBuyerContact: this.state.checkoutBuyerContact,
-      onCheckoutNameChange: this.onCheckoutNameChange,
-      onCheckoutContactChange: this.onCheckoutContactChange,
-      checkoutNameErrorDisplay: this.state.checkoutNameError ? 'block' : 'none',
-      checkoutContactErrorDisplay: this.state.checkoutContactError ? 'block' : 'none',
+      formProduct: this.state.formProduct,
+      formDesign: this.state.formDesign,
+      formVolume: this.state.formVolume,
+      formTargetCost: this.state.formTargetCost,
+      formPhone: this.state.formPhone,
+      formContactHandle: this.state.formContactHandle,
+      onFormProductChange: this.onFormProductChange,
+      onFormDesignChange: this.onFormDesignChange,
+      onFormVolumeChange: this.onFormVolumeChange,
+      onFormTargetCostChange: this.onFormTargetCostChange,
+      onFormPhoneChange: this.onFormPhoneChange,
+      onFormContactHandleChange: this.onFormContactHandleChange,
+      checkoutProductErrorDisplay: this.state.formProductError ? 'block' : 'none',
+      checkoutPhoneErrorDisplay: this.state.formPhoneError ? 'block' : 'none',
       // Success view is prepared but unreachable: bookingState only ever
       // becomes 'idle' from the current startCheckout() stub, never 'success'.
       checkoutSuccess: this.state.bookingState === 'success',

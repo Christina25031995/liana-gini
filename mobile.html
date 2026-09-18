@@ -106,11 +106,6 @@
               <button type="button" onClick="{{ d.onClick }}" style="width:{{ d.size }};height:6px;padding:0;border:none;border-radius:3px;background:{{ d.color }};cursor:pointer;transition:all 0.2s ease;"></button>
             </sc-for>
           </div>
-          <div style="display:flex;align-items:center;gap:18px;">
-            <button type="button" onClick="{{ onPrevCard }}" disabled="{{ isFirstCard }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};opacity:{{ prevOpacity }};padding:4px;">← Вернуться</button>
-            <div style="font-size:11px;font-weight:600;letter-spacing:0.5px;opacity:0.4;">{{ cardCounterLabel }}</div>
-            <button type="button" onClick="{{ onNextCard }}" disabled="{{ isLastCard }}" style="font-family:'Manrope',sans-serif;border:none;background:none;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:{{ ink }};opacity:{{ nextOpacity }};padding:4px;">Далее →</button>
-          </div>
         </div>
       </div>
 
@@ -269,7 +264,7 @@
 
       <div style="padding:36px {{ secPadX }} 24px {{ secPadX }};border-top:1px solid rgba(24,23,21,0.08);display:flex;gap:16px;align-items:flex-start;">
         <div onClick="{{ toggleLianaVideo }}" style="position:relative;width:120px;height:150px;flex-shrink:0;cursor:pointer;overflow:hidden;background:#0e0b0a;">
-          <video ref="{{ lianaVideoElRef }}" onEnded="{{ onLianaVideoEnded }}" poster="assets/media/liana-video-poster.jpg" src="assets/media/liana-video-card.mp4" playsinline="true" preload="metadata" style="width:120px;height:150px;object-fit:cover;object-position:center;display:block;background-image:url('assets/media/liana-video-poster.jpg');background-size:cover;background-position:center;"></video>
+          <video ref="{{ lianaVideoElRef }}" onEnded="{{ onLianaVideoEnded }}" poster="assets/media/liana-video-poster.jpg" src="assets/media/liana-video-card.mp4" playsinline="true" preload="metadata" style="width:120px;height:150px;object-fit:cover;object-position:15% center;display:block;background-image:url('assets/media/liana-video-poster.jpg');background-size:cover;background-position:15% center;"></video>
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:{{ lianaPlayIconOpacity }};transition:opacity 0.2s ease;">
             <div style="width:36px;height:36px;border-radius:50%;background:rgba(14,11,10,0.55);display:flex;align-items:center;justify-content:center;">
               <span style="color:#F2EFE8;font-size:13px;margin-left:2px;">▶</span>
@@ -917,13 +912,6 @@ class Component extends DCLogic {
         color: i === this.state.cardIdx ? accent : inactive,
         size: i === this.state.cardIdx ? '20px' : '6px',
       })),
-      cardCounterLabel: String(this.state.cardIdx + 1).padStart(2, '0') + ' / ' + String(PROBLEMS.length).padStart(2, '0'),
-      onPrevCard: this.scrollToCard(Math.max(0, this.state.cardIdx - 1)),
-      onNextCard: this.scrollToCard(Math.min(PROBLEMS.length - 1, this.state.cardIdx + 1)),
-      isFirstCard: this.state.cardIdx === 0 ? 'true' : 'false',
-      isLastCard: this.state.cardIdx === PROBLEMS.length - 1 ? 'true' : 'false',
-      prevOpacity: this.state.cardIdx === 0 ? 0.3 : 1,
-      nextOpacity: this.state.cardIdx === PROBLEMS.length - 1 ? 0.3 : 1,
       servicesRef: this.servicesRef,
       timeline: TIMELINE.map((t, i) => {
         const on = this.state.revealed.services;
